@@ -1,0 +1,352 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
+  --font-label: var(--font-label);
+  --font-mono: var(--font-geist-mono);
+  --color-brand-blue: #4CB4E7;
+  --color-brand-gray: #B7B8B9;
+  --color-surface: #1A1A1B;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  --background: #0F0F10;
+  --foreground: #F5F5F5;
+  --card: #1A1A1B;
+  --card-foreground: #F5F5F5;
+  --popover: #1A1A1B;
+  --popover-foreground: #F5F5F5;
+  --primary: #4CB4E7;
+  --primary-foreground: #0F0F10;
+  --secondary: #252526;
+  --secondary-foreground: #F5F5F5;
+  --muted: #252526;
+  --muted-foreground: #B7B8B9;
+  --accent: #4CB4E7;
+  --accent-foreground: #0F0F10;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #2a2a2b;
+  --input: #252526;
+  --ring: #4CB4E7;
+  --radius: 0.5rem;
+  --sidebar: #1A1A1B;
+  --sidebar-foreground: #F5F5F5;
+  --sidebar-primary: #4CB4E7;
+  --sidebar-primary-foreground: #0F0F10;
+  --sidebar-accent: #252526;
+  --sidebar-accent-foreground: #F5F5F5;
+  --sidebar-border: #2a2a2b;
+  --sidebar-ring: #4CB4E7;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+  .font-label {
+    font-family: var(--font-label);
+    letter-spacing: 0.1em;
+  }
+}
+
+/* ── Legal pages prose ── */
+.legal-content {
+  color: #B7B8B9;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.legal-content h2 {
+  font-family: var(--font-heading);
+  color: #F5F5F5;
+  font-size: 1.15rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.legal-content h3 {
+  font-family: var(--font-label);
+  color: #4CB4E7;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.legal-content p {
+  margin-bottom: 1rem;
+}
+
+.legal-content ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.legal-content ul li {
+  margin-bottom: 0.4rem;
+}
+
+.legal-content strong {
+  color: #F5F5F5;
+  font-weight: 500;
+}
+
+.legal-content a {
+  color: #4CB4E7;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal-content a:hover {
+  opacity: 0.8;
+}
+
+/* ── HubSpot form — MedPhoto dark theme ── */
+
+/* Typography override — must beat HubSpot's inline styles */
+.hs-form,
+.hs-form * {
+  font-family: var(--font-body), Arial, sans-serif !important;
+}
+
+.hs-form label,
+.hs-form .hs-form-field > label {
+  font-family: var(--font-label), Arial, sans-serif !important;
+}
+
+.hs-form input,
+.hs-form textarea,
+.hs-form select {
+  font-family: var(--font-body), Arial, sans-serif !important;
+}
+
+.hs-form .hs-button,
+.hs-form input[type="submit"] {
+  font-family: var(--font-label), Arial, sans-serif !important;
+}
+
+.hs-form-wrapper .hs-form,
+#hubspot-form .hs-form {
+  color: #F5F5F5;
+}
+
+#hubspot-form .hs-form-field {
+  margin-bottom: 1.25rem;
+}
+
+#hubspot-form .hs-form-field label {
+  display: block;
+  font-size: 0.75rem;
+  font-family: var(--font-label), Arial, sans-serif !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #B7B8B9;
+  margin-bottom: 0.5rem;
+}
+
+#hubspot-form input[type="text"],
+#hubspot-form input[type="email"],
+#hubspot-form input[type="tel"],
+#hubspot-form input[type="number"],
+#hubspot-form select,
+#hubspot-form textarea {
+  width: 100%;
+  background-color: #252526;
+  border: 1px solid #2a2a2b;
+  border-radius: 0.5rem;
+  color: #F5F5F5;
+  font-size: 0.9rem;
+  font-family: var(--font-body), Arial, sans-serif !important;
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+#hubspot-form input[type="text"]:focus,
+#hubspot-form input[type="email"]:focus,
+#hubspot-form input[type="tel"]:focus,
+#hubspot-form input[type="number"]:focus,
+#hubspot-form select:focus,
+#hubspot-form textarea:focus {
+  border-color: #4CB4E7;
+  box-shadow: 0 0 0 3px #4CB4E720;
+}
+
+#hubspot-form input::placeholder,
+#hubspot-form textarea::placeholder {
+  color: #555557;
+}
+
+#hubspot-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+#hubspot-form select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23B7B8B9' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+/* Multi-column layout on desktop */
+#hubspot-form .hs-form .form-columns-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  #hubspot-form .hs-form .form-columns-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Submit button */
+#hubspot-form input[type="submit"],
+#hubspot-form .hs-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4CB4E7;
+  color: #0F0F10;
+  font-family: var(--font-label), Arial, sans-serif !important;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.875rem 2.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  margin-top: 0.5rem;
+  min-height: 48px;
+  width: auto;
+}
+
+#hubspot-form input[type="submit"]:hover,
+#hubspot-form .hs-button:hover {
+  opacity: 0.88;
+  transform: scale(1.02);
+}
+
+/* Validation errors */
+#hubspot-form .hs-error-msgs {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0;
+}
+
+#hubspot-form .hs-error-msg {
+  font-size: 0.75rem;
+  color: #f87171;
+}
+
+#hubspot-form .hs-input.invalid.error {
+  border-color: #f87171;
+}
+
+/* Required asterisk */
+#hubspot-form .hs-form-required {
+  color: #4CB4E7;
+  margin-left: 2px;
+}
+
+/* Success message */
+#hubspot-form .submitted-message {
+  text-align: center;
+  padding: 2rem;
+  color: #F5F5F5;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* GDPR / legal text */
+#hubspot-form .legal-consent-container {
+  font-size: 0.75rem;
+  color: #B7B8B9;
+  line-height: 1.5;
+  margin-top: 1rem;
+}
+
+#hubspot-form .legal-consent-container a {
+  color: #4CB4E7;
+  text-decoration: underline;
+}
+
+/* Remove default HubSpot fieldset borders */
+#hubspot-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  max-width: 100% !important;
+}
+
+/* Loading state skeleton */
+.hs-form-wrapper:empty::after {
+  content: "";
+  display: block;
+  height: 320px;
+  background: linear-gradient(90deg, #1A1A1B 25%, #252526 50%, #1A1A1B 75%);
+  background-size: 400% 100%;
+  animation: hs-skeleton 1.4s ease infinite;
+  border-radius: 0.5rem;
+}
+
+@keyframes hs-skeleton {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
