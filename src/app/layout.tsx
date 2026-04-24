@@ -35,6 +35,12 @@ export const metadata: Metadata = {
   },
   description:
     "Distribuidores oficiales de Profoto, Phase One, Capture One y TetherTools en Colombia. Equipos fotográficos profesionales con asesoría pre y post venta.",
+
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
+
   keywords: [
     "Profoto Colombia",
     "Phase One Colombia",
@@ -81,6 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <WhatsAppButton />
         </CartProvider>
+
         <Script
           id="hs-analytics"
           src="//js.hs-scripts.com/9428261.js"
