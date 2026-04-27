@@ -36,9 +36,16 @@ export const metadata: Metadata = {
   description:
     "Distribuidores oficiales de Profoto, Phase One, Capture One y TetherTools en Colombia. Equipos fotográficos profesionales con asesoría pre y post venta.",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
     apple: [
-      { url: "/apple-icon.png?v=2", sizes: "180x180", type: "image/png" },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      { rel: "manifest", url: "/site.webmanifest" },
     ],
   },
   keywords: [
