@@ -218,31 +218,7 @@ export const products: Product[] = [
     image: "/images/products/profoto-d30.png",
     sku: "901070",
   },
-  // L1600D, Pro-11, D2 Kit (AC flashes)
-  {
-    id: "profoto-l1600d",
-    slug: "profoto-l1600d",
-    name: "Profoto L1600D",
-    brand: "profoto",
-    brandLabel: "Profoto",
-    category: "Flashes a Corriente",
-    originalPrice: 46944700,
-    price: 42677000,
-    currency: "COP",
-    availability: "backorder",
-    shortDescription: "Luz continua LED de máxima potencia para video y foto.",
-    description:
-      "El Profoto L1600D es la solución definitiva para video y fotografía con luz continua. 1600 W equivalente LED con calidad de color excepcional.",
-    features: [
-      "1600 W equivalente LED",
-      "CRI > 96",
-      "Temperatura de color 5600K",
-      "Control Air inalámbrico",
-      "Fanless — completamente silencioso",
-    ],
-    image: "/images/products/profoto-l1600d.png",
-    sku: "901700",
-  },
+  // Pro-11, D2 Kit (AC flashes)
   {
     id: "profoto-pro-11",
     slug: "profoto-pro-11",
@@ -2578,16 +2554,18 @@ export const products: Product[] = [
     availability: "backorder",
     shortDescription: "LED daylight de 1600W — potencia máxima para grandes producciones.",
     description:
-      "El Profoto L1600D entrega 1600W de potencia LED daylight en un formato compacto y ligero, impulsado por el sistema de enfriamiento líquido HydroCTech™. Diseñado para grandes estudios y producciones de cine y publicidad que exigen máxima salida de luz con la calidad de color Profoto. Con TLCI 97, control remoto completo y compatibilidad nativa con el ecosistema Profoto, el L1600D es la solución de iluminación LED más potente de la línea.",
+      "El Profoto L1600D es un LED daylight de 1600W diseñado para grandes estudios y producciones de cine y publicidad que exigen máxima salida de luz con la calidad de color Profoto. Su sistema de enfriamiento líquido HydroCTech™ garantiza operación silenciosa y eficiente en condiciones de uso intensivo. Con TLCI 97 y temperatura de color de 5700K, el L1600D reproduce tonos de piel naturales y colores fieles tanto en video como en fotografía. Su diseño compacto todo en uno, sin balastro externo, permite una instalación rápida. Cuenta con conectividad completa vía DMX, CRMX TimoTwo, Bluetooth y Profoto Air, y es compatible con la montura Profoto nativa para acceder a más de 100 modificadores de luz. Con certificación IP54, ofrece mayor protección ambiental que el resto de la línea.",
     features: [
       "1600W — máxima potencia de la línea LED Profoto",
       "5700K daylight — TLCI/CRI 97",
-      "HydroCTech™ — enfriamiento líquido (patent pending)",
+      "HydroCTech™ — enfriamiento líquido silencioso (patent pending)",
       "Sin flicker a cualquier frame rate",
-      "DMX, CRMX, Bluetooth, Profoto Air integrados",
-      "IP54 — mayor protección ambiental",
+      "DMX, CRMX TimoTwo, Bluetooth, Profoto Air integrados",
+      "IP54 — mayor protección ambiental de la línea",
       "Dimming 0.1–100% (EXP, LOG, Linear)",
+      "Sin balastro externo — diseño todo en uno, 11.7 kg",
       "Montura Profoto nativa + reflector Boost incluido",
+      "Límite automático de corriente — 15A (voltaje bajo)",
     ],
     specs: {
       "Número de producto": "902010",
@@ -2614,6 +2592,7 @@ export const products: Product[] = [
       "Largo (reflector Boost)": "85 cm",
       "Ancho": "26 cm",
       "Alto": "29 cm",
+      "Actualización firmware": "Inalámbrica vía App o USB-C",
     },
     image: "/images/products/profoto-l1600d-side.png",
     gallery: [
