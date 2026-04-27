@@ -103,19 +103,40 @@ export default async function ProductPage({ params }: Props) {
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Image */}
-          <div
-            className="relative aspect-square rounded-2xl overflow-hidden"
-            style={{ backgroundColor: "#111112" }}
-          >
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              className="object-contain p-12"
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+          {/* Image + Gallery */}
+          <div className="space-y-4">
+            <div
+              className="relative aspect-square rounded-2xl overflow-hidden"
+              style={{ backgroundColor: "#111112" }}
+            >
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                className="object-contain p-12"
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+            {product.gallery && product.gallery.length > 1 && (
+              <div className="flex gap-3 overflow-x-auto pb-1">
+                {product.gallery.map((src, i) => (
+                  <div
+                    key={src}
+                    className="relative shrink-0 w-20 h-20 rounded-xl overflow-hidden border"
+                    style={{ backgroundColor: "#111112", borderColor: i === 0 ? "#4CB4E7" : "#2a2a2b" }}
+                  >
+                    <Image
+                      src={src}
+                      alt={`${product.name} vista ${i + 1}`}
+                      fill
+                      className="object-contain p-2"
+                      sizes="80px"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Info */}
@@ -274,7 +295,7 @@ export default async function ProductPage({ params }: Props) {
                   className="text-xs uppercase tracking-widest mb-4"
                   style={{ color: "#4CB4E7", fontFamily: "var(--font-label)" }}
                 >
-                  Especificaciones
+                  Características
                 </h2>
                 <ul className="space-y-2">
                   {product.features.map((f) => (
@@ -284,6 +305,41 @@ export default async function ProductPage({ params }: Props) {
                     </li>
                   ))}
                 </ul>
+              </div>
+            )}
+
+            {/* Specs table */}
+            {product.specs && Object.keys(product.specs).length > 0 && (
+              <div
+                className="rounded-xl border overflow-hidden mt-6"
+                style={{ borderColor: "#2a2a2b" }}
+              >
+                <div
+                  className="px-6 py-3 border-b"
+                  style={{ backgroundColor: "#1A1A1B", borderColor: "#2a2a2b" }}
+                >
+                  <h2
+                    className="text-xs uppercase tracking-widest"
+                    style={{ color: "#4CB4E7", fontFamily: "var(--font-label)" }}
+                  >
+                    Especificaciones técnicas
+                  </h2>
+                </div>
+                <div style={{ backgroundColor: "#111112" }}>
+                  {Object.entries(product.specs).map(([key, val], i) => (
+                    <div
+                      key={key}
+                      className="grid grid-cols-2 px-6 py-3 text-sm border-b last:border-b-0"
+                      style={{
+                        borderColor: "#2a2a2b",
+                        backgroundColor: i % 2 === 0 ? "#111112" : "#13131400",
+                      }}
+                    >
+                      <span style={{ color: "#B7B8B9", fontFamily: "var(--font-label)" }}>{key}</span>
+                      <span style={{ color: "#F5F5F5" }}>{val}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
