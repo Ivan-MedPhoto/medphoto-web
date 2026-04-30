@@ -79,7 +79,7 @@ export default function LeadMagnetForm() {
           <label
             htmlFor="lm-firstname"
             className="block text-xs uppercase tracking-widest mb-2"
-            style={{ color: "#B7B8B9", fontFamily: "var(--font-label)" }}
+            style={{ color: "#FFFFFF", fontFamily: "var(--font-label)" }}
           >
             Nombre
           </label>
@@ -90,14 +90,14 @@ export default function LeadMagnetForm() {
             required
             autoComplete="given-name"
             placeholder="Tu nombre"
-            className="w-full rounded-lg px-4 py-3 text-sm outline-none transition-colors"
+            className="w-full rounded-lg px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#9CA3AF]"
             style={{
-              backgroundColor: "#252526",
-              border: "1px solid #2a2a2b",
-              color: "#F5F5F5",
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #D1D5DB",
+              color: "#1A1A1A",
             }}
             onFocus={(e) => (e.currentTarget.style.borderColor = "#4CB4E7")}
-            onBlur={(e) => (e.currentTarget.style.borderColor = "#2a2a2b")}
+            onBlur={(e) => (e.currentTarget.style.borderColor = "#D1D5DB")}
           />
         </div>
 
@@ -105,7 +105,7 @@ export default function LeadMagnetForm() {
           <label
             htmlFor="lm-email"
             className="block text-xs uppercase tracking-widest mb-2"
-            style={{ color: "#B7B8B9", fontFamily: "var(--font-label)" }}
+            style={{ color: "#FFFFFF", fontFamily: "var(--font-label)" }}
           >
             Email
           </label>
@@ -116,14 +116,14 @@ export default function LeadMagnetForm() {
             required
             autoComplete="email"
             placeholder="tu@email.com"
-            className="w-full rounded-lg px-4 py-3 text-sm outline-none transition-colors"
+            className="w-full rounded-lg px-4 py-3 text-sm outline-none transition-colors placeholder:text-[#9CA3AF]"
             style={{
-              backgroundColor: "#252526",
-              border: "1px solid #2a2a2b",
-              color: "#F5F5F5",
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #D1D5DB",
+              color: "#1A1A1A",
             }}
             onFocus={(e) => (e.currentTarget.style.borderColor = "#4CB4E7")}
-            onBlur={(e) => (e.currentTarget.style.borderColor = "#2a2a2b")}
+            onBlur={(e) => (e.currentTarget.style.borderColor = "#D1D5DB")}
           />
         </div>
 
