@@ -6,6 +6,23 @@ export const metadata: Metadata = {
   title: "Fotografía Splash con Flash: Guía Profesional | MedPhoto",
   description:
     "Aprende cómo hacer fotografía splash profesional con iluminación de alta velocidad. Técnicas, equipo y setup explicado paso a paso.",
+  openGraph: {
+    title: "Fotografía Splash con Flash: Guía Profesional",
+    description:
+      "Aprende cómo hacer fotografía splash profesional con iluminación de alta velocidad. Técnicas, equipo y setup explicado paso a paso.",
+    url: "https://medphoto.com.co/blog/fotografia-splash-con-flash",
+    siteName: "MedPhoto Colombia",
+    images: [
+      {
+        url: "https://medphoto.com.co/blog/medphoto_splash_hero.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Fotografía splash de alta velocidad con flash Profoto",
+      },
+    ],
+    locale: "es_CO",
+    type: "article",
+  },
 };
 
 const styles = {

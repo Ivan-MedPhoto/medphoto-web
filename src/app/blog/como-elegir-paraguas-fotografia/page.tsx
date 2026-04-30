@@ -6,6 +6,23 @@ export const metadata: Metadata = {
   title: "Cómo elegir el paraguas de iluminación ideal | MedPhoto Colombia",
   description:
     "Aprende cómo elegir el paraguas de iluminación perfecto para fotografía. Guía completa sobre tipos, tamaños y usos profesionales.",
+  openGraph: {
+    title: "Cómo elegir el paraguas de iluminación ideal para fotografía profesional",
+    description:
+      "Aprende cómo elegir el paraguas de iluminación perfecto para fotografía. Guía completa sobre tipos, tamaños y usos profesionales.",
+    url: "https://medphoto.com.co/blog/como-elegir-paraguas-fotografia",
+    siteName: "MedPhoto Colombia",
+    images: [
+      {
+        url: "https://medphoto.com.co/blog/medphoto_paraguas_profoto_deep_hero.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Paraguas Profoto Deep en sesión de fotografía de retrato profesional",
+      },
+    ],
+    locale: "es_CO",
+    type: "article",
+  },
 };
 
 const styles = {

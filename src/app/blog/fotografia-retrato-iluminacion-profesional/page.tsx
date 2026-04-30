@@ -6,6 +6,23 @@ export const metadata: Metadata = {
   title: "Fotografía de Retrato Profesional: Iluminación y Técnica | MedPhoto",
   description:
     "Aprende cómo iluminar retratos profesionales con flash. Setup, técnicas y ejemplos reales con equipos Profoto.",
+  openGraph: {
+    title: "Fotografía de Retrato Profesional: Iluminación y Técnica",
+    description:
+      "Aprende cómo iluminar retratos profesionales con flash. Setup, técnicas y ejemplos reales con equipos Profoto.",
+    url: "https://medphoto.com.co/blog/fotografia-retrato-iluminacion-profesional",
+    siteName: "MedPhoto Colombia",
+    images: [
+      {
+        url: "https://medphoto.com.co/blog/medphoto_retrato_hero.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Setup de iluminación profesional para retrato con Profoto",
+      },
+    ],
+    locale: "es_CO",
+    type: "article",
+  },
 };
 
 const styles = {
