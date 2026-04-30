@@ -36,6 +36,15 @@ const posts = [
     date: "23 de abril, 2026",
     category: "Iluminación",
   },
+  {
+    title: "Profoto B3: ¿Single o Duo Kit? Cómo elegir según tu forma de trabajar",
+    description:
+      "750 Ws de batería en campo. Comparativa real entre el B3 Single y el Duo Kit para elegir según tu flujo de trabajo.",
+    slug: "profoto-b3-single-vs-duo-kit",
+    image: "/blog/medphoto_profoto_b3_hero.jpg",
+    date: "30 de abril, 2026",
+    category: "Producto",
+  },
 ];
 
 export default function BlogPage() {

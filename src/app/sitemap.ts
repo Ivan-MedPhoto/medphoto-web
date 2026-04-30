@@ -9,6 +9,7 @@ const blogSlugs: { slug: string; lastModified: Date }[] = [
   { slug: "fotografia-splash-con-flash", lastModified: new Date("2026-04-23") },
   { slug: "fotografia-retrato-iluminacion-profesional", lastModified: new Date("2026-04-23") },
   { slug: "como-elegir-paraguas-fotografia", lastModified: new Date("2026-04-23") },
+  { slug: "profoto-b3-single-vs-duo-kit", lastModified: new Date("2026-04-30") },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
