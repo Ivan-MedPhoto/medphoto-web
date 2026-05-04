@@ -1,7 +1,12 @@
 "use client";
 
 import { MessageCircle } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { WHATSAPP_URL } from "@/data/products";
+
+const WHATSAPP_MESSAGES: Record<string, string> = {
+  "/guia-roi-profoto/": "Hola, vi la guía de ROI de Profoto y quiero saber qué equipo necesito para mi tipo de fotografía",
+};
 
 function InstagramIcon() {
   return (
@@ -52,6 +57,8 @@ const socials = [
 ];
 
 export default function WhatsAppButton() {
+  const pathname = usePathname();
+  const message = WHATSAPP_MESSAGES[pathname] ?? "Hola, quiero información sobre equipos fotográficos";
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
       {socials.map(({ href, label, Icon, bg, color }) => (
@@ -68,7 +75,7 @@ export default function WhatsAppButton() {
         </a>
       ))}
       <a
-        href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quiero información sobre equipos fotográficos")}`}
+        href={`${WHATSAPP_URL}?text=${encodeURIComponent(message)}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contactar por WhatsApp"
