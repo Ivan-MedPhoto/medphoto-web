@@ -152,7 +152,7 @@ export default function BlogProfotoB3SingleVsDuo() {
         {/* Imagen hero */}
         <div style={styles.imageWrapper}>
           <Image
-            src="/images/products/profoto-pro-b3.png"
+            src="/blog/medphoto_profoto_b3_hero.jpg"
             alt="Profoto B3 en exteriores — Single vs Duo Kit"
             width={800}
             height={500}
