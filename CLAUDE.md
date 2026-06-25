@@ -85,7 +85,7 @@ Todo contenido debe encajar en al menos uno de estos pilares. Si no encaja, no s
 ### Deploy (Vercel)
 
 - **Proyecto Vercel:** `medphoto-web` (ivans-projects-b1e5d1e4)
-- **Configuración:** `.vercel/project.json` ya apunta al proyecto correcto
+- **Configuración:** `site/.vercel/project.json` ya apunta al proyecto correcto
 - **Comando producción:** `vercel --prod` (ejecutar desde `site/`)
 - **Dominio de producción:** medphoto.com.co (DNS apunta a Vercel — registros A/CNAME configurados)
 - **PROHIBIDO usar el proyecto "site"** — no está vinculado al dominio medphoto.com.co
@@ -137,3 +137,28 @@ No escalar para:
 2. Confirmar qué feature o pipeline se va a trabajar.
 3. Activar /guard si la sesión toca archivos de configuración o pipelines activos.
 4. Si es trabajo de contenido: confirmar audiencia y pilar antes de escribir.
+
+---
+
+## Deploy a Producción
+
+Vercel está conectado a GitHub. El CLI (`vercel --prod`) 
+NO actualiza producción.
+
+El único flujo válido para deployar es:
+
+git add <archivos modificados>
+git commit -m "descripción del cambio"
+git push origin main
+
+Vercel detecta el push y buildea automáticamente (~1-2 min).
+Verificar siempre con hard refresh (Cmd+Shift+R) en producción.
+
+## Datos del Proyecto
+
+- Proyecto Vercel: medphoto-web
+- Dominio: medphoto.com.co
+- Rama de producción: main
+- Repo: github.com/Ivan-MedPhoto/medphoto-web
+- Todos los datos de productos están en: src/data/products.ts
+- No hay CMS ni API externa — todo hardcodeado en products.ts
