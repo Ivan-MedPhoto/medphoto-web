@@ -47,6 +47,11 @@ const availabilityConfig = {
   subject_to_availability: { label: "Stock sujeto a disponibilidad", color: "#f59e0b", bg: "#f59e0b15" },
 };
 
+function toEmbedUrl(url: string): string {
+  const match = url.match(/[?&]v=([^&]+)/);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : url;
+}
+
 export default async function ProductPage({ params }: Props) {
   const { marca, slug } = await params;
   const product = getProductBySlug(marca as Brand, slug);
@@ -337,6 +342,37 @@ export default async function ProductPage({ params }: Props) {
                     >
                       <span style={{ color: "#B7B8B9", fontFamily: "var(--font-label)" }}>{key}</span>
                       <span style={{ color: "#F5F5F5" }}>{val}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Videos */}
+            {product.videos && product.videos.length > 0 && (
+              <div className="mt-10">
+                <p
+                  className="text-xs uppercase tracking-widest mb-5"
+                  style={{ color: "#4CB4E7", fontFamily: "var(--font-label)" }}
+                >
+                  Ver en acción
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {product.videos.map((url) => (
+                    <div
+                      key={url}
+                      className="relative w-full overflow-hidden rounded-xl"
+                      style={{ paddingBottom: "56.25%", backgroundColor: "#0F0F10" }}
+                    >
+                      <iframe
+                        src={toEmbedUrl(url)}
+                        title={product.name}
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                        style={{ border: "none" }}
+                      />
                     </div>
                   ))}
                 </div>

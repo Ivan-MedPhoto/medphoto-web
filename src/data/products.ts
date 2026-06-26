@@ -31,6 +31,7 @@ export interface Product {
   discontinued?: boolean;
   successor?: string;
   sku?: string;
+  videos?: string[];
 }
 
 export function formatPrice(price: number, currency: Currency): string {
@@ -2419,6 +2420,10 @@ export const products: Product[] = [
       "/images/products/profoto-l600c-angle.png",
       "/images/products/profoto-l600c-side.png",
     ],
+    videos: [
+      "https://www.youtube.com/watch?v=Zrj2TEs8Eos",
+      "https://www.youtube.com/watch?v=FwvA3Tvk6Ts",
+    ],
     isFeatured: true,
   },
   {
@@ -2482,6 +2487,10 @@ export const products: Product[] = [
       "/images/products/profoto-l600d-side.png",
       "/images/products/profoto-l600d-side-full.png",
     ],
+    videos: [
+      "https://www.youtube.com/watch?v=Zrj2TEs8Eos",
+      "https://www.youtube.com/watch?v=FwvA3Tvk6Ts",
+    ],
     isFeatured: true,
   },
   {
@@ -2537,6 +2546,10 @@ export const products: Product[] = [
       "/images/products/profoto-propanel-front.png",
       "/images/products/profoto-propanel-back.png",
       "/images/products/profoto-propanel-display.png",
+    ],
+    videos: [
+      "https://www.youtube.com/watch?v=6pcpqzqZgns&t=3s",
+      "https://www.youtube.com/watch?v=WtYj3EgLsJ0&t=2s",
     ],
     isFeatured: true,
   },
@@ -2598,6 +2611,10 @@ export const products: Product[] = [
     gallery: [
       "/images/products/profoto-l1600d-side.png",
       "/images/products/profoto-l1600d-reflector.png",
+    ],
+    videos: [
+      "https://www.youtube.com/watch?v=eqFC8Rsj2dE&t=7s",
+      "https://www.youtube.com/watch?v=0N3MXsGRB08&t=12s",
     ],
     isFeatured: false,
   },
