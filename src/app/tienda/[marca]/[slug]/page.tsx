@@ -142,6 +142,37 @@ export default async function ProductPage({ params }: Props) {
                 ))}
               </div>
             )}
+
+            {/* Videos */}
+            {product.videos && product.videos.length > 0 && (
+              <div className="mt-6">
+                <p
+                  className="text-xs uppercase tracking-widest mb-4"
+                  style={{ color: "#4CB4E7", fontFamily: "var(--font-label)" }}
+                >
+                  Ver en acción
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {product.videos.map((url) => (
+                    <div
+                      key={url}
+                      className="relative w-full overflow-hidden rounded-xl"
+                      style={{ paddingBottom: "56.25%", backgroundColor: "#0F0F10" }}
+                    >
+                      <iframe
+                        src={toEmbedUrl(url)}
+                        title={product.name}
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="absolute inset-0 w-full h-full"
+                        style={{ border: "none" }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Info */}
@@ -348,36 +379,6 @@ export default async function ProductPage({ params }: Props) {
               </div>
             )}
 
-            {/* Videos */}
-            {product.videos && product.videos.length > 0 && (
-              <div className="mt-10">
-                <p
-                  className="text-xs uppercase tracking-widest mb-5"
-                  style={{ color: "#4CB4E7", fontFamily: "var(--font-label)" }}
-                >
-                  Ver en acción
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {product.videos.map((url) => (
-                    <div
-                      key={url}
-                      className="relative w-full overflow-hidden rounded-xl"
-                      style={{ paddingBottom: "56.25%", backgroundColor: "#0F0F10" }}
-                    >
-                      <iframe
-                        src={toEmbedUrl(url)}
-                        title={product.name}
-                        loading="lazy"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="absolute inset-0 w-full h-full"
-                        style={{ border: "none" }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
