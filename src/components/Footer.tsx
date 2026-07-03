@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 import { WHATSAPP_URL } from "@/data/products";
+
+const LANDING_PAGES = ["/promo-profoto/"];
 
 const brands = [
   { label: "Profoto", href: "/tienda/profoto/" },
@@ -40,6 +45,10 @@ const social = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  if (LANDING_PAGES.includes(pathname)) return null;
+
   return (
     <footer
       className="border-t mt-24"

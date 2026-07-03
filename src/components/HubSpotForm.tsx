@@ -12,7 +12,11 @@ declare global {
   }
 }
 
-export default function HubSpotForm() {
+export default function HubSpotForm({
+  formId = "3518743b-004e-4084-895e-74ac98edae2f",
+}: {
+  formId?: string;
+}) {
   const initialized = useRef(false);
 
   useEffect(() => {
@@ -24,7 +28,7 @@ export default function HubSpotForm() {
         window.hbspt.forms.create({
           region: "na1",
           portalId: "9428261",
-          formId: "3518743b-004e-4084-895e-74ac98edae2f",
+          formId,
           target: "#hubspot-form",
         });
       }

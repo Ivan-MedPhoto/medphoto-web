@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, MessageCircle, ShoppingCart } from "lucide-react";
 import Logo from "./Logo";
 import { WHATSAPP_URL } from "@/data/products";
@@ -14,9 +15,14 @@ const nav = [
   { label: "Contacto", href: "/contacto/" },
 ];
 
+const LANDING_PAGES = ["/promo-profoto/"];
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const { totalItems } = useCart();
+  const pathname = usePathname();
+
+  if (LANDING_PAGES.includes(pathname)) return null;
 
   return (
     <header
