@@ -239,7 +239,6 @@ export default function HomePage() {
                         className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all hover:opacity-90"
                         style={{ backgroundColor: "#4CB4E7", color: "#0F0F10", fontFamily: "var(--font-label)" }}
                       >
-                        <MessageCircle size={14} />
                         Ver oferta
                       </Link>
                     </div>

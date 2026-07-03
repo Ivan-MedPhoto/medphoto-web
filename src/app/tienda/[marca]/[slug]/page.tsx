@@ -40,6 +40,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+const PROMO_BONO_SLUGS = ["profoto-b30", "profoto-a2"];
+const PROMO_BADGE_SLUGS = ["profoto-b30", "profoto-a2"];
+const SONY_A9III_SLUGS = ["profoto-a2"];
+
 const availabilityConfig = {
   available: { label: "En Stock", color: "#22c55e", bg: "#22c55e15" },
   backorder: { label: "Disponible bajo pedido", color: "#f59e0b", bg: "#f59e0b15" },
@@ -185,10 +189,18 @@ export default async function ProductPage({ params }: Props) {
             </p>
 
             <h1
-              className="text-3xl sm:text-4xl mb-4"
+              className="text-3xl sm:text-4xl mb-4 flex flex-wrap items-center gap-3"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               {product.name}
+              {PROMO_BADGE_SLUGS.includes(product.slug) && (
+                <span
+                  className="text-xs uppercase tracking-widest rounded-full px-3 py-1"
+                  style={{ backgroundColor: "#4CB4E7", color: "#0F0F10", fontFamily: "var(--font-label)" }}
+                >
+                  Promo Julio–Agosto
+                </span>
+              )}
             </h1>
 
             {/* Availability */}
@@ -272,6 +284,11 @@ export default async function ProductPage({ params }: Props) {
                     {formatPrice(product.priceBundled, product.currency)} al comprar con equipo Profoto o Phase One.
                   </p>
                 )}
+                {PROMO_BONO_SLUGS.includes(product.slug) && (
+                  <p className="text-sm mt-1" style={{ color: "#4CB4E7" }}>
+                    + Bono de $500.000 en productos MedPhoto
+                  </p>
+                )}
               </div>
             )}
 
@@ -318,6 +335,25 @@ export default async function ProductPage({ params }: Props) {
                   <MessageCircle size={18} />
                   Consultar por WhatsApp
                 </a>
+              </div>
+            )}
+
+            {/* Compatibilidad Sony α9 III */}
+            {SONY_A9III_SLUGS.includes(product.slug) && (
+              <div
+                className="rounded-xl p-5 border-l-4 mb-6"
+                style={{ backgroundColor: "#1A1A1B", borderColor: "#4CB4E7" }}
+              >
+                <p
+                  className="text-xs uppercase tracking-widest mb-2"
+                  style={{ color: "#4CB4E7", fontFamily: "var(--font-label)" }}
+                >
+                  Compatible · Firmware Update
+                </p>
+                <p className="text-sm leading-relaxed" style={{ color: "#B7B8B9" }}>
+                  Compatible con Sony α9 III — sincronización hasta 1/80.000s con
+                  actualización de firmware gratuita de Profoto.
+                </p>
               </div>
             )}
 
