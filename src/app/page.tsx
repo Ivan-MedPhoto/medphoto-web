@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { MessageCircle, Award, HeadphonesIcon, Package } from "lucide-react";
-import { getFeaturedProducts, whatsappProduct, formatPrice, WHATSAPP_URL } from "@/data/products";
+import { getFeaturedProducts, formatPrice, WHATSAPP_URL } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
 
 export const metadata: Metadata = {
@@ -227,18 +227,21 @@ export default function HomePage() {
                         </div>
                         <p className="text-xs mt-1" style={{ color: "#B7B8B9" }}>
                           IVA incluido · Ahorras $2.200.000
+                          <br />
+                          + Bono $500.000
+                        </p>
+                        <p className="text-xs mt-1" style={{ color: "#4CB4E7" }}>
+                          + Bono $500.000 en productos MedPhoto
                         </p>
                       </div>
-                      <a
-                        href={whatsappProduct(heroProduct.name)}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <Link
+                        href="/promo-profoto/"
                         className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all hover:opacity-90"
                         style={{ backgroundColor: "#4CB4E7", color: "#0F0F10", fontFamily: "var(--font-label)" }}
                       >
                         <MessageCircle size={14} />
-                        Pedir
-                      </a>
+                        Ver oferta
+                      </Link>
                     </div>
                   </div>
                 </div>
