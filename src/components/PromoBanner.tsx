@@ -35,7 +35,7 @@ export default function PromoBanner() {
         <Link
           href="/promo-profoto"
           className="shrink-0 rounded-md px-5 py-2 font-bold transition-all hover:opacity-90"
-          style={{ backgroundColor: "#0F0F10", color: "#4CB4E7", fontFamily: "var(--font-label)" }}
+          style={{ backgroundColor: "#FFFFFF", color: "#0F0F10", fontFamily: "var(--font-label)" }}
         >
           Ver oferta →
         </Link>
