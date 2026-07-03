@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Image from "next/image";
 import HubSpotForm from "@/components/HubSpotForm";
 
@@ -33,8 +34,21 @@ export default function PromoProfotoPage() {
   return (
     <div style={{ backgroundColor: "#0F0F10" }}>
 
+      {/* Volver al sitio */}
+      <div className="pt-6 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <Link
+            href="/"
+            className="inline-flex items-center text-xs transition-colors hover:text-[#4CB4E7]"
+            style={{ color: "#B7B8B9", fontFamily: "var(--font-label)" }}
+          >
+            ← Volver al sitio
+          </Link>
+        </div>
+      </div>
+
       {/* 1. Hero */}
-      <section className="pt-16 pb-12 px-4 sm:px-6 lg:px-8 text-center">
+      <section className="pt-10 pb-12 px-4 sm:px-6 lg:px-8 text-center">
         <div className="mx-auto max-w-4xl">
           <span
             className="inline-block rounded-full px-4 py-1.5 text-xs uppercase tracking-widest mb-6"
