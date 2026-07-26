@@ -5,3 +5,12 @@ export function productTitle(name: string): string {
   if (mid.length <= 60) return mid;
   return `${name} | MedPhoto`;
 }
+
+export function productAvailability(
+  brand: string,
+  stock?: string
+): string {
+  if (stock) return `https://schema.org/${stock}`;
+  if (brand === "phase-one") return "https://schema.org/PreOrder";
+  return "https://schema.org/InStock";
+}

@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import LeadMagnetForm from "@/components/LeadMagnetForm";
 
 export const metadata: Metadata = {
-  title: "¿Vale la pena invertir en Profoto en Colombia? Análisis real de ROI | MedPhoto",
+  title: "¿Vale la pena invertir en Profoto en Colombia? Análisis real de ROI",
   description:
     "Guía gratuita: desglose de costos, retorno real y análisis honesto sobre invertir en iluminación Profoto en Colombia. Descarga sin compromiso.",
+  alternates: {
+    canonical: "/guia-roi-profoto/",
+  },
   openGraph: {
     title: "¿Vale la pena invertir en Profoto en Colombia? Análisis real de ROI",
     description:

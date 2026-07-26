@@ -13,7 +13,7 @@ import {
   type Brand,
 } from "@/data/products";
 import AddToCartButton from "@/components/AddToCartButton";
-import { productTitle } from "@/lib/seo";
+import { productTitle, productAvailability } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ marca: string; slug: string }>;
@@ -78,6 +78,9 @@ export default async function ProductPage({ params }: Props) {
     "@type": "Product",
     name: product.name,
     description: product.description,
+    image: product.image.startsWith("http")
+      ? product.image
+      : `https://medphoto.com.co${product.image}`,
     brand: {
       "@type": "Brand",
       name: product.brandLabel,
@@ -86,10 +89,7 @@ export default async function ProductPage({ params }: Props) {
       "@type": "Offer",
       price: product.price,
       priceCurrency: product.currency,
-      availability:
-        product.availability === "available"
-          ? "https://schema.org/InStock"
-          : "https://schema.org/PreOrder",
+      availability: productAvailability(product.brand, product.stock),
       seller: {
         "@type": "Organization",
         name: "MedPhoto Colombia",
@@ -261,6 +261,10 @@ export default async function ProductPage({ params }: Props) {
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: avail.color }} />
               {avail.label}
             </div>
+
+            <p className="text-xs mb-6" style={{ color: "#B7B8B9" }}>
+              Sujeto a disponibilidad. Si el equipo no está en bodega, coordinamos la importación contigo.
+            </p>
 
             <p className="text-base leading-relaxed mb-8" style={{ color: "#B7B8B9" }}>
               {product.description}

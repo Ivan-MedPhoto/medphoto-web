@@ -32,6 +32,7 @@ export interface Product {
   successor?: string;
   sku?: string;
   videos?: string[];
+  stock?: "InStock" | "OutOfStock" | "PreOrder";
 }
 
 export function formatPrice(price: number, currency: Currency): string {

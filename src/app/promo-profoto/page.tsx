@@ -4,9 +4,12 @@ import Image from "next/image";
 import HubSpotForm from "@/components/HubSpotForm";
 
 export const metadata: Metadata = {
-  title: "Promo Profoto Julio–Agosto 2026 | MedPhoto Colombia",
+  title: "Promo Profoto Julio–Agosto 2026",
   description:
     "B30 desde $10.300.000 + bono de $500.000. A2 Connect Kit disponible. Distribuidores oficiales Profoto en Colombia.",
+  alternates: {
+    canonical: "/promo-profoto/",
+  },
 };
 
 function formatCOP(price: number): string {
