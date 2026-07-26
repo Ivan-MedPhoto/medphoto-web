@@ -231,11 +231,13 @@ export default async function ProductPage({ params }: Props) {
               {product.brandLabel} · {product.category}
             </p>
 
-            <h1
-              className="text-3xl sm:text-4xl mb-4 flex flex-wrap items-center gap-3"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              {product.name}
+            <div className="mb-4 flex flex-wrap items-center gap-3">
+              <h1
+                className="text-3xl sm:text-4xl"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                {product.name}
+              </h1>
               {PROMO_BADGE_SLUGS.includes(product.slug) && (
                 <span
                   className="text-xs uppercase tracking-widest rounded-full px-3 py-1"
@@ -244,7 +246,7 @@ export default async function ProductPage({ params }: Props) {
                   Promo Julio–Agosto
                 </span>
               )}
-            </h1>
+            </div>
 
             {/* Availability */}
             <div

@@ -19,6 +19,8 @@ const pages = [
   { label: "Nosotros", href: "/nosotros/" },
   { label: "Blog", href: "/blog/" },
   { label: "Contacto", href: "/contacto/" },
+  { label: "Guía ROI Profoto", href: "/guia-roi-profoto/" },
+  { label: "Promo Profoto", href: "/promo-profoto/" },
 ];
 
 const social = [
