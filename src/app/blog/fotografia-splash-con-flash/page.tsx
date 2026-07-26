@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Fotografía Splash con Flash: Guía Profesional | MedPhoto",
+  title: "Fotografía Splash con Flash: Guía Profesional",
   description:
     "Aprende cómo hacer fotografía splash profesional con iluminación de alta velocidad. Técnicas, equipo y setup explicado paso a paso.",
+  alternates: {
+    canonical: "/blog/fotografia-splash-con-flash/",
+  },
   openGraph: {
     title: "Fotografía Splash con Flash: Guía Profesional",
     description:

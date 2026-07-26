@@ -4,9 +4,12 @@ import { WHATSAPP_URL } from "@/data/products";
 import HubSpotForm from "@/components/HubSpotForm";
 
 export const metadata: Metadata = {
-  title: "Contacto — MedPhoto Colombia",
+  title: "Contacto",
   description:
     "Contáctanos para asesoría sobre equipos Profoto, Phase One, Capture One y TetherTools. WhatsApp +57 324 368 0862 · Bogotá, Colombia.",
+  alternates: {
+    canonical: "/contacto/",
+  },
 };
 
 const contactMethods = [

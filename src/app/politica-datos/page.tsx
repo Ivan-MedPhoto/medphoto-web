@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
 
 export const metadata: Metadata = {
-  title: "Política de Tratamiento de Datos Personales — MedPhoto Colombia",
+  title: "Política de Tratamiento de Datos Personales",
   description:
     "Política de protección y tratamiento de datos personales de Comercial MedPhoto S.A.S, conforme a la Ley 1581 de 2012.",
+  alternates: {
+    canonical: "/politica-datos/",
+  },
 };
 
 export default function PoliticaDatos() {

@@ -4,9 +4,12 @@ import { MessageCircle, Award, Users, Zap } from "lucide-react";
 import { WHATSAPP_URL } from "@/data/products";
 
 export const metadata: Metadata = {
-  title: "Nosotros — MedPhoto Colombia",
+  title: "Nosotros",
   description:
     "Distribuidores oficiales de Profoto, Phase One, Capture One y TetherTools en Colombia desde 2021. Asesoría pre y post venta para fotógrafos profesionales.",
+  alternates: {
+    canonical: "/nosotros/",
+  },
 };
 
 const brands = [

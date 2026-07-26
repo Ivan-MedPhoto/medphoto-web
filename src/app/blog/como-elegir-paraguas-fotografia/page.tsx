@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Cómo elegir el paraguas de iluminación ideal | MedPhoto Colombia",
+  title: "Cómo elegir el paraguas de iluminación ideal",
   description:
     "Aprende cómo elegir el paraguas de iluminación perfecto para fotografía. Guía completa sobre tipos, tamaños y usos profesionales.",
+  alternates: {
+    canonical: "/blog/como-elegir-paraguas-fotografia/",
+  },
   openGraph: {
     title: "Cómo elegir el paraguas de iluminación ideal para fotografía profesional",
     description:

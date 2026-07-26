@@ -13,6 +13,7 @@ import {
   type Brand,
 } from "@/data/products";
 import AddToCartButton from "@/components/AddToCartButton";
+import { productTitle } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ marca: string; slug: string }>;
@@ -30,12 +31,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) return {};
 
   return {
-    title: `${product.name} Colombia | MedPhoto — Distribuidor Oficial`,
+    title: { absolute: productTitle(product.name) },
     description: product.description,
+    alternates: {
+      canonical: `/tienda/${marca}/${slug}/`,
+    },
     openGraph: {
       title: `${product.name} | MedPhoto Colombia`,
       description: product.shortDescription,
       images: [product.image],
+      url: `/tienda/${marca}/${slug}/`,
+      siteName: "MedPhoto Colombia",
+      locale: "es_CO",
+      type: "website",
     },
   };
 }

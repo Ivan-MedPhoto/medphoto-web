@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
 
 export const metadata: Metadata = {
-  title: "Términos y Condiciones — MedPhoto Colombia",
+  title: "Términos y Condiciones",
   description:
     "Términos y condiciones de uso del sitio web y de los servicios de Comercial MedPhoto S.A.S.",
+  alternates: {
+    canonical: "/terminos-condiciones/",
+  },
 };
 
 export default function TerminosCondiciones() {

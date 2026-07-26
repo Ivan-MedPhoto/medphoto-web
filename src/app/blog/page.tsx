@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Blog — MedPhoto Colombia",
+  title: "Blog — Iluminación y Fotografía Profesional",
   description:
     "Tips de iluminación, reseñas de equipos Profoto y Phase One, y recursos para fotógrafos profesionales en Colombia.",
+  alternates: {
+    canonical: "/blog/",
+  },
 };
 
 const posts = [

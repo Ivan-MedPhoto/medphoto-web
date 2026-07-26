@@ -19,9 +19,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { marca } = await params;
   if (!validBrands.includes(marca as Brand)) return {};
   const label = brandLabels[marca as Brand];
+  const title = `${label} Colombia — Distribuidor Oficial | MedPhoto`;
+  const description = `Catálogo completo de ${label} en Colombia. Distribuidores oficiales con asesoría personalizada.`;
   return {
-    title: `${label} Colombia — Distribuidor Oficial`,
-    description: `Catálogo completo de ${label} en Colombia. Distribuidores oficiales con asesoría personalizada.`,
+    title: { absolute: title },
+    description,
+    alternates: {
+      canonical: `/tienda/${marca}/`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `/tienda/${marca}/`,
+      siteName: "MedPhoto Colombia",
+      locale: "es_CO",
+      type: "website",
+    },
   };
 }
 

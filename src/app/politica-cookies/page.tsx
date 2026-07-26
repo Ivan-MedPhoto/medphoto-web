@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
 
 export const metadata: Metadata = {
-  title: "Política de Cookies — MedPhoto Colombia",
+  title: "Política de Cookies",
   description:
     "Información sobre el uso de cookies en el sitio web de Comercial MedPhoto S.A.S.",
+  alternates: {
+    canonical: "/politica-cookies/",
+  },
 };
 
 export default function PoliticaCookies() {

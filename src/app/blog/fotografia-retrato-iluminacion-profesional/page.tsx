@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Fotografía de Retrato Profesional: Iluminación y Técnica | MedPhoto",
+  title: "Fotografía de Retrato Profesional: Iluminación y Técnica",
   description:
     "Aprende cómo iluminar retratos profesionales con flash. Setup, técnicas y ejemplos reales con equipos Profoto.",
+  alternates: {
+    canonical: "/blog/fotografia-retrato-iluminacion-profesional/",
+  },
   openGraph: {
     title: "Fotografía de Retrato Profesional: Iluminación y Técnica",
     description:

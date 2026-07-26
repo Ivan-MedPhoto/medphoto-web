@@ -3,9 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Profoto B3: ¿Single o Duo Kit? Cómo elegir según tu forma de trabajar | MedPhoto",
+  title: "Profoto B3: ¿Single o Duo Kit? Cómo elegir según tu forma de trabajar",
   description:
     "750 Ws de batería en campo. Comparativa real entre el Profoto B3 Single y el Duo Kit para elegir según tu flujo de trabajo.",
+  alternates: {
+    canonical: "/blog/profoto-b3-single-vs-duo-kit/",
+  },
   openGraph: {
     title: "Profoto B3: ¿Single o Duo Kit? Cómo elegir según tu forma de trabajar",
     description:

@@ -48,15 +48,6 @@ export const metadata: Metadata = {
       { rel: "manifest", url: "/site.webmanifest" },
     ],
   },
-  keywords: [
-    "Profoto Colombia",
-    "Phase One Colombia",
-    "Capture One Colombia",
-    "TetherTools Colombia",
-    "flash fotográfico profesional",
-    "cámara formato medio Colombia",
-    "distribuidor oficial Profoto",
-  ],
   authors: [{ name: "MedPhoto Colombia" }],
   creator: "MedPhoto Colombia",
   metadataBase: new URL("https://medphoto.com.co"),
@@ -71,9 +62,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MedPhoto Colombia",
-    description:
-      "Distribuidores oficiales de Profoto, Phase One, Capture One y TetherTools en Colombia.",
   },
   robots: {
     index: true,
