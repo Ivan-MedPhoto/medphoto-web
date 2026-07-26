@@ -122,9 +122,34 @@ const styles = {
   } as React.CSSProperties,
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: "Cómo elegir el paraguas de iluminación ideal para fotografía profesional",
+  datePublished: "2026-04-23",
+  author: {
+    "@type": "Organization",
+    name: "MedPhoto Colombia",
+  },
+  image: "https://medphoto.com.co/blog/medphoto_paraguas_profoto_deep_hero.jpg",
+  publisher: {
+    "@type": "Organization",
+    name: "MedPhoto Colombia",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://medphoto.com.co/apple-touch-icon.png",
+    },
+  },
+};
+
 export default function BlogParaguas() {
   return (
-    <div style={styles.page}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div style={styles.page}>
       <div style={styles.container}>
 
         <span style={styles.label}>Iluminación</span>
@@ -372,6 +397,7 @@ export default function BlogParaguas() {
         </div>
 
       </div>
-    </div>
+      </div>
+    </>
   );
 }

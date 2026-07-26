@@ -98,11 +98,46 @@ export default async function ProductPage({ params }: Props) {
     ...(product.sku && { sku: product.sku }),
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: "https://medphoto.com.co/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Tienda",
+        item: "https://medphoto.com.co/tienda/",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.brandLabel,
+        item: `https://medphoto.com.co/tienda/${product.brand}/`,
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: product.name,
+        item: `https://medphoto.com.co/tienda/${product.brand}/${product.slug}/`,
+      },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">

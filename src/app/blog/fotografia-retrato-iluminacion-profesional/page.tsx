@@ -103,9 +103,34 @@ const styles = {
   } as React.CSSProperties,
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: "Cómo lograr retratos profesionales con iluminación de estudio (guía completa)",
+  datePublished: "2026-04-23",
+  author: {
+    "@type": "Organization",
+    name: "MedPhoto Colombia",
+  },
+  image: "https://medphoto.com.co/blog/medphoto_retrato_hero.jpg",
+  publisher: {
+    "@type": "Organization",
+    name: "MedPhoto Colombia",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://medphoto.com.co/apple-touch-icon.png",
+    },
+  },
+};
+
 export default function BlogRetrato() {
   return (
-    <div style={styles.page}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div style={styles.page}>
       <div style={styles.container}>
 
         <span style={styles.label}>Retrato</span>
@@ -324,6 +349,7 @@ export default function BlogRetrato() {
         </div>
 
       </div>
-    </div>
+      </div>
+    </>
   );
 }

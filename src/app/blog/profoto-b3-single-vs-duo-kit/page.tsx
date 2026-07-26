@@ -134,9 +134,34 @@ const styles = {
   } as React.CSSProperties,
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: "Profoto B3: ¿Single o Duo Kit? Cómo elegir según tu forma de trabajar",
+  datePublished: "2026-04-30",
+  author: {
+    "@type": "Organization",
+    name: "MedPhoto Colombia",
+  },
+  image: "https://medphoto.com.co/blog/medphoto_profoto_b3_hero.jpg",
+  publisher: {
+    "@type": "Organization",
+    name: "MedPhoto Colombia",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://medphoto.com.co/apple-touch-icon.png",
+    },
+  },
+};
+
 export default function BlogProfotoB3SingleVsDuo() {
   return (
-    <div style={styles.page}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div style={styles.page}>
       <div style={styles.container}>
 
         <span style={styles.label}>Producto · Profoto</span>
@@ -245,6 +270,7 @@ export default function BlogProfotoB3SingleVsDuo() {
         </div>
 
       </div>
-    </div>
+      </div>
+    </>
   );
 }

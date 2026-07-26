@@ -79,6 +79,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className="min-h-screen flex flex-col antialiased"
         style={{ backgroundColor: "#0F0F10", color: "#F5F5F5" }}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "MedPhoto Colombia",
+              url: "https://medphoto.com.co",
+              logo: "https://medphoto.com.co/apple-touch-icon.png",
+              sameAs: [
+                "https://www.instagram.com/Medphoto_Colombia",
+                "https://www.facebook.com/MedPhotoColombia",
+                "https://www.tiktok.com/@medphoto_colombia",
+              ],
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+573243680862",
+                email: "contacto@medphoto.com.co",
+                contactType: "customer service",
+                areaServed: "CO",
+                availableLanguage: "Spanish",
+              },
+            }),
+          }}
+        />
         <CartProvider>
           <Header />
           <main className="flex-1">{children}</main>
