@@ -145,6 +145,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src="//js.hs-scripts.com/46114173.js"
           strategy="afterInteractive"
         />
+        {/* Google Analytics 4 */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-39DGBKV73R"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="ga4-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-39DGBKV73R');
+            `,
+          }}
+        />
       </body>
     </html>
   );
