@@ -51,14 +51,14 @@ Todo contenido debe encajar en al menos uno de estos pilares. Si no encaja, no s
 ## 5. TOOLING STACK (Claude Code Session)
 
 ### Plugins Activos (verificado 26 jul 2026)
-| Plugin | Estado |
-|---|---|
-| claude-mem | Activo |
-| frontend-design | Activo |
-| pyright-lsp | Activo |
-| context7 | Activo |
-| playwright | Activo |
-| G Stack | NO es plugin — skills vendorizadas en `.claude/skills/gstack/` del repo |
+| Plugin | Estado | Propósito |
+|---|---|---|
+| claude-mem | Activo | Memoria persistente entre sesiones. Worker en puerto 37701. (Versión: NO VERIFICADO) |
+| frontend-design | Activo | UI production-grade. Sin estética genérica de IA. |
+| pyright-lsp | Activo | Type checking Python vía LSP — sin uso actual en este proyecto (100% TypeScript) |
+| context7 | Activo | Documentación en tiempo real de cualquier librería o framework. |
+| playwright | Activo | QA visual automatizado en browser real — /qa lo activa. |
+| G Stack | NO es plugin | Skills vendorizadas en `.claude/skills/gstack/` del repo — 44 skills (43 subskills + raíz), verificado |
 
 **CRÍTICO — raíz de sesión:** las skills de gstack (`/autoplan`, `/qa`, `/review` completo) solo cargan si Claude Code se inicia DESDE `~/medphoto-web/site`. La raíz queda fijada al iniciar la sesión; anteponer `cd` a los comandos NO la corrige. Arrancar siempre escribiendo `web` en la terminal (la función `medphoto` abre `~/Documents/MedPhoto` y las skills del sitio no cargan).
 
