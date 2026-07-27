@@ -173,7 +173,7 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 
 3. **Lote 2 — script de inventario.** **Primera carga hecha el 27 jul** (ver §3 y commit `39a52fe`) — se confirmó que los SKU del Excel de Ivan **NO coincidían** con los de `products.ts` (eran de dos sistemas de numeración distintos), así que el cruce se hizo por nombre de producto y se corrigieron los 74 SKU discrepantes en el mismo commit. Pendiente real: convertir esto en un flujo recurrente (Ivan exporta CSV semanal → actualizar `stock` → `git push`) — por ahora fue una corrección puntual manual, no un script automatizado. Cadencia sugerida: semanal (lunes).
 4. **Logotipo horizontal — RESUELTO el 27 jul** (commit `603e65c`). `public/logo-medphoto-horizontal.png` (380x100, wordmark oficial, traído desde el proyecto de Claude.ai) reemplaza `apple-touch-icon.png` como `logo` en el schema `Organization` (`src/app/layout.tsx:90`).
-5. **GA4** — no instalado. Confirmado por grep: cero referencias a `gtag` o `G-`. Solo Meta Pixel (`1530931291102927`) y HubSpot (`46114173`).
+5. **GA4 — RESUELTO el 27 jul** (commit `90be3bc`). Measurement ID `G-39DGBKV73R` (propiedad ya existía en la cuenta de Ivan, nunca se había instalado en el sitio). `gtag.js` agregado en `src/app/layout.tsx` con `next/script` (`strategy="afterInteractive"`), mismo patrón que Meta Pixel y HubSpot.
 
 ### Baja
 
@@ -189,6 +189,8 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 |---|---|
 | HubSpot | Portal `9428261` · Tracking `46114173` · Form lead magnet `fe713f94-46ec-45cb-987e-1e681443a2fe` |
 | Meta Pixel | `1530931291102927` |
+| Google Analytics 4 | Measurement ID `G-39DGBKV73R` (instalado 27 jul) |
+| Google Search Console | Propiedad de Dominio, verificada 27 jul vía TXT en Dongee |
 | Dominios autorizados en HubSpot | medphoto.com.co · medphoto.com.mx |
 | WhatsApp | +57 324 368 0862 |
 | Redes en schema `sameAs` | Instagram `@Medphoto_Colombia` · Facebook `MedPhotoColombia` · TikTok `@medphoto_colombia` (los tres verificados) |
