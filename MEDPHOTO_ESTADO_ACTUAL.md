@@ -167,7 +167,7 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 ### Alta prioridad
 
 1. **Google Search Console** — nunca revisado. Tres métodos de verificación descartados con evidencia (DNS TXT, meta tag, archivo en `public/`), pero no se ha entrado al panel. Su reporte de 404 ordenaría las 230 URLs legacy por equity real en vez de tratarlas como lista plana. No bloquea el envío del mapa de redirecciones (ver punto 2).
-2. **Mapa de redirecciones 301** — **IMPLEMENTADO** el 27 jul (`next.config.ts` + `src/data/legacy-redirects.ts`, 281 reglas). Auditoría manual de las 118 rutas con candidato completada por Ivan (94 aprobadas, 24 rechazadas). `next build` exitoso + smoke test local de 16 casos, todo correcto. **Pendiente real: commit + push a `main`** — no hecho, requiere autorización explícita de Ivan (regla de deploy en CLAUDE.md).
+2. **Mapa de redirecciones 301** — **EN PRODUCCIÓN desde el 27 jul** (commit `735151e`, `next.config.ts` + `src/data/legacy-redirects.ts`, 281 reglas). Auditoría manual completada por Ivan (94 aprobadas, 24 rechazadas de 118). Verificado en producción por Ivan: `/como-escoger-tu-paraguas/` → `/blog/como-elegir-paraguas-fotografia/` y `/producto/profoto-a2/` → `/tienda/profoto/profoto-a2/`, ambos correctos. Pendiente real restante: auditoría manual de las 118 filas ya está hecha — solo falta, si se quiere, el barrido completo y detallado de productos que Ivan mencionó para después (fuera de alcance de este trabajo).
 
 ### Media
 
