@@ -7,9 +7,12 @@ import ProductCard from "@/components/ProductCard";
 import PromoBanner from "@/components/PromoBanner";
 
 export const metadata: Metadata = {
-  title: "MedPhoto Colombia — Distribuidores Oficiales Profoto, Phase One",
+  title: "MedPhoto Colombia — Equipos Fotográficos Profesionales",
   description:
     "Distribuidores oficiales de Profoto, Phase One, Capture One y TetherTools en Colombia. Equipos fotográficos de alta gama con asesoría personalizada.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 const brands = [
@@ -69,8 +72,9 @@ const reasons = [
 ];
 
 export default function HomePage() {
-  const featured = getFeaturedProducts().slice(0, 6);
-  const heroProduct = featured.find((p) => p.isHero) ?? featured[0];
+  const allFeatured = getFeaturedProducts();
+  const heroProduct = allFeatured.find((p) => p.isHero) ?? allFeatured[0];
+  const featured = allFeatured.filter((p) => p.id !== heroProduct.id).slice(0, 6);
 
   return (
     <>
@@ -137,8 +141,8 @@ export default function HomePage() {
                 className="text-4xl sm:text-5xl lg:text-6xl leading-[1.05] mb-6"
                 style={{ fontFamily: "var(--font-heading)", fontWeight: 700 }}
               >
-                La luz que<br />
-                <span style={{ color: "#4CB4E7" }}>los mejores</span><br />
+                La luz que <br />
+                <span style={{ color: "#4CB4E7" }}>los mejores </span><br />
                 usan.
               </h1>
 
@@ -264,7 +268,7 @@ export default function HomePage() {
             className="text-xs uppercase tracking-widest text-center mb-12"
             style={{ color: "#4CB4E7", fontFamily: "var(--font-label)" }}
           >
-            Distribuidores Oficiales
+            Nuestras Marcas
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px" style={{ backgroundColor: "#2a2a2b" }}>
             {brands.map((brand) => (
