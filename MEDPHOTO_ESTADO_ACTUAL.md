@@ -1,6 +1,6 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 26 de julio de 2026
+**Última actualización:** 27 de julio de 2026
 **Mantenido por:** Claude · Actualizar al cierre de cada bloque de trabajo significativo
 
 > **Instrucción de arranque:** leer este documento antes de iniciar cualquier sesión de trabajo sobre el sitio, tanto en Claude.ai como en Claude Code.
@@ -132,16 +132,17 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 ### Decisiones ya tomadas para el mapa de 301
 
 - **Las 148 `/etiqueta-producto/` NO se redirigen** — son *product tags* de WooCommerce, thin content. Deben devolver 404/410. Redirigirlas manda a Google 148 señales de equivalencia falsa.
-- **Default seguro:** todo `UNRESOLVED` va a la categoría de marca. Nunca al home, nunca 404.
+- **Fallback de dos capas (aclarado 27 jul, vía `/autoplan`):** las líneas "default seguro → categoría de marca" y "catch-all → `/tienda/`" de este mismo documento no eran contradictorias, eran dos capas secuenciales sin cruzar entre sí. Orden correcto: (1) si el slug o la categoría legacy permite inferir marca (prefijos `profoto-`, `phase-one-`, `capture-one-`, `tethertools-`, o viene de una de las 46 categorías mapeadas) → `/tienda/{marca}/`; (2) solo si NO se puede inferir marca de ninguna forma → catch-all genérico `/tienda/` (verdadero último recurso, no el default).
 - **Estructura en capas** en `next.config.ts` (Next.js evalúa de arriba abajo, primera coincidencia gana):
-  1. Producto→producto específicos (~75 filas, auditoría manual)
-  2. Rutas sueltas (6 filas, ya resueltas)
+  1. Producto→producto específicos (41 resueltos por matching automático; 118 de las 189 UNRESOLVED restantes tienen candidato para auditoría manual — 42 alta confianza, 55 media, 21 baja; 71 sin candidato razonable. Lista completa ruta-por-ruta en el anexo del plan. Auditoría = fast-follow, no bloquea el envío inicial, ver TODOS.md)
+  2. Rutas sueltas (6 filas, ya resueltas). `/contacto/` y `/carrito/` NO necesitan regla — path idéntico en ambos sitios.
   3. Categorías → páginas de marca (46 filas)
   4. Colapso de paginación `/page/N/` (1 regla)
   5. `/etiqueta-producto/*` — sin regla, 404 deliberado
-  6. Catch-all `/producto/:slug*` → `/tienda/` (red de seguridad)
+  6. Fallback por marca inferida, luego catch-all `/producto/:slug*` → `/tienda/` (último recurso)
 
-  Resultado: **~81 filas auditables a mano** en vez de 430.
+  Plan completo: `~/.gstack/projects/Ivan-MedPhoto-medphoto-web/main-legacy-redirects-plan.md`
+  (aprobado 27 jul vía `/autoplan`, listo para implementación).
 
 ### Rutas sueltas con destino propuesto (sin verificar contra contenido archivado)
 
@@ -165,8 +166,8 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 
 ### Alta prioridad
 
-1. **Google Search Console** — nunca revisado. Tres métodos de verificación descartados con evidencia (DNS TXT, meta tag, archivo en `public/`), pero no se ha entrado al panel. Su reporte de 404 ordenaría las 230 URLs legacy por equity real en vez de tratarlas como lista plana.
-2. **Mapa de redirecciones 301** — el problema más caro abierto. Bloqueado por: (a) las 230 rutas nunca llegaron completas a Claude.ai, (b) falta criterio de Iván sobre los ~155 productos sin equivalente.
+1. **Google Search Console** — nunca revisado. Tres métodos de verificación descartados con evidencia (DNS TXT, meta tag, archivo en `public/`), pero no se ha entrado al panel. Su reporte de 404 ordenaría las 230 URLs legacy por equity real en vez de tratarlas como lista plana. No bloquea el envío del mapa de redirecciones (ver punto 2).
+2. **Mapa de redirecciones 301** — **IMPLEMENTADO** el 27 jul (`next.config.ts` + `src/data/legacy-redirects.ts`, 281 reglas). Auditoría manual de las 118 rutas con candidato completada por Ivan (94 aprobadas, 24 rechazadas). `next build` exitoso + smoke test local de 16 casos, todo correcto. **Pendiente real: commit + push a `main`** — no hecho, requiere autorización explícita de Ivan (regla de deploy en CLAUDE.md).
 
 ### Media
 
