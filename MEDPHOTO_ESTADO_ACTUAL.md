@@ -18,7 +18,7 @@
 | Rama de producción | `main` |
 | Hosting | Vercel — proyecto `medphoto-web` |
 | Ruta local | `~/medphoto-web/site/` |
-| Alias de terminal | `medphoto` → navega a la ruta y abre Claude Code |
+| Comando de terminal | `web` → `~/medphoto-web/site` + Claude Code (**usar este**). `medphoto` → `~/Documents/MedPhoto`, NO carga las skills del sitio |
 | Dominio | medphoto.com.co |
 | Datos de producto | 96 productos hardcodeados en `src/data/products.ts` |
 | Páginas generadas en build | 120 |
@@ -182,34 +182,7 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 
 ---
 
-## 6. Reglas operativas
-
-### Verificación en sesiones de Claude Code
-
-- Preguntas numeradas con línea de reconciliación obligatoria **al inicio**: `"Respondí X de Y. Sin verificar: [números]."`
-- Evidencia `archivo:línea` o salida de comando en cada afirmación.
-- `NO VERIFICADO` explícito cuando no se pueda confirmar. Prohibido inferir.
-- **Un grep vacío NO prueba ausencia** si el dato puede vivir fuera del repo (DNS, base de datos, panel externo).
-- Code no autoevalúa el alcance de sus cambios. La spec la aprueba Iván.
-- **Sesión limpia obligatoria** para reportes de diagnóstico — Code reproduce análisis previos si arrastra contexto.
-
-### Asimetría Claude.ai vs Claude Code
-
-Claude Code **ve el repositorio, no ve la historia de producción**. Los 404 legacy no aparecen en ningún grep porque vivían en una base de datos que ya no alimenta el sitio. Todo lo que requiera conocimiento cruzado (DNS, índice de Wayback, estado HTTP en vivo, índice de Google) se maneja desde Claude.ai.
-
-### Capas de seguridad
-
-Si Claude pide desactivar cualquier protección (Vercel Deployment Protection, firewall, permisos), **Claude es responsable de cerrarla en el mismo hilo**, declarándola como pendiente al final de cada respuesta hasta confirmar el cierre.
-
-### Errores de entorno conocidos
-
-- El `grep` de la máquina de Iván resuelve a **`ugrep`**, que no acepta `\|` como alternancia. Usar siempre `-E` con `|`.
-- `git log --grep` usa regex básica por defecto. Para alternancia hay que añadir `-E`.
-- El directorio de trabajo de Claude Code **se resetea entre comandos**. Anteponer `cd ~/medphoto-web/site &&` a cada uno.
-
----
-
-## 7. Integraciones activas
+## 6. Integraciones activas
 
 | Servicio | ID / Detalle |
 |---|---|
@@ -221,7 +194,7 @@ Si Claude pide desactivar cualquier protección (Vercel Deployment Protection, f
 
 ---
 
-## 8. Campañas activas
+## 7. Campañas activas
 
 **Promo Profoto Verano 2026** (julio–agosto 2026)
 - Landing `/promo-profoto/` — con canonical, título propio y en el sitemap

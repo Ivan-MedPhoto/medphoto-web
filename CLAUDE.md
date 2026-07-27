@@ -41,7 +41,7 @@ Todo contenido debe encajar en al menos uno de estos pilares. Si no encaja, no s
 ## 4. REGLAS DE PRODUCCIÓN DE CONTENIDO
 
 - **Asset-First:** Siempre imágenes reales del catálogo de productos. CERO imágenes generadas por IA.
-- **Regla de 3 minutos:** Cada piece de contenido debe producirse en máximo 3 minutos. Si tarda más, el proceso está roto — escalar a Ivan.
+- **Regla de 3 minutos:** Si un contenido educativo no se entiende en menos de 3 minutos, se rediseña. Aplica a COMPRENSIÓN del lector, no a tiempo de producción. El estándar es calidad sobre velocidad — 3 posts potentes por semana, no 7.
 - **Pipeline:** Google Sheets + Make.com + Claude API + Canva + Instagram Graph API.
 - **TikTok:** Manual siempre. Audio trending requiere control humano.
 - **Instagram → Facebook:** Sincronización vía Meta Business Suite (automática).
@@ -50,43 +50,40 @@ Todo contenido debe encajar en al menos uno de estos pilares. Si no encaja, no s
 
 ## 5. TOOLING STACK (Claude Code Session)
 
-### Plugins Activos
-| Plugin | Propósito |
-|--------|-----------|
-| claude-mem v12.4.7 | Memoria persistente entre sesiones. Worker en puerto 37701. |
-| G Stack (43 skills) | /autoplan, /design-html, /qa, /review, /ship — pipeline completo de web. |
-| frontend-design | UI production-grade. Sin estética genérica de IA. |
-| pyright-lsp | Type checking Python activo como LSP server. |
-| context7 | Documentación en tiempo real de cualquier librería o framework. |
-| playwright | QA visual automatizado en browser real — /qa lo activa. |
+### Plugins Activos (verificado 26 jul 2026)
+| Plugin | Estado |
+|---|---|
+| claude-mem | Activo |
+| frontend-design | Activo |
+| pyright-lsp | Activo |
+| context7 | Activo |
+| playwright | Activo |
+| G Stack | NO es plugin — skills vendorizadas en `.claude/skills/gstack/` del repo |
+
+**CRÍTICO — raíz de sesión:** las skills de gstack (`/autoplan`, `/qa`, `/review` completo) solo cargan si Claude Code se inicia DESDE `~/medphoto-web/site`. La raíz queda fijada al iniciar la sesión; anteponer `cd` a los comandos NO la corrige. Arrancar siempre escribiendo `web` en la terminal (la función `medphoto` abre `~/Documents/MedPhoto` y las skills del sitio no cargan).
 
 ### Reglas de Uso de Herramientas (MedPhoto)
-- Usar /autoplan antes de cualquier feature nueva del sitio.
-- Usar /qa antes de cualquier deploy o presentación a Ivan.
-- Usar /review después de cada bloque de implementación.
-- Usar context7 cuando se trabaje con librerías externas (Next.js, Vercel, Make.com API).
-- Usar /careful antes de modificar pipelines de automatización activos.
-- Usar /guard en sesiones que toquen archivos de configuración de Make.com o Instagram API.
-- ultrathink: SOLO para lógica compleja (algoritmos de pricing, lógica de automatización no trivial).
-- Para tareas mecánicas (copy, captions, HTML básico): modo normal.
+- `/autoplan` antes de cualquier feature nueva (requiere raíz correcta)
+- `/qa` antes de cualquier deploy (requiere raíz correcta)
+- `context7` al trabajar con librerías externas
+- `ultrathink` solo para lógica compleja; modo normal para tareas mecánicas
 
 ---
 
 ## 6. STACK TECNOLÓGICO DEL SITIO
 
-- Framework: Next.js (App Router) + TypeScript + Tailwind CSS
+- Framework: Next.js 16.2.4 (App Router) + TypeScript ^5 + Tailwind CSS ^4 + React 19.2.4
 - Componentes: shadcn/ui
 - Hosting: Vercel
 - Fuentes: Google Fonts vía next/font/google
 - Imágenes: next/image (siempre — nunca img tags directos)
 - Formularios: Formspree o mailto: (sin backend propio)
-- SEO: metadata export desde layout.tsx
+- SEO: metadata API de Next.js — generateMetadata por ruta + helpers en src/lib/seo.ts (productTitle, productAvailability). Schema JSON-LD: Product, Organization, BreadcrumbList, BlogPosting
 
 ### Deploy (Vercel)
 
-- **Proyecto Vercel:** `medphoto-web` (ivans-projects-b1e5d1e4)
+- **Proyecto Vercel:** `medphoto-web` (ivans-projects-1d09dbdb)
 - **Configuración:** `site/.vercel/project.json` ya apunta al proyecto correcto
-- **Comando producción:** `vercel --prod` (ejecutar desde `site/`)
 - **Dominio de producción:** medphoto.com.co (DNS apunta a Vercel — registros A/CNAME configurados)
 - **PROHIBIDO usar el proyecto "site"** — no está vinculado al dominio medphoto.com.co
 
@@ -133,10 +130,33 @@ No escalar para:
 
 ## 10. CHECKLIST DE INICIO DE SESIÓN
 
-1. Ejecutar /mem-search "[tarea actual]" para cargar contexto previo.
-2. Confirmar qué feature o pipeline se va a trabajar.
-3. Activar /guard si la sesión toca archivos de configuración o pipelines activos.
+0. **Arrancar la sesión con `web`** (no `medphoto`). `web` abre Claude Code desde `~/medphoto-web/site`, donde viven las skills de gstack.
+1. `/mem-search "[tarea actual]"` para cargar contexto previo.
+2. Leer `MEDPHOTO_ESTADO_ACTUAL.md`.
+3. Confirmar rama: `git branch --show-current`.
 4. Si es trabajo de contenido: confirmar audiencia y pilar antes de escribir.
+
+---
+
+## 11. PROTOCOLO DE VERIFICACIÓN (BINDING)
+
+En cualquier auditoría, diagnóstico o reporte:
+- Numerar las respuestas y responderlas en orden.
+- Primera línea de la respuesta: `"Respondí X de Y. Sin verificar: [números]."`
+- Cada afirmación con evidencia `archivo:línea` o salida de comando.
+- Si no se puede verificar: escribir `NO VERIFICADO`. Prohibido inferir o completar por patrón.
+- **Un grep vacío NO prueba ausencia** si el dato puede vivir fuera del repo (DNS, base de datos, panel externo). Decirlo explícitamente.
+- No autoevaluar el alcance de los cambios. La spec la aprueba Iván.
+- Sesión limpia obligatoria para reportes de diagnóstico — arrastrar contexto hace que se reproduzcan análisis previos en vez de ejecutar.
+
+### Asimetría Claude.ai vs Claude Code
+Claude Code ve el repositorio, no la historia de producción. Lo que requiera conocimiento cruzado (DNS, índice de Wayback, estado HTTP en vivo, índice de Google) se maneja desde Claude.ai.
+
+### Errores de entorno conocidos
+- `grep` resuelve a **ugrep**: no acepta `\|` como alternancia. Usar `-E` con `|`.
+- `git log --grep` usa regex básica. Para alternancia añadir `-E`.
+- El cwd de Bash se resetea entre comandos: anteponer `cd ~/medphoto-web/site &&`.
+- Esto NO corrige la raíz de sesión para skills (ver §5).
 
 ---
 
