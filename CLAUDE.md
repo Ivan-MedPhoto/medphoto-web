@@ -65,6 +65,9 @@ Todo contenido debe encajar en al menos uno de estos pilares. Si no encaja, no s
 ### Reglas de Uso de Herramientas (MedPhoto)
 - `/autoplan` antes de cualquier feature nueva (requiere raíz correcta)
 - `/qa` antes de cualquier deploy (requiere raíz correcta)
+- `/review` después de cada bloque de implementación (requiere raíz correcta)
+- `/careful` antes de modificar pipelines de automatización activos
+- `/guard` en sesiones que toquen configuración de Make.com o Instagram API
 - `context7` al trabajar con librerías externas
 - `ultrathink` solo para lógica compleja; modo normal para tareas mecánicas
 
@@ -134,7 +137,8 @@ No escalar para:
 1. `/mem-search "[tarea actual]"` para cargar contexto previo.
 2. Leer `MEDPHOTO_ESTADO_ACTUAL.md`.
 3. Confirmar rama: `git branch --show-current`.
-4. Si es trabajo de contenido: confirmar audiencia y pilar antes de escribir.
+4. Activar `/guard` si la sesión toca archivos de configuración o pipelines activos.
+5. Si es trabajo de contenido: confirmar audiencia y pilar antes de escribir.
 
 ---
 
