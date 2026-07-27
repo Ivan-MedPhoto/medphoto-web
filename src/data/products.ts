@@ -78,7 +78,8 @@ export const products: Product[] = [
       "Peso: 4,1 kg",
     ],
     image: "/images/products/profoto-pro-d3-duo.png",
-    sku: "901099D",
+    sku: "901099",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-pro-d3-1250w",
@@ -106,7 +107,8 @@ export const products: Product[] = [
       "Peso: 4,1 kg",
     ],
     image: "/images/products/profoto-pro-d3.png",
-    sku: "901099",
+    sku: "901098",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-pro-d3-750w-duo",
@@ -134,7 +136,8 @@ export const products: Product[] = [
       "Peso: 3,6 kg (por unidad)",
     ],
     image: "/images/products/profoto-pro-d3-duo.png",
-    sku: "901097D",
+    sku: "901097",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-pro-d3-750w",
@@ -162,7 +165,8 @@ export const products: Product[] = [
       "Peso: 3,6 kg",
     ],
     image: "/images/products/profoto-pro-d3.png",
-    sku: "901097",
+    sku: "901096",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-d30-duo",
@@ -218,7 +222,8 @@ export const products: Product[] = [
       "Peso: 1,85 kg sin adaptador / 2,1 kg con adaptador",
     ],
     image: "/images/products/profoto-d30.png",
-    sku: "901070",
+    sku: "901071",
+    stock: "OutOfStock",
   },
   // Pro-11, D2 Kit (AC flashes)
   {
@@ -244,7 +249,8 @@ export const products: Product[] = [
       "Display táctil",
     ],
     image: "/images/products/profoto-pro-11.png",
-    sku: "901900",
+    sku: "901011",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-d2-kit-500",
@@ -270,7 +276,8 @@ export const products: Product[] = [
     image: "/images/products/profoto-d2-kit-500500-airttl.jpg",
     discontinued: true,
     successor: "profoto-d30-duo",
-    sku: "901012",
+    sku: "901016",
+    stock: "OutOfStock",
   },
   // ───── PROFOTO — FLASHES A BATERÍA ─────
   {
@@ -299,7 +306,8 @@ export const products: Product[] = [
       "Peso: 4,0 kg con batería (por unidad)",
     ],
     image: "/images/products/profoto-pro-b3-duo.png",
-    sku: "901082D",
+    sku: "901082",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-pro-b3-750",
@@ -328,6 +336,7 @@ export const products: Product[] = [
     ],
     image: "/images/products/profoto-pro-b3-single.png",
     sku: "901081",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-b30-kit-duo",
@@ -354,7 +363,8 @@ export const products: Product[] = [
     ],
     image: "/images/products/profoto-b30-duo.png",
     isFeatured: true,
-    sku: "901301",
+    sku: "901078",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-b30",
@@ -386,7 +396,8 @@ export const products: Product[] = [
     image: "/images/products/profoto-b30.png",
     isFeatured: true,
     isHero: true,
-    sku: "901300",
+    sku: "901077",
+    stock: "InStock",
   },
   {
     id: "profoto-b20-kit-duo",
@@ -443,7 +454,8 @@ export const products: Product[] = [
     ],
     image: "/images/products/profoto-b20.png",
     isFeatured: true,
-    sku: "901200",
+    sku: "901075",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-b10x-plus-duo",
@@ -468,7 +480,8 @@ export const products: Product[] = [
     image: "/images/products/profoto-b10x-plus-duo-kit.jpeg",
     discontinued: true,
     successor: "profoto-b30-kit-duo",
-    sku: "901164D",
+    sku: "901168",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-b10x-duo",
@@ -493,7 +506,8 @@ export const products: Product[] = [
     image: "/images/products/profoto-b10x-duo-kit.jpeg",
     discontinued: true,
     successor: "profoto-b30-kit-duo",
-    sku: "901163D",
+    sku: "901167",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-b10x-plus",
@@ -519,7 +533,8 @@ export const products: Product[] = [
     image: "/images/products/profoto-b10x-plus.jpeg",
     discontinued: true,
     successor: "profoto-b30",
-    sku: "901164",
+    sku: "901193",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-b10x",
@@ -545,7 +560,8 @@ export const products: Product[] = [
     image: "/images/products/profoto-b10x.jpeg",
     discontinued: true,
     successor: "profoto-b30",
-    sku: "901163",
+    sku: "901192",
+    stock: "OutOfStock",
   },
   // ───── PROFOTO — ON-CAMERA FLASH ─────
   {
@@ -576,7 +592,8 @@ export const products: Product[] = [
     ],
     image: "/images/products/profoto-a2.png",
     isFeatured: true,
-    sku: "901230",
+    sku: "901250",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-a10-canon",
@@ -613,7 +630,8 @@ export const products: Product[] = [
       { label: "Sony", slug: "profoto-a10-sony" },
       { label: "Fuji", slug: "profoto-a10-fuji" },
     ],
-    sku: "901220",
+    sku: "901230",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-a10-nikon",
@@ -649,7 +667,8 @@ export const products: Product[] = [
       { label: "Sony", slug: "profoto-a10-sony" },
       { label: "Fuji", slug: "profoto-a10-fuji" },
     ],
-    sku: "901221",
+    sku: "901231",
+    stock: "InStock",
   },
   {
     id: "profoto-a10-sony",
@@ -685,7 +704,8 @@ export const products: Product[] = [
       { label: "Sony", slug: "profoto-a10-sony" },
       { label: "Fuji", slug: "profoto-a10-fuji" },
     ],
-    sku: "901222",
+    sku: "901232",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-a10-fuji",
@@ -721,7 +741,8 @@ export const products: Product[] = [
       { label: "Sony", slug: "profoto-a10-sony" },
       { label: "Fuji", slug: "profoto-a10-fuji" },
     ],
-    sku: "901223",
+    sku: "901233",
+    stock: "OutOfStock",
   },
   // ───── PROFOTO — TRANSMISORES ─────
   {
@@ -753,7 +774,8 @@ export const products: Product[] = [
       { label: "Leica", slug: "profoto-connect-pro-leica" },
       { label: "Non-TTL", slug: "profoto-connect-pro-non-ttl" },
     ],
-    sku: "901300C",
+    sku: "901321",
+    stock: "InStock",
   },
   {
     id: "profoto-connect-pro-nikon",
@@ -779,7 +801,8 @@ export const products: Product[] = [
       { label: "Leica", slug: "profoto-connect-pro-leica" },
       { label: "Non-TTL", slug: "profoto-connect-pro-non-ttl" },
     ],
-    sku: "901300N",
+    sku: "901322",
+    stock: "InStock",
   },
   {
     id: "profoto-connect-pro-sony",
@@ -805,7 +828,8 @@ export const products: Product[] = [
       { label: "Leica", slug: "profoto-connect-pro-leica" },
       { label: "Non-TTL", slug: "profoto-connect-pro-non-ttl" },
     ],
-    sku: "901300S",
+    sku: "901323",
+    stock: "InStock",
   },
   {
     id: "profoto-connect-pro-fuji",
@@ -855,7 +879,8 @@ export const products: Product[] = [
       { label: "Leica", slug: "profoto-connect-pro-leica" },
       { label: "Non-TTL", slug: "profoto-connect-pro-non-ttl" },
     ],
-    sku: "901300L",
+    sku: "901325",
+    stock: "InStock",
   },
   {
     id: "profoto-connect-pro-non-ttl",
@@ -880,7 +905,8 @@ export const products: Product[] = [
       { label: "Leica", slug: "profoto-connect-pro-leica" },
       { label: "Non-TTL", slug: "profoto-connect-pro-non-ttl" },
     ],
-    sku: "901300U",
+    sku: "901320",
+    stock: "InStock",
   },
   {
     id: "profoto-air-remote-ttl-s",
@@ -897,7 +923,8 @@ export const products: Product[] = [
     description: "Transmisor Air Remote TTL para sistemas Sony. Control TTL inalámbrico confiable.",
     features: ["TTL para Sony", "Control remoto Air", "HSS"],
     image: "/images/products/air-remote-ttl-s.png",
-    sku: "901041",
+    sku: "901045",
+    stock: "InStock",
   },
   {
     id: "profoto-air-remote-ttl-f",
@@ -914,7 +941,8 @@ export const products: Product[] = [
     description: "Transmisor Air Remote TTL para sistemas Fuji. Control TTL inalámbrico confiable.",
     features: ["TTL para Fuji", "Control remoto Air", "HSS"],
     image: "/images/products/air-remote-ttl-f.png",
-    sku: "901042",
+    sku: "901047",
+    stock: "InStock",
   },
   {
     id: "profoto-air-remote-universal",
@@ -957,7 +985,8 @@ export const products: Product[] = [
       "Instalación rápida sin herramientas",
     ],
     image: "/images/products/softbox-rfi-13x2-40x60cm.jpg",
-    sku: "254703",
+    sku: "254702",
+    stock: "InStock",
   },
   {
     id: "profoto-softbox-rfi-60x90",
@@ -980,7 +1009,8 @@ export const products: Product[] = [
       "Instalación rápida sin herramientas",
     ],
     image: "/images/products/softbox-rfi-2x3-60x90cm.png",
-    sku: "254704",
+    sku: "254703",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-softbox-rfi-90x120",
@@ -1003,7 +1033,8 @@ export const products: Product[] = [
       "Instalación rápida sin herramientas",
     ],
     image: "/images/products/softbox-rfi-3x4-90x120cm.png",
-    sku: "254705",
+    sku: "254704",
+    stock: "InStock",
   },
   {
     id: "profoto-softbox-rfi-octa-90",
@@ -1026,7 +1057,8 @@ export const products: Product[] = [
       "Speed ring compatible con todos los flashes Profoto",
     ],
     image: "/images/products/softbox-rfi-3-octa-90cm.png",
-    sku: "254706",
+    sku: "254711",
+    stock: "InStock",
   },
   {
     id: "profoto-softbox-rfi-octa-120",
@@ -1049,7 +1081,8 @@ export const products: Product[] = [
       "Speed ring compatible con todos los flashes Profoto",
     ],
     image: "/images/products/softbox-rfi-4-octa-120cm.jpg",
-    sku: "254707",
+    sku: "254715",
+    stock: "InStock",
   },
   {
     id: "profoto-softbox-rfi-octa-150",
@@ -1072,7 +1105,8 @@ export const products: Product[] = [
       "Speed ring compatible con todos los flashes Profoto",
     ],
     image: "/images/products/softbox-rfi-5-octa-150cm.png",
-    sku: "254708",
+    sku: "254712",
+    stock: "OutOfStock",
   },
   // Softbox OCF
   {
@@ -1096,7 +1130,8 @@ export const products: Product[] = [
       "Montaje magnético — instalación en segundos",
     ],
     image: "/images/products/softbox-ocf-octa-2-60cm.jpg",
-    sku: "101218",
+    sku: "101211",
+    stock: "InStock",
   },
   {
     id: "profoto-softbox-ocf-60x90",
@@ -1119,7 +1154,8 @@ export const products: Product[] = [
       "Montaje magnético",
     ],
     image: "/images/products/softbox-ocf-2x3-60x90cm.jpg",
-    sku: "101219",
+    sku: "101215",
+    stock: "InStock",
   },
   {
     id: "profoto-beauty-dish-ocf-white",
@@ -1142,7 +1178,8 @@ export const products: Product[] = [
       "Difusor de tejido incluido",
     ],
     image: "/images/products/ocf-beauty-dish-white-2-plegable.jpg",
-    sku: "101222",
+    sku: "101220",
+    stock: "InStock",
   },
   {
     id: "profoto-beauty-dish-ocf-silver",
@@ -1165,7 +1202,8 @@ export const products: Product[] = [
       "Difusor de tejido incluido",
     ],
     image: "/images/products/ocf-beauty-dish-silver-2-plegable.jpg",
-    sku: "101223",
+    sku: "101221",
+    stock: "InStock",
   },
   // Paraguas Deep
   {
@@ -1189,7 +1227,8 @@ export const products: Product[] = [
       "Compatible con todos los flashes Profoto",
     ],
     image: "/images/products/paraguas-deep-white-s.jpg",
-    sku: "100993",
+    sku: "100983",
+    stock: "InStock",
   },
   {
     id: "profoto-paraguas-deep-white-m",
@@ -1212,7 +1251,8 @@ export const products: Product[] = [
       "Compatible con todos los flashes Profoto",
     ],
     image: "/images/products/paraguas-deep-white-m.jpg",
-    sku: "100994",
+    sku: "100986",
+    stock: "InStock",
   },
   {
     id: "profoto-paraguas-deep-white-l",
@@ -1235,7 +1275,8 @@ export const products: Product[] = [
       "Compatible con todos los flashes Profoto",
     ],
     image: "/images/products/paraguas-deep-white-l.jpg",
-    sku: "100995",
+    sku: "100977",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-paraguas-deep-white-xl",
@@ -1258,7 +1299,8 @@ export const products: Product[] = [
       "Compatible con todos los flashes Profoto",
     ],
     image: "/images/products/paraguas-deep-white-xl.jpg",
-    sku: "100996",
+    sku: "100980",
+    stock: "InStock",
   },
   {
     id: "profoto-paraguas-deep-silver-s",
@@ -1281,7 +1323,8 @@ export const products: Product[] = [
       "Compatible con todos los flashes Profoto",
     ],
     image: "/images/products/paraguas-deep-silver-s.jpg",
-    sku: "100997",
+    sku: "100984",
+    stock: "InStock",
   },
   {
     id: "profoto-paraguas-deep-silver-m",
@@ -1304,7 +1347,8 @@ export const products: Product[] = [
       "Compatible con todos los flashes Profoto",
     ],
     image: "/images/products/paraguas-deep-silver-m.jpg",
-    sku: "100998",
+    sku: "100987",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-paraguas-deep-silver-l",
@@ -1327,7 +1371,8 @@ export const products: Product[] = [
       "Compatible con todos los flashes Profoto",
     ],
     image: "/images/products/paraguas-deep-silver-l.jpg",
-    sku: "100999",
+    sku: "100978",
+    stock: "InStock",
   },
   {
     id: "profoto-paraguas-deep-translucent-l",
@@ -1350,7 +1395,8 @@ export const products: Product[] = [
       "Compatible con todos los flashes Profoto",
     ],
     image: "/images/products/paraguas-deep-translucent-l.jpg",
-    sku: "101002",
+    sku: "100979",
+    stock: "InStock",
   },
   // Reflectores duros
   {
@@ -1374,7 +1420,8 @@ export const products: Product[] = [
       "Incluye bolsa de transporte",
     ],
     image: "/images/products/reflector-zoom.png",
-    sku: "101000",
+    sku: "100785",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-reflector-magnum",
@@ -1397,7 +1444,8 @@ export const products: Product[] = [
       "Construcción en aluminio de alta calidad",
     ],
     image: "/images/products/reflector-magnum.jpg",
-    sku: "101003",
+    sku: "100624",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-reflector-narrow-beam",
@@ -1420,7 +1468,8 @@ export const products: Product[] = [
       "Construcción en aluminio",
     ],
     image: "/images/products/reflector-narrow-beam.jpg",
-    sku: "101004",
+    sku: "100617",
+    stock: "InStock",
   },
   {
     id: "profoto-beauty-dish-white",
@@ -1493,6 +1542,7 @@ export const products: Product[] = [
     image: "/images/products/sistema-de-camara-xf-iq4-150.webp",
     isFeatured: true,
     sku: "IQ4-150",
+    stock: "PreOrder",
   },
   {
     id: "phase-one-xt-iq4-150",
@@ -1516,6 +1566,7 @@ export const products: Product[] = [
     ],
     image: "/images/products/sistema-de-camara-xt-iq4-150.jpg",
     sku: "XT-IQ4-150",
+    stock: "PreOrder",
   },
   {
     id: "phase-one-xc-iq4-150",
@@ -1538,6 +1589,7 @@ export const products: Product[] = [
     ],
     image: "/images/products/sistema-de-camara-xc-iq4-150-con-lente-23mm.jpg",
     sku: "XC-IQ4-23",
+    stock: "PreOrder",
   },
   // ───── CAPTURE ONE ─────
   {
@@ -1565,7 +1617,8 @@ export const products: Product[] = [
     ],
     image: "/images/products/capture-one-pro.jpg",
     isFeatured: true,
-    sku: "CO-PRO",
+    sku: "88200202",
+    stock: "InStock",
   },
   // ───── TETHERTOOLS ─────
   {
@@ -1591,7 +1644,8 @@ export const products: Product[] = [
     ],
     image: "/images/products/tetherpro-usb-30-to-usb-c-46mts-high-visibility-orange.jpg",
     isFeatured: true,
-    sku: "CU3C4BLK",
+    sku: "CUC3215-ORG",
+    stock: "InStock",
   },
   {
     id: "tetherpro-usbc-usbc-9-4m",
@@ -1614,7 +1668,8 @@ export const products: Product[] = [
       "Blindaje premium",
     ],
     image: "/images/products/tetherpro-usb-c-to-usb-c-31-94m-straight-to-right-angle-cable.jpg",
-    sku: "CUCA",
+    sku: "CUC31RT2-ORG",
+    stock: "InStock",
   },
   {
     id: "tetherboost-pro-9-4m",
@@ -1637,7 +1692,8 @@ export const products: Product[] = [
       "Sin pérdida de velocidad",
     ],
     image: "/images/products/tetherboost-pro-31-ft-94m-usb-c-cable-system.jpg",
-    sku: "TBPRO",
+    sku: "CUC31R-ORG",
+    stock: "OutOfStock",
   },
   {
     id: "rock-solid-tripod-roller",
@@ -1660,7 +1716,8 @@ export const products: Product[] = [
       "Ruedas de goma premium",
     ],
     image: "/images/products/rock-solid-tripod-roller.jpg",
-    sku: "RS-TR",
+    sku: "RSDL012",
+    stock: "InStock",
   },
   {
     id: "tether-table-aero",
@@ -1685,7 +1742,8 @@ export const products: Product[] = [
     ],
     image: "/images/products/tether-table-aero.jpg",
     isFeatured: true,
-    sku: "TTETHERAIRBLK",
+    sku: "TTA1SBLK",
+    stock: "InStock",
   },
   {
     id: "tetherguard-leverlock",
@@ -1708,7 +1766,8 @@ export const products: Product[] = [
       "Instalación sin herramientas",
     ],
     image: "/images/products/tetherguard-leverlock-cable-kit-usb-c-to-usb-c-31-94metros-straight-to-right-high-visibility-orange.png",
-    sku: "TGLL",
+    sku: "LLPC31RT2-ORG",
+    stock: "InStock",
   },
   // ───── PROFOTO — TRANSMISORES CONNECT BÁSICO ─────
   {
@@ -1849,7 +1908,8 @@ export const products: Product[] = [
       "Construcción ligera para locación",
     ],
     image: "/images/products/ocf-ii-grid-10.jpg",
-    sku: "101230",
+    sku: "101121",
+    stock: "InStock",
   },
   {
     id: "profoto-ocf-ii-grid-20",
@@ -1872,7 +1932,8 @@ export const products: Product[] = [
       "Reduce el derrame sin endurecer la luz",
     ],
     image: "/images/products/ocf-ii-grid-20.jpg",
-    sku: "101231",
+    sku: "101122",
+    stock: "InStock",
   },
   {
     id: "profoto-ocf-ii-grid-30",
@@ -1918,7 +1979,8 @@ export const products: Product[] = [
       "Montaje magnético",
     ],
     image: "/images/products/ocf-ii-grid-gel-kit.jpeg",
-    sku: "101235",
+    sku: "101129",
+    stock: "InStock",
   },
   {
     id: "profoto-ocf-ii-snoot",
@@ -1941,7 +2003,8 @@ export const products: Product[] = [
       "Construcción plegable para transporte",
     ],
     image: "/images/products/ocf-ii-snoot.jpeg",
-    sku: "101240",
+    sku: "101128",
+    stock: "InStock",
   },
   // ───── PROFOTO — GRIDS RFi ─────
   {
@@ -1986,7 +2049,8 @@ export const products: Product[] = [
       "Instalación rápida sin herramientas",
     ],
     image: "/images/products/rfi-grid-50-para-softbox-2x3.jpg",
-    sku: "254774",
+    sku: "254622",
+    stock: "OutOfStock",
   },
   {
     id: "profoto-rfi-grid-octa-120",
@@ -2008,7 +2072,8 @@ export const products: Product[] = [
       "Instalación rápida sin herramientas",
     ],
     image: "/images/products/rfi-grid-50-para-softbox-4-octa.jpg",
-    sku: "254777",
+    sku: "254645",
+    stock: "InStock",
   },
   // ───── PROFOTO — GELES OCF ─────
   {
@@ -2078,7 +2143,8 @@ export const products: Product[] = [
       "Gestión de color avanzada",
     ],
     image: "/images/products/capture-one-pro-con-compra-de-flash-profoto-o-camara-digital.jpg",
-    sku: "CO-PRO-BUNDLE",
+    sku: "88200206",
+    stock: "InStock",
   },
   // ───── TETHERTOOLS — CABLES ADICIONALES ─────
   {
@@ -2102,7 +2168,8 @@ export const products: Product[] = [
       "Compatible con TetherGuard",
     ],
     image: "/images/products/tetherpro-usb-30-to-micro-b-right-angle-15-46m-high-visibility-orange.jpg",
-    sku: "CU3MB15ORG",
+    sku: "CU61RT15-ORG",
+    stock: "InStock",
   },
   {
     id: "tetherpro-usbc-microb-4-6m",
@@ -2125,7 +2192,8 @@ export const products: Product[] = [
       "Núcleo de ferrita antiinterferencias",
     ],
     image: "/images/products/tetherpro-usb-c-to-30-micro-b-right-angle-15-46m-high-visibility-orange.jpg",
-    sku: "CUCMB15ORG",
+    sku: "CUC33R15-ORG",
+    stock: "InStock",
   },
   {
     id: "tetherpro-usbc-usbc-right-angle",
@@ -2148,7 +2216,8 @@ export const products: Product[] = [
       "Compatible con TetherGuard",
     ],
     image: "/images/products/tetherpro-usb-c-to-usb-c-right-angle-orange.jpg",
-    sku: "CUCA15ORG",
+    sku: "CUC15RT2RT-ORG",
+    stock: "OutOfStock",
   },
   {
     id: "tetherboost-pro-core-controller",
@@ -2195,7 +2264,8 @@ export const products: Product[] = [
       "Compatible con todas las cámaras estándar",
     ],
     image: "/images/products/tetherblock-graphite.jpg",
-    sku: "TBLKGRA",
+    sku: "TB-MC-005",
+    stock: "OutOfStock",
   },
   {
     id: "tetherblock-arca-graphite",
@@ -2218,7 +2288,8 @@ export const products: Product[] = [
       "Construcción en aluminio anodizado",
     ],
     image: "/images/products/tetherblock-arca-graphite.jpg",
-    sku: "TBLKARCGRA",
+    sku: "TB-QR-004G",
+    stock: "OutOfStock",
   },
   {
     id: "tetherguard-leverlock-plate",
@@ -2241,7 +2312,8 @@ export const products: Product[] = [
       "Instalación sin herramientas",
     ],
     image: "/images/products/tetherguard-leverlock-plate.jpg",
-    sku: "TGLLPLT",
+    sku: "TG-LLP",
+    stock: "OutOfStock",
   },
   {
     id: "tetherguard-tethering-support-kit",
@@ -2264,7 +2336,8 @@ export const products: Product[] = [
       "Solución completa de seguridad",
     ],
     image: "/images/products/tetherguard-tethering-support-kit.jpg",
-    sku: "TGLLKIT",
+    sku: "TG098",
+    stock: "InStock",
   },
   // ───── TETHERTOOLS — ACCESORIOS DE ESTUDIO ─────
   {
@@ -2288,7 +2361,8 @@ export const products: Product[] = [
       "Ruedas de goma premium",
     ],
     image: "/images/products/rock-solid-low-boy-roller.jpg",
-    sku: "RS-LOWBOY",
+    sku: "RSLBR81",
+    stock: "OutOfStock",
   },
   {
     id: "rock-solid-2-head-side-arm",
@@ -2311,7 +2385,8 @@ export const products: Product[] = [
       "Construcción en acero",
     ],
     image: "/images/products/rock-solid-2-head-cross-bar-side-arm.jpg",
-    sku: "RS-2HXBAR",
+    sku: "RSTAA2",
+    stock: "InStock",
   },
   {
     id: "tether-tools-organization-case",
@@ -2334,7 +2409,8 @@ export const products: Product[] = [
       "Tamaño compacto para mochila o bolso",
     ],
     image: "/images/products/tether-tools-organization-case-standard-estuche.jpg",
-    sku: "TTORG-STD",
+    sku: "TTPCC",
+    stock: "OutOfStock",
   },
   {
     id: "tether-t-setup",
@@ -2369,6 +2445,7 @@ export const products: Product[] = [
     brandLabel: "Profoto",
     category: "Luces LED Cinema",
     sku: "902022",
+    stock: "OutOfStock",
     price: 12800000,
     originalPrice: 14000000,
     currency: "COP",
@@ -2435,6 +2512,7 @@ export const products: Product[] = [
     brandLabel: "Profoto",
     category: "Luces LED Cinema",
     sku: "902020",
+    stock: "OutOfStock",
     price: 12000000,
     originalPrice: 13000000,
     currency: "COP",
@@ -2501,7 +2579,8 @@ export const products: Product[] = [
     brand: "profoto",
     brandLabel: "Profoto",
     category: "Luces LED Cinema",
-    sku: "902030",
+    sku: "903010",
+    stock: "OutOfStock",
     price: 65000000,
     originalPrice: 70500000,
     currency: "COP",
@@ -2561,7 +2640,8 @@ export const products: Product[] = [
     brand: "profoto",
     brandLabel: "Profoto",
     category: "Luces LED Cinema",
-    sku: "902010",
+    sku: "902011",
+    stock: "OutOfStock",
     price: 26000000,
     originalPrice: 28500000,
     currency: "COP",
