@@ -177,9 +177,13 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 
 ### Baja
 
-6. Copy único por página de marca (`/tienda/[marca]/`) — hoy solo grid, sin texto indexable. Requiere definir audiencia y tono antes de escribir.
-7. Ampliar el blog de 4 a ~12-15 artículos. Cada post técnico de Instagram debería convertirse en artículo indexable.
+6. **Copy único por página de marca — RESUELTO el 27 jul** (commit `d2a6648`). Las 4 páginas (`/tienda/[marca]/`) tienen párrafo indexable, tono Profesional confirmado por Ivan para las 4 marcas.
+7. **Ampliar el blog de 4 a ~12-15 artículos — EN PROGRESO.** Fuente: posts técnicos que Ivan e Iván ya escribieron junto con Claude.ai para Instagram. Pendiente: Ivan debe recuperar/pasar ese material (no está en este repo ni en esta sesión) antes de poder redactar los artículos nuevos.
 8. Gap visual entre el banner de promo y el hero del home.
+9. **Contenido delgado en el home — detectado 27 jul vía auditoría externa (Seobility).** 451 palabras vs ~800 recomendadas. Requiere escribir copy adicional — pendiente definir audiencia/tono antes de tocarlo (regla binding del proyecto).
+10. **H1 del home no reforzado en el cuerpo del texto — detectado 27 jul vía Seobility.** El H1 ("La luz que los mejores usan") no comparte palabras clave con el copy del cuerpo. Se resuelve junto con el punto 9 (ambos son trabajo de copywriting, no de código).
+
+**Ya corregido de esa misma auditoría Seobility (commit `40589ab`):** título del home acortado (602px→54 caracteres, ya no queda cortado a mitad de frase), canonical agregado al home (única página que no lo tenía), espaciado del H1 corregido (se extraía como "quelos mejoresusan" sin espacios), encabezado duplicado corregido (hero repetido como H2+H3, y "Distribuidores Oficiales" repetido en dos secciones — la segunda se renombró a "Nuestras Marcas").
 
 ---
 
