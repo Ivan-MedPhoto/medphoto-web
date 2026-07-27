@@ -101,7 +101,7 @@ resto                          → InStock
 
 **Justificación comercial:** Phase One es siempre bajo pedido (confirmado por Iván). Capture One es software sin inventario físico. Profoto y TetherTools rotan y se reponen.
 
-El campo `stock?: "InStock" | "OutOfStock" | "PreOrder"` **ya existe en el tipo `Product`** pero **no está asignado a ningún producto todavía**. Listo para recibir el dato del script de inventario (ver §5).
+El campo `stock?: "InStock" | "OutOfStock" | "PreOrder"` **poblado el 27 jul** (commit `39a52fe`) cruzando los 96 productos contra el inventario real de Ivan (código + nombre + cantidad) por nombre — los SKU no coincidían entre `products.ts` y el inventario real, así que no sirvió cruzar por código. 80 productos con dato real (40 InStock, 37 OutOfStock, 3 Phase One en PreOrder explícito); 16 sin dato en el inventario, sin stock asignado (Connect básico Canon/Nikon/Sony/Fuji, Beauty Dish no-OCF, D30/B20 Duo Kit, Air Remote Universal, Connect Pro Fuji, OCF II Grid 30°, RFi Grid 40x60, OCF Gel Corrección/Efectos, TetherBoost Pro Core Controller, Tether T-Setup). De paso se corrigieron 74 SKU que estaban desalineados desde la carga inicial del catálogo (ej. A2 tenía el SKU de A10 Canon; B30 tenía el de Connect Pro; Pro-D3 single/duo con números cruzados).
 
 ---
 
@@ -171,7 +171,7 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 
 ### Media
 
-3. **Lote 2 — script de inventario.** Iván tiene un sistema propio en Excel con el inventario real. Flujo propuesto: exportar CSV (SKU + disponible) → script actualiza campo `stock` en `products.ts` → `git push` → Vercel redespliega. Cadencia semanal (lunes). **Pendiente confirmar: ¿los SKU del Excel coinciden con los de `products.ts`?** (`901300`, `254703`, `CU3C4BLK`, `IQ4-150`). Si no, hay que mapear 96 productos primero.
+3. **Lote 2 — script de inventario.** **Primera carga hecha el 27 jul** (ver §3 y commit `39a52fe`) — se confirmó que los SKU del Excel de Ivan **NO coincidían** con los de `products.ts` (eran de dos sistemas de numeración distintos), así que el cruce se hizo por nombre de producto y se corrigieron los 74 SKU discrepantes en el mismo commit. Pendiente real: convertir esto en un flujo recurrente (Ivan exporta CSV semanal → actualizar `stock` → `git push`) — por ahora fue una corrección puntual manual, no un script automatizado. Cadencia sugerida: semanal (lunes).
 4. **Logotipo horizontal.** El schema `Organization` usa `apple-touch-icon.png` (isotipo cuadrado 180x180). No existe logotipo horizontal en `public/`. Google usa ese campo para el Knowledge Panel. Fuente: `Logotipo_Principal.png` en el proyecto de Claude.ai.
 5. **GA4** — no instalado. Confirmado por grep: cero referencias a `gtag` o `G-`. Solo Meta Pixel (`1530931291102927`) y HubSpot (`46114173`).
 
