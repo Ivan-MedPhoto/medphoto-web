@@ -87,7 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@type": "Organization",
               name: "MedPhoto Colombia",
               url: "https://medphoto.com.co",
-              logo: "https://medphoto.com.co/apple-touch-icon.png",
+              logo: "https://medphoto.com.co/logo-medphoto-horizontal.png",
               sameAs: [
                 "https://www.instagram.com/Medphoto_Colombia",
                 "https://www.facebook.com/MedPhotoColombia",
