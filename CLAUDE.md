@@ -77,7 +77,7 @@ Todo contenido debe encajar en al menos uno de estos pilares. Si no encaja, no s
 - Hosting: Vercel
 - Fuentes: Google Fonts vía next/font/google
 - Imágenes: next/image (siempre — nunca img tags directos)
-- Formularios: Formspree o mailto: (sin backend propio)
+- Formularios: HubSpot (portal 9428261) para captura de leads + enlaces `mailto:` en contacto y legales. Sin backend propio. **Formspree NO se usa** — verificado 26 jul 2026, cero coincidencias en el repo.
 - SEO: metadata API de Next.js — generateMetadata por ruta + helpers en src/lib/seo.ts (productTitle, productAvailability). Schema JSON-LD: Product, Organization, BreadcrumbList, BlogPosting
 
 ### Deploy (Vercel)
@@ -157,6 +157,9 @@ Claude Code ve el repositorio, no la historia de producción. Lo que requiera co
 - `git log --grep` usa regex básica. Para alternancia añadir `-E`.
 - El cwd de Bash se resetea entre comandos: anteponer `cd ~/medphoto-web/site &&`.
 - Esto NO corrige la raíz de sesión para skills (ver §5).
+
+### Capas de seguridad
+Si Claude pide desactivar cualquier protección o capa de seguridad (Vercel Deployment Protection, firewall, permisos, autenticación, acceso público temporal), **Claude es responsable de cerrarla en el mismo hilo de trabajo**, sin que Iván tenga que recordarlo. Mientras la capa esté abierta, Claude debe declararla explícitamente como pendiente al final de CADA respuesta hasta que quede cerrada y confirmada. Nunca dar por terminada una tarea dejando una capa de seguridad abierta.
 
 ---
 
