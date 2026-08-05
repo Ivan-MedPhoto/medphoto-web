@@ -8,8 +8,10 @@ export interface LegacyRedirect {
   destination: string;
 }
 
-// Capa 1: producto legacy -> producto actual especifico (135 filas:
-// 41 matching automatico + 94 aprobadas en auditoria manual).
+// Capa 1: producto legacy -> producto actual especifico (156 filas:
+// 135 originales [41 matching automatico + 94 auditoria manual] + 21
+// movidas desde Capa 6a el 5 ago 2026, sucesor especifico en vez de
+// fallback generico de marca -- ver bloque "Bloque A" mas abajo).
 export const productRedirects: LegacyRedirect[] = [
   { source: "/producto/adaptador-rock-solid-baby-ballhead/", destination: "/tienda/tethertools/rock-solid-low-boy-roller/" },
   { source: "/producto/air-remote-ttl-f/", destination: "/tienda/profoto/profoto-air-remote-ttl-f/" },
@@ -146,6 +148,36 @@ export const productRedirects: LegacyRedirect[] = [
   { source: "/producto/tetherpro-usb-c-to-3-0-micro-b-right-angle-15-4-6m-high-visibility-orange/", destination: "/tienda/tethertools/tetherpro-usbc-usbc-right-angle/" },
   { source: "/producto/tetherpro-usb-c-to-usb-c-31-9-4m-straight-to-right-angle-cable/", destination: "/tienda/tethertools/tetherpro-usbc-usbc-right-angle/" },
   { source: "/producto/tetherpro-usb-c-to-usb-c-right-angle-orange/", destination: "/tienda/tethertools/tetherpro-usbc-usbc-right-angle/" },
+
+  // Bloque A (5 ago 2026): flashes discontinuados con sucesor especifico,
+  // en vez de caer al fallback generico de marca. Destinos verificados
+  // contra el campo successor de src/data/products.ts (y corregidos ahi
+  // el 5 ago 2026: b10x/b10x-duo -> b20/b20-kit-duo, confirmado por Ivan).
+  { source: "/producto/profoto-a1x-para-canon/", destination: "/tienda/profoto/profoto-a10-canon/" },
+  { source: "/producto/profoto-a1x-para-nikon/", destination: "/tienda/profoto/profoto-a10-nikon/" },
+  { source: "/producto/profoto-a1x-para-sony/", destination: "/tienda/profoto/profoto-a10-sony/" },
+  { source: "/producto/profoto-a1x-para-fuji/", destination: "/tienda/profoto/profoto-a10-fuji/" },
+  { source: "/producto/profoto-a1x-kit-connect-para-canon/", destination: "/tienda/profoto/profoto-a10-canon/" },
+  { source: "/producto/profoto-a1x-kit-connect-para-nikon/", destination: "/tienda/profoto/profoto-a10-nikon/" },
+  { source: "/producto/profoto-a1x-kit-connect-para-sony/", destination: "/tienda/profoto/profoto-a10-sony/" },
+  { source: "/producto/profoto-a1x-kit-connect-para-fuji/", destination: "/tienda/profoto/profoto-a10-fuji/" },
+  { source: "/producto/b1x-500-airttl-to-go-kit/", destination: "/tienda/profoto/profoto-pro-b3-750/" },
+  { source: "/producto/b1x-kit-locacin/", destination: "/tienda/profoto/profoto-pro-b3-750/" },
+  { source: "/producto/profoto-b10/", destination: "/tienda/profoto/profoto-b20/" },
+  { source: "/producto/profoto-b10-kit-duo/", destination: "/tienda/profoto/profoto-b20-kit-duo/" },
+  { source: "/producto/profoto-b10-plus/", destination: "/tienda/profoto/profoto-b30/" },
+  { source: "/producto/profoto-b10-plus-kit-duo/", destination: "/tienda/profoto/profoto-b30-kit-duo/" },
+  { source: "/producto/profoto-d2-500-airttl/", destination: "/tienda/profoto/profoto-d30/" },
+  { source: "/producto/profoto-d2-1000-airttl/", destination: "/tienda/profoto/profoto-pro-d3-1250w/" },
+  { source: "/producto/profoto-d2-kit-1000-1000-airttl/", destination: "/tienda/profoto/profoto-pro-d3-1250w-duo/" },
+  { source: "/producto/profoto-pro-10/", destination: "/tienda/profoto/profoto-pro-11/" },
+
+  // Bloque A, opcion 1 (auto-redirect a pagina viva): estos 3 slugs legacy
+  // corresponden a productos que siguen activos y descontinuados con su
+  // propio aviso + successor en pagina -- no se saltan directo al sucesor.
+  { source: "/producto/profoto-b10x-duo-kit/", destination: "/tienda/profoto/profoto-b10x-duo/" },
+  { source: "/producto/profoto-b10x-plus-duo-kit/", destination: "/tienda/profoto/profoto-b10x-plus-duo/" },
+  { source: "/producto/profoto-d2-kit-500-500-airttl/", destination: "/tienda/profoto/profoto-d2-kit-500/" },
 ];
 
 // Capa 2: rutas sueltas con match 1:1 verificado (6 filas). La ruta de
@@ -215,9 +247,10 @@ export const categoryRedirects: LegacyRedirect[] = [
 // Capa 5: /etiqueta-producto/* -- sin regla, 404/410 deliberado (148 tags
 // de WooCommerce, thin content). No agregar entradas aqui.
 
-// Capa 6a: productos sin match especifico -- 94 filas (24 rechazadas en
-// auditoria manual + 70 sin candidato), con marca inferida del slug o,
-// a falta de prefijo, asumida Profoto (confirmado por Ivan 27 jul --
+// Capa 6a: productos sin match especifico -- 73 filas (94 originales
+// [24 rechazadas en auditoria manual + 70 sin candidato] menos 21
+// movidas a Capa 1 el 5 ago 2026), con marca inferida del slug o, a
+// falta de prefijo, asumida Profoto (confirmado por Ivan 27 jul --
 // ninguna de las 73 sin prefijo parece TetherTools/Phase One/Capture One
 // por contenido).
 export const fallbackByBrandRedirects: LegacyRedirect[] = [
@@ -227,8 +260,6 @@ export const fallbackByBrandRedirects: LegacyRedirect[] = [
   { source: "/producto/air-remote-ttl-n/", destination: "/tienda/profoto/" },
   { source: "/producto/air-usb/", destination: "/tienda/profoto/" },
   { source: "/producto/b10-base-stand/", destination: "/tienda/profoto/" },
-  { source: "/producto/b1x-500-airttl-to-go-kit/", destination: "/tienda/profoto/" },
-  { source: "/producto/b1x-kit-locacin/", destination: "/tienda/profoto/" },
   { source: "/producto/batera-li-ion-para-b1-b1x/", destination: "/tienda/profoto/" },
   { source: "/producto/batera-li-on-profoto-b10/", destination: "/tienda/profoto/" },
   { source: "/producto/bounce-card/", destination: "/tienda/profoto/" },
@@ -267,27 +298,8 @@ export const fallbackByBrandRedirects: LegacyRedirect[] = [
   { source: "/producto/panal-d1-20/", destination: "/tienda/profoto/" },
   { source: "/producto/panal-d1-5/", destination: "/tienda/profoto/" },
   { source: "/producto/porta-filtros-y-panales/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-a1x-kit-connect-para-canon/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-a1x-kit-connect-para-fuji/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-a1x-kit-connect-para-nikon/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-a1x-kit-connect-para-sony/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-a1x-para-canon/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-a1x-para-fuji/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-a1x-para-nikon/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-a1x-para-sony/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-b10-kit-duo/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-b10-plus-kit-duo/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-b10-plus/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-b10/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-b10x-duo-kit/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-b10x-plus-duo-kit/", destination: "/tienda/profoto/" },
   { source: "/producto/profoto-c1-plus/", destination: "/tienda/profoto/" },
   { source: "/producto/profoto-c1/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-d2-1000-airttl/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-d2-500-airttl/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-d2-kit-1000-1000-airttl/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-d2-kit-500-500-airttl/", destination: "/tienda/profoto/" },
-  { source: "/producto/profoto-pro-10/", destination: "/tienda/profoto/" },
   { source: "/producto/prohead-plus/", destination: "/tienda/profoto/" },
   { source: "/producto/proring2-plus/", destination: "/tienda/profoto/" },
   { source: "/producto/protwin-head/", destination: "/tienda/profoto/" },
