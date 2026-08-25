@@ -42,7 +42,13 @@ Todo contenido debe encajar en al menos uno de estos pilares. Si no encaja, no s
 
 - **Asset-First:** Siempre imágenes reales del catálogo de productos. CERO imágenes generadas por IA.
 - **Regla de 3 minutos:** Si un contenido educativo no se entiende en menos de 3 minutos, se rediseña. Aplica a COMPRENSIÓN del lector, no a tiempo de producción. El estándar es calidad sobre velocidad — 3 posts potentes por semana, no 7.
-- **Pipeline:** Google Sheets + Make.com + Claude API + Canva + Instagram Graph API.
+- **Pipeline:** Google Sheets (planeación) + Claude API + Canva (producción) → publicación
+  vía `instagram-engine` (repo propio, motor Python sobre Instagram Graph API, atajo de
+  terminal `marketing`). **Make.com está descartado definitivamente** de este pipeline —
+  el escenario que orquestaba la publicación no funcionaba y no forma parte de la
+  arquitectura actual. Ver `~/medphoto-automations/instagram-engine/MEDPHOTO_ESTADO_ACTUAL.md`
+  para el estado y la estrategia de Instagram/marketing (no se documenta aquí para no
+  duplicarlo).
 - **TikTok:** Manual siempre. Audio trending requiere control humano.
 - **Instagram → Facebook:** Sincronización vía Meta Business Suite (automática).
 
@@ -67,7 +73,7 @@ Todo contenido debe encajar en al menos uno de estos pilares. Si no encaja, no s
 - `/qa` antes de cualquier deploy (requiere raíz correcta)
 - `/review` después de cada bloque de implementación (requiere raíz correcta)
 - `/careful` antes de modificar pipelines de automatización activos
-- `/guard` en sesiones que toquen configuración de Make.com o Instagram API
+- `/guard` en sesiones que toquen configuración de Instagram API o pipelines de contenido
 - `context7` al trabajar con librerías externas
 - `ultrathink` solo para lógica compleja; modo normal para tareas mecánicas
 
@@ -97,7 +103,7 @@ Todo contenido debe encajar en al menos uno de estos pilares. Si no encaja, no s
 PROHIBIDO:
 - Generar o usar imágenes AI para productos o contenido de MedPhoto.
 - Publicar en Instagram, Facebook o TikTok sin aprobación explícita de Ivan.
-- Modificar pipelines de Make.com activos sin spec aprobada.
+- Modificar pipelines de contenido/publicación activos (`instagram-engine`) sin spec aprobada.
 - Cambiar precios, descripciones de productos o información de contacto sin confirmación.
 - Hacer deploy a producción (medphoto.com.co) sin autorización de Ivan.
 - Usar tonos o claims no verificados sobre los productos.
@@ -136,9 +142,17 @@ No escalar para:
 0. **Arrancar la sesión con `web`** (no `medphoto`). `web` abre Claude Code desde `~/medphoto-web/site`, donde viven las skills de gstack.
 1. `/mem-search "[tarea actual]"` para cargar contexto previo.
 2. Leer `MEDPHOTO_ESTADO_ACTUAL.md`.
-3. Confirmar rama: `git branch --show-current`.
-4. Activar `/guard` si la sesión toca archivos de configuración o pipelines activos.
-5. Si es trabajo de contenido: confirmar audiencia y pilar antes de escribir.
+3. **(Agregado 24 ago 2026)** Cargar las herramientas de Drive (`ToolSearch` con
+   `select:mcp__claude_ai_Google_Drive__search_files,mcp__claude_ai_Google_Drive__read_file_content,mcp__claude_ai_Google_Drive__update_file,mcp__claude_ai_Google_Drive__trash_file`)
+   y listar la carpeta `MedPhoto / Estado de Proyectos (Claude)`
+   (`parentId = '1D8-M_V-x9WZlXip3pMs2t8MeqfS9wYKx'`) buscando
+   `PENDIENTE_INTEGRAR_WEB_*.md` sin procesar (no están en `Integrados/`). Si hay
+   alguno, clasificar (DATO/CORRECCIÓN/DECISIÓN se integran directo; PROPUESTA se
+   pregunta a Iván) e integrarlo antes de seguir — mismo protocolo que
+   `instagram-engine` (ver `MEDPHOTO_ESTADO_ACTUAL.md` de ese repo, §7).
+4. Confirmar rama: `git branch --show-current`.
+5. Activar `/guard` si la sesión toca archivos de configuración o pipelines activos.
+6. Si es trabajo de contenido: confirmar audiencia y pilar antes de escribir.
 
 ---
 

@@ -11,26 +11,33 @@
 
 ## 1. ARRANQUE OBLIGATORIO DE SESIÓN
 
-**Antes de cualquier otra cosa en un chat nuevo de trabajo web:**
+**Actualizado 24 ago 2026 — reemplaza el protocolo de pegado manual anterior.**
 
-Iván le pide a Claude Code:
+**Claude Chat ("Chat0"):** antes de opinar sobre cualquier cosa, busca y lee
+`MEDPHOTO_ESTADO_ACTUAL_WEB.md` en la carpeta de Drive `MedPhoto / Estado de Proyectos
+(Claude)` (`https://drive.google.com/drive/folders/1D8-M_V-x9WZlXip3pMs2t8MeqfS9wYKx`).
+El sufijo `_WEB` es solo del espejo en Drive — esa carpeta es compartida entre
+proyectos (web y marketing), así que cada espejo lleva el nombre del proyecto para
+no chocar; el archivo local (`MEDPHOTO_ESTADO_ACTUAL.md`, sin sufijo) no tiene esa
+ambigüedad porque vive solo en este repo. Mismo patrón para `PENDIENTE_INTEGRAR_WEB_*`
+vs `PENDIENTE_INTEGRAR_MARKETING_*`.
+No asumas el estado por chats anteriores — ese doc se actualiza seguido y el espejo
+puede ir un paso detrás del repo si Code no lo sincronizó todavía.
 
-```
-cd ~/medphoto-web/site && git checkout main && git pull origin main
-Luego pega el contenido completo de MEDPHOTO_ESTADO_ACTUAL.md
-en bloques de 70 líneas usando sed -n 'X,Yp', indicando
-cuántas líneas van y cuántas faltan.
-```
+**Claude Code ("Code"):** al iniciar cualquier sesión en este repo, lee
+`MEDPHOTO_ESTADO_ACTUAL.md` local primero (es la fuente de verdad, no el espejo), y
+revisa si el espejo en Drive quedó desactualizado desde el último cierre de sesión.
 
-Y pega ese contenido en el chat de Claude.ai.
+**Por qué cambió:** el paso anterior — Iván pegando el doc a mano en bloques de 70
+líneas porque Claude.ai no podía leer el repo — fue el mismo punto de falla que causó
+la pérdida de sesión del 5 ago 2026 (ver abajo) y que después se resolvió con el
+puente de Drive, probado primero en el proyecto de marketing (`instagram-engine`,
+24 ago 2026). Detalle completo del protocolo Code↔Chat0:
+`~/medphoto-automations/instagram-engine/MEDPHOTO_ESTADO_ACTUAL.md` §7.
 
-**Por qué es obligatorio:** Claude.ai NO puede leer el repositorio. La copia
-que exista en el panel del proyecto se desactualiza en días. Sin este paso,
-Claude opera sobre un estado viejo y propone trabajo que ya está hecho.
-
-**Esto ya falló una vez** (5 ago 2026): se perdió una sesión completa
-re-proponiendo Search Console, el mapa de 301, GA4 y el logo horizontal —
-todo resuelto el 27 de julio.
+**Esto ya falló una vez** (5 ago 2026, con el protocolo anterior): se perdió una
+sesión completa re-proponiendo Search Console, el mapa de 301, GA4 y el logo
+horizontal — todo resuelto el 27 de julio.
 
 ---
 
@@ -142,8 +149,10 @@ corporativo — el radio de daño incluye el canal de contacto del negocio).
   `cd ~/medphoto-web/site &&` a cada uno.
 - Eso **no** corrige la raíz de sesión para skills. Claude Code debe arrancarse
   con `web` (no `medphoto`) o las skills de gstack no cargan.
-- Los pegados largos desde Code **se cortan**. Pedir bloques de 70 líneas con
-  `sed -n 'X,Yp'` y conteo explícito de cuántas van y cuántas faltan.
+- Los pegados largos desde Code **se cortan**. Para el estado del proyecto esto ya no
+  aplica (Chat0 lee el espejo en Drive directo, ver §1). Sigue aplicando a cualquier
+  otro pegado largo ad-hoc en el chat: pedir bloques de 70 líneas con `sed -n 'X,Yp'`
+  y conteo explícito de cuántas van y cuántas faltan.
 
 ---
 

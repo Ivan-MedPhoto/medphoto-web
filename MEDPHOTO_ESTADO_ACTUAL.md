@@ -1,11 +1,15 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 5 de agosto de 2026
+**Última actualización:** 24 de agosto de 2026 (migración al puente de Drive; sin
+cambios de estado del sitio desde el 5 de agosto — ver §8)
 **Mantenido por:** Claude · Actualizar al cierre de cada bloque de trabajo significativo
 
 > **Instrucción de arranque:** leer este documento antes de iniciar cualquier sesión de trabajo sobre el sitio, tanto en Claude.ai como en Claude Code.
 >
-> **Ubicación canónica:** raíz del repo, versionado en Git. Debe existir también una copia en el proyecto de Claude.ai para las sesiones sin acceso al repo.
+> **Ubicación canónica:** raíz del repo, versionado en Git. Espejo para sesiones sin
+> acceso al repo (Claude Chat / claude.ai) en Google Drive, carpeta `MedPhoto / Estado
+> de Proyectos (Claude)` — reemplaza al viejo "proyecto de Claude.ai" desde el 24 ago
+> 2026. Ver `PROTOCOLO_SESION_WEB.md` §1.
 
 ---
 
@@ -225,3 +229,10 @@ Una sesión completa de Claude.ai se perdió re-proponiendo trabajo ya resuelto 
 - Regla de cierre de sesión: el paso que más se olvida es subir la versión nueva al proyecto de Claude.ai; sin él las dos copias divergen.
 
 **Otro patrón detectado:** tres pérdidas de contenido en `CLAUDE.md` por reemplazar secciones completas sin inventariar qué se perdía (regla de capas de seguridad, comandos `/careful` y `/guard`, columna "Propósito" de la tabla de plugins). Las tres restauradas el 26 de julio.
+
+### 24 de agosto de 2026 — migración al puente de Drive
+
+El protocolo de pegado manual (§1 arriba, "pega el contenido en bloques de 70 líneas")
+queda reemplazado por lectura directa desde Google Drive — mismo puente ya probado con
+el proyecto de marketing (`instagram-engine`). Ver `PROTOCOLO_SESION_WEB.md` en el repo
+para el detalle actualizado del arranque y cierre de sesión.
