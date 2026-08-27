@@ -9,6 +9,7 @@ export interface RentalItem {
   specs: string[];
   whatsappMessage: string;
   status: "active" | "coming-soon";
+  image: string;
 }
 
 export const rentals: RentalItem[] = [
@@ -17,6 +18,7 @@ export const rentals: RentalItem[] = [
     brand: "phase-one",
     name: "Phase One IQ3 100",
     hook: "¿Tu próximo shoot necesita 100MP?",
+    image: "/alquiler/phase-one-iq3-100.jpg",
     description:
       "Alquila el respaldo digital Phase One IQ3 100 por los días que lo necesites, sin comprometer los $50-60M+ COP que cuesta un sistema Phase One propio.",
     specs: [

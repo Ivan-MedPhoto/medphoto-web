@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MessageCircle } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { WHATSAPP_URL } from "@/data/products";
 import { rentals } from "@/data/rentals";
@@ -60,6 +61,19 @@ export default function AlquilerPage() {
               className="rounded-2xl p-8 sm:p-10 border"
               style={{ backgroundColor: "#1A1A1B", borderColor: "#2a2a2b" }}
             >
+              <div
+                className="relative aspect-square rounded-xl overflow-hidden mb-8"
+                style={{ backgroundColor: "#0F0F10" }}
+              >
+                <Image
+                  src={item.image}
+                  alt="Phase One IQ3 100 disponible para alquiler en Colombia"
+                  fill
+                  className="object-contain p-8"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+
               <p
                 className="text-xs uppercase tracking-widest mb-3"
                 style={{ color: "#4CB4E7", fontFamily: "var(--font-label)" }}
