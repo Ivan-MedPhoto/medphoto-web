@@ -49,7 +49,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const PROMO_BONO_SLUGS = ["profoto-b30", "profoto-a2"];
-const PROMO_BADGE_SLUGS = ["profoto-b30", "profoto-a2"];
+// Promo Verano (jul–ago 2026) apagada — sin campaña activa por ahora.
+const PROMO_BADGE_SLUGS: string[] = [];
 const SONY_A9III_SLUGS = ["profoto-a2"];
 
 const availabilityConfig = {
