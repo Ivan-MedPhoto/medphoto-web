@@ -156,8 +156,8 @@ export default function AlquilerPage() {
 
               <p className="text-xs leading-relaxed mb-8" style={{ color: "#B7B8B9" }}>
                 *El lente Phase One 120mm Macro tiene obturador de plano focal —
-                sincroniza flash hasta 1/125s (velocidad de obturación hasta
-                1/4.000s). Los lentes Schneider 80mm y 110mm sincronizan flash
+                sincroniza con flash hasta 1/125s (velocidad de obturación hasta
+                1/4.000s). Los lentes Schneider 80mm y 110mm sincronizan con flash
                 hasta 1/1.600s.
               </p>
 
