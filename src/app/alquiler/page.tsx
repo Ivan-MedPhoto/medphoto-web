@@ -61,15 +61,12 @@ export default function AlquilerPage() {
               className="rounded-2xl p-8 sm:p-10 border"
               style={{ backgroundColor: "#1A1A1B", borderColor: "#2a2a2b" }}
             >
-              <div
-                className="relative aspect-square rounded-xl overflow-hidden mb-8"
-                style={{ backgroundColor: "#0F0F10" }}
-              >
+              <div className="relative aspect-square rounded-xl overflow-hidden mb-8">
                 <Image
                   src={item.image}
                   alt="Phase One IQ3 100 disponible para alquiler en Colombia"
                   fill
-                  className="object-contain p-8"
+                  className="object-contain"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
