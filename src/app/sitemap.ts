@@ -43,7 +43,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/nosotros/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
     { url: `${BASE}/blog/`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
     { url: `${BASE}/contacto/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE}/promo-profoto/`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/politica-datos/`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${BASE}/politica-cookies/`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
     { url: `${BASE}/terminos-condiciones/`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },

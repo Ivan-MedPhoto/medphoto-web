@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/promo-profoto/",
   },
+  // Campaña apagada (27 ago 2026) — página inactiva, sin contenido borrado.
+  // Se deja fuera de índice mientras no haya una promo vigente.
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 function formatCOP(price: number): string {
