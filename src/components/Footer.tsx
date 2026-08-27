@@ -21,6 +21,7 @@ const pages = [
   { label: "Contacto", href: "/contacto/" },
   { label: "Guía ROI Profoto", href: "/guia-roi-profoto/" },
   { label: "Promo Profoto", href: "/promo-profoto/" },
+  { label: "Alquiler de Equipo", href: "/alquiler/" },
 ];
 
 const social = [
