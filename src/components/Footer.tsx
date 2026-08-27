@@ -20,6 +20,7 @@ const pages = [
   { label: "Blog", href: "/blog/" },
   { label: "Contacto", href: "/contacto/" },
   { label: "Guía ROI Profoto", href: "/guia-roi-profoto/" },
+  { label: "Alquiler de Equipo", href: "/alquiler/" },
 ];
 
 const social = [
