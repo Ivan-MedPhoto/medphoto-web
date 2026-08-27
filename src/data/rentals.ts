@@ -10,6 +10,7 @@ export interface RentalItem {
   whatsappMessage: string;
   status: "active" | "coming-soon";
   image: string;
+  includes: { category: string; items: string[] }[];
 }
 
 export const rentals: RentalItem[] = [
@@ -22,12 +23,61 @@ export const rentals: RentalItem[] = [
     description:
       "Alquila el respaldo digital Phase One IQ3 100 por los días que lo necesites, sin comprometer los $50-60M+ COP que cuesta un sistema Phase One propio.",
     specs: [
-      "Sensor CMOS 101MP formato medio 54×40mm",
+      "Sensor CMOS 101MP formato medio 53.7×40.4mm",
       "15 stops de rango dinámico",
       "ISO 50–12.800",
       "Exposiciones largas hasta 60 minutos",
     ],
     whatsappMessage: "Hola, quiero cotizar el alquiler del respaldo Phase One IQ3 100",
     status: "active",
+    includes: [
+      {
+        category: "Cuerpo y respaldo",
+        items: [
+          "Cuerpo de cámara Phase One 645DF+",
+          "Respaldo digital Phase One IQ3 100",
+          "Grip vertical",
+        ],
+      },
+      {
+        category: "Óptica",
+        items: [
+          "Lente Schneider 80mm",
+          "Lente Schneider 110mm",
+          "Lente Phase One 120mm Macro",
+        ],
+      },
+      {
+        category: "Energía",
+        items: [
+          "2 baterías IQ",
+          "Cargador de baterías IQ",
+          "Cable para cargador de carro de baterías IQ",
+          "Batería de litio para 645",
+          "Cargador de batería 645 con cable de corriente",
+          "Cassette de pilas AA para 645",
+        ],
+      },
+      {
+        category: "Almacenamiento y transferencia",
+        items: [
+          "Tarjeta CF 32GB SanDisk Extreme PRO",
+          "Lector de tarjeta con cable",
+          "2 cables USB 3",
+          "Cable Mini HDMI",
+        ],
+      },
+      {
+        category: "Accesorios",
+        items: [
+          "Anillo de extensión #2",
+          "Paquete de tarjetas de gris QP Card",
+        ],
+      },
+      {
+        category: "Transporte",
+        items: ["Maleta Pelican Phase One con maletín interno Phase One"],
+      },
+    ],
   },
 ];

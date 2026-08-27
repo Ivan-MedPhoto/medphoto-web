@@ -102,6 +102,43 @@ export default function AlquilerPage() {
                 ))}
               </ul>
 
+              <h3
+                className="text-lg sm:text-xl mb-5"
+                style={{ fontFamily: "var(--font-heading)", color: "#F5F5F5" }}
+              >
+                Qué incluye el kit
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+                {item.includes.map((group) => (
+                  <div
+                    key={group.category}
+                    className="rounded-xl border py-4 px-4"
+                    style={{ borderColor: "#2a2a2b", backgroundColor: "#0F0F10" }}
+                  >
+                    <p
+                      className="text-xs uppercase tracking-widest mb-3"
+                      style={{ color: "#4CB4E7", fontFamily: "var(--font-label)" }}
+                    >
+                      {group.category}
+                    </p>
+                    <ul className="space-y-1.5">
+                      {group.items.map((line) => (
+                        <li
+                          key={line}
+                          className="text-sm leading-relaxed pl-4 relative"
+                          style={{ color: "#B7B8B9" }}
+                        >
+                          <span className="absolute left-0" style={{ color: "#4CB4E7" }}>
+                            •
+                          </span>
+                          {line}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
               <a
                 href={`${WHATSAPP_URL}?text=${encodeURIComponent(item.whatsappMessage)}`}
                 target="_blank"
