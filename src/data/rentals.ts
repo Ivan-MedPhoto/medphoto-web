@@ -35,6 +35,7 @@ export const rentals: RentalItem[] = [
       "Arquitectura e interiorismo",
       "Campañas publicitarias",
       "Reproducción de arte y patrimonio",
+      "Fotografía de movimiento con flash de alta velocidad — sincronización hasta 1/1.600s con los lentes Schneider (80mm y 110mm)",
     ],
     whatsappMessage:
       "Hola, quiero cotizar el alquiler del sistema Phase One IQ3 100. Mi proyecto es para [tipo de producción], necesito el equipo del [fecha] al [fecha].",
@@ -53,7 +54,7 @@ export const rentals: RentalItem[] = [
         items: [
           "Lente Schneider 80mm",
           "Lente Schneider 110mm",
-          "Lente Phase One 120mm Macro",
+          "Lente Phase One 120mm Macro*",
         ],
       },
       {

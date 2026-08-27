@@ -53,7 +53,7 @@ export default function AlquilerPage() {
       </section>
 
       {/* Items */}
-      <section className="py-4 px-4 sm:px-6 lg:px-8 border-t" style={{ borderColor: "#2a2a2b" }}>
+      <section className="pt-4 pb-16 px-4 sm:px-6 lg:px-8 border-t" style={{ borderColor: "#2a2a2b" }}>
         <div className="mx-auto max-w-4xl grid grid-cols-1 gap-8 py-12">
           {rentals.map((item) => (
             <div
@@ -105,7 +105,7 @@ export default function AlquilerPage() {
               >
                 ¿Para qué lo puedes usar?
               </h3>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+              <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10">
                 {item.useCases.map((useCase) => (
                   <li
                     key={useCase}
@@ -154,6 +154,13 @@ export default function AlquilerPage() {
                 ))}
               </div>
 
+              <p className="text-xs leading-relaxed mb-8" style={{ color: "#B7B8B9" }}>
+                *El lente Phase One 120mm Macro tiene obturador de plano focal —
+                sincroniza flash hasta 1/125s (velocidad de obturación hasta
+                1/4.000s). Los lentes Schneider 80mm y 110mm sincronizan flash
+                hasta 1/1.600s.
+              </p>
+
               <a
                 href={`${WHATSAPP_URL}?text=${encodeURIComponent(item.whatsappMessage)}`}
                 target="_blank"
@@ -166,16 +173,6 @@ export default function AlquilerPage() {
               </a>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Nota de cierre */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 border-t" style={{ borderColor: "#2a2a2b" }}>
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#B7B8B9" }}>
-            Este es el comienzo de la línea de alquiler profesional de MedPhoto.
-            Próximamente incorporaremos nuevos equipos y sistemas especializados.
-          </p>
         </div>
       </section>
     </div>
