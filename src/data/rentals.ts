@@ -7,6 +7,7 @@ export interface RentalItem {
   hook: string;
   description: string;
   specs: string[];
+  useCases: string[];
   whatsappMessage: string;
   status: "active" | "coming-soon";
   image: string;
@@ -21,14 +22,22 @@ export const rentals: RentalItem[] = [
     hook: "¿Tu próximo shoot necesita 100MP?",
     image: "/alquiler/phase-one-iq3-100.jpg",
     description:
-      "Alquila el respaldo digital Phase One IQ3 100 por los días que lo necesites, sin comprometer los $50-60M+ COP que cuesta un sistema Phase One propio.",
+      "Alquila el sistema completo Phase One 645DF+ con respaldo digital IQ3 100 por los días que lo necesites, sin comprometer los $50-60M+ COP que cuesta un sistema Phase One propio.",
     specs: [
       "Sensor CMOS 101MP formato medio 53.7×40.4mm",
       "15 stops de rango dinámico",
       "ISO 50–12.800",
       "Exposiciones largas hasta 60 minutos",
     ],
-    whatsappMessage: "Hola, quiero cotizar el alquiler del respaldo Phase One IQ3 100",
+    useCases: [
+      "Moda y belleza de alta resolución",
+      "Producto y still life",
+      "Arquitectura e interiorismo",
+      "Campañas publicitarias",
+      "Reproducción de arte y patrimonio",
+    ],
+    whatsappMessage:
+      "Hola, quiero cotizar el alquiler del sistema Phase One IQ3 100. Mi proyecto es para [tipo de producción], necesito el equipo del [fecha] al [fecha].",
     status: "active",
     includes: [
       {

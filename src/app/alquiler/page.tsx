@@ -61,7 +61,7 @@ export default function AlquilerPage() {
               className="rounded-2xl p-8 sm:p-10 border"
               style={{ backgroundColor: "#1A1A1B", borderColor: "#2a2a2b" }}
             >
-              <div className="relative aspect-square rounded-xl overflow-hidden mb-8">
+              <div className="relative h-[340px] sm:h-[460px] rounded-xl overflow-hidden mb-8">
                 <Image
                   src={item.image}
                   alt="Phase One IQ3 100 disponible para alquiler en Colombia"
@@ -95,6 +95,24 @@ export default function AlquilerPage() {
                     style={{ borderColor: "#2a2a2b", backgroundColor: "#0F0F10", color: "#F5F5F5" }}
                   >
                     {spec}
+                  </li>
+                ))}
+              </ul>
+
+              <h3
+                className="text-lg sm:text-xl mb-5"
+                style={{ fontFamily: "var(--font-heading)", color: "#F5F5F5" }}
+              >
+                ¿Para qué lo puedes usar?
+              </h3>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+                {item.useCases.map((useCase) => (
+                  <li
+                    key={useCase}
+                    className="rounded-xl border py-3 px-4 text-sm"
+                    style={{ borderColor: "#2a2a2b", backgroundColor: "#0F0F10", color: "#F5F5F5" }}
+                  >
+                    {useCase}
                   </li>
                 ))}
               </ul>
@@ -144,7 +162,7 @@ export default function AlquilerPage() {
                 style={{ backgroundColor: "#4CB4E7", color: "#0F0F10", fontFamily: "var(--font-label)", letterSpacing: "0.05em" }}
               >
                 <MessageCircle size={18} />
-                Cotizar por WhatsApp
+                Consultar disponibilidad
               </a>
             </div>
           ))}
@@ -155,8 +173,8 @@ export default function AlquilerPage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 border-t" style={{ borderColor: "#2a2a2b" }}>
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm sm:text-base leading-relaxed" style={{ color: "#B7B8B9" }}>
-            Esta es la primera pieza de nuestra línea de alquiler de equipo — más
-            opciones en camino.
+            Este es el comienzo de la línea de alquiler profesional de MedPhoto.
+            Próximamente incorporaremos nuevos equipos y sistemas especializados.
           </p>
         </div>
       </section>
