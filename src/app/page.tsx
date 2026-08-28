@@ -169,73 +169,61 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right: featured product */}
-            {heroProduct && (
-              <div className="flex flex-col items-center lg:items-end">
+            {/* Right: featured — alquiler de equipo */}
+            <div className="flex flex-col items-center lg:items-end">
+              <div
+                className="relative w-full max-w-sm rounded-2xl overflow-hidden border p-8"
+                style={{ backgroundColor: "#1A1A1B", borderColor: "#2a2a2b" }}
+              >
                 <div
-                  className="relative w-full max-w-sm rounded-2xl overflow-hidden border p-8"
-                  style={{ backgroundColor: "#1A1A1B", borderColor: "#2a2a2b" }}
+                  className="absolute top-4 right-4 text-xs px-2 py-1 rounded-full border"
+                  style={{
+                    backgroundColor: "#4CB4E71a",
+                    borderColor: "#4CB4E740",
+                    color: "#4CB4E7",
+                    fontFamily: "var(--font-label)",
+                  }}
                 >
-                  <div
-                    className="absolute top-4 right-4 text-xs px-2 py-1 rounded-full border"
-                    style={{
-                      backgroundColor: "#4CB4E71a",
-                      borderColor: "#4CB4E740",
-                      color: "#4CB4E7",
-                      fontFamily: "var(--font-label)",
-                    }}
+                  Nuevo
+                </div>
+                <div className="relative aspect-square">
+                  <Image
+                    src="/alquiler/phase-one-iq3-100.jpg"
+                    alt="Phase One IQ3 100 disponible para alquiler en Colombia"
+                    fill
+                    className="object-contain"
+                    priority
+                    sizes="(max-width: 768px) 80vw, 400px"
+                  />
+                </div>
+                <div className="mt-6">
+                  <p
+                    className="text-xs uppercase tracking-widest mb-1"
+                    style={{ color: "#4CB4E7", fontFamily: "var(--font-label)" }}
                   >
-                    Destacado
-                  </div>
-                  <div className="relative aspect-square">
-                    <Image
-                      src={heroProduct.image}
-                      alt={heroProduct.name}
-                      fill
-                      className="object-contain"
-                      priority
-                      sizes="(max-width: 768px) 80vw, 400px"
-                    />
-                  </div>
-                  <div className="mt-6">
-                    <p
-                      className="text-xs uppercase tracking-widest mb-1"
-                      style={{ color: "#4CB4E7", fontFamily: "var(--font-label)" }}
+                    Phase One
+                  </p>
+                  <h2
+                    className="text-xl mb-2"
+                    style={{ fontFamily: "var(--font-heading)", color: "#F5F5F5" }}
+                  >
+                    Phase One IQ3 100 — Alquiler
+                  </h2>
+                  <p className="text-sm mb-4" style={{ color: "#B7B8B9" }}>
+                    Sistema completo, listo para tu próxima producción.
+                  </p>
+                  <div className="flex justify-end">
+                    <Link
+                      href="/alquiler/"
+                      className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all hover:opacity-90"
+                      style={{ backgroundColor: "#4CB4E7", color: "#0F0F10", fontFamily: "var(--font-label)" }}
                     >
-                      {heroProduct.brandLabel}
-                    </p>
-                    <h2
-                      className="text-xl mb-2"
-                      style={{ fontFamily: "var(--font-heading)", color: "#F5F5F5" }}
-                    >
-                      {heroProduct.name}
-                    </h2>
-                    <p className="text-sm mb-4" style={{ color: "#B7B8B9" }}>
-                      {heroProduct.shortDescription}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="flex items-baseline gap-2">
-                          <span
-                            className="text-2xl"
-                            style={{ fontFamily: "var(--font-heading)", color: "#F5F5F5", fontVariantNumeric: "tabular-nums" }}
-                          >
-                            $ 10.300.000
-                          </span>
-                        </div>
-                      </div>
-                      <Link
-                        href="/tienda/profoto/profoto-b30/"
-                        className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all hover:opacity-90"
-                        style={{ backgroundColor: "#4CB4E7", color: "#0F0F10", fontFamily: "var(--font-label)" }}
-                      >
-                        Ver producto
-                      </Link>
-                    </div>
+                      Ver alquiler
+                    </Link>
                   </div>
                 </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </section>
