@@ -1,8 +1,8 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 27 de agosto de 2026 — cierre de sesión: `/alquiler/` en
-producción (línea de negocio de alquiler de equipo, primer producto Phase One IQ3 100)
-y Promo Profoto Verano apagada en todo el sitio. Ver §5 punto 0 y §7.
+**Última actualización:** 28 de agosto de 2026 — la home ahora promociona el alquiler
+en el espacio que dejó libre la Promo Verano: card "Destacado" del hero y banner
+debajo, ambos en producción. Ver §5 punto 0 y §7.
 **Mantenido por:** Claude · Actualizar al cierre de cada bloque de trabajo significativo
 
 > **Instrucción de arranque:** leer este documento antes de iniciar cualquier sesión de trabajo sobre el sitio, tanto en Claude.ai como en Claude Code.
@@ -218,15 +218,37 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 
 ## 7. Campañas
 
-### Alquiler de equipo — activa desde el 27 ago 2026
+### Alquiler de equipo — activa desde el 27 ago 2026, con presencia en la home desde el 28 ago
 
 Primera línea de alquiler de MedPhoto, ver §5 punto 0. `/alquiler/`, sin tarifa
 publicada, CTA a cotizar por WhatsApp.
 
+**28 ago — protagonismo en la home** (decisión de Iván: el alquiler debía tener
+visibilidad real, no solo vivir en su propia página). Dos piezas, ambas en producción
+(commits `d3b6bfd` y `281214d`, mergeados a `main`):
+
+- **Card "Destacado" del hero** (`src/app/page.tsx`) — mismo componente y posición que
+  antes ocupaba el B30 en promoción, contenido reemplazado: badge "Nuevo" (ya no
+  "Destacado"), "Phase One IQ3 100 — Alquiler", sin precio, botón "Ver alquiler" →
+  `/alquiler/`. Imagen: referencia directa a `public/alquiler/phase-one-iq3-100.jpg`
+  (no duplicada). `heroProduct` sigue en uso para el grid de destacados debajo, sin
+  variable huérfana.
+- **`PromoBanner.tsx` recreado** — el componente se había borrado al apagar la Promo
+  Verano; se reconstruyó a partir del último commit antes del borrado
+  (`git show b137d41^:src/components/PromoBanner.tsx`), mismo esqueleto visual (fondo
+  `#4CB4E7`, layout responsive), contenido nuevo ("Ahora también alquilamos equipo
+  Phase One · Sistema completo, listo para tu próxima producción — sin comprar." + CTA
+  "Ver alquiler →"), reinsertado **debajo del hero** (antes vivía arriba, decisión
+  deliberada de Iván esta vez). **28 ago, ajuste de persistencia:** el cierre del
+  banner ya no se guarda en `localStorage` — el estado vive solo en `useState` local,
+  así que reaparece en cada carga/recarga de la home aunque el usuario lo haya
+  cerrado antes. Verificado en producción: el texto del banner ya sale en el HTML
+  servido por el servidor (antes solo aparecía tras hidratación en cliente).
+
 ### Promo Profoto Verano 2026 — APAGADA el 27 ago (julio–agosto 2026)
 
 Decisión de Iván: apagar la campaña en todo el sitio, sin reemplazo definido todavía
-(el espacio queda libre). Verificado en producción tras merge a `main` (commit
+(el espacio de la home lo ocupó después el alquiler, ver arriba). Verificado en producción tras merge a `main` (commit
 `db7735e`):
 
 - **Home:** `PromoBanner.tsx` quitado del render y **borrado** (solo se usaba ahí).
