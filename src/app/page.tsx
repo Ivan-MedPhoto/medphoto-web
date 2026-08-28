@@ -4,6 +4,7 @@ import Image from "next/image";
 import { MessageCircle, Award, HeadphonesIcon, Package } from "lucide-react";
 import { getFeaturedProducts, formatPrice, WHATSAPP_URL } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
+import PromoBanner from "@/components/PromoBanner";
 
 export const metadata: Metadata = {
   title: "MedPhoto Colombia — Equipos Fotográficos Profesionales",
@@ -227,6 +228,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <PromoBanner />
 
       {/* ── BRANDS ── */}
       <section
