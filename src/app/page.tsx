@@ -78,6 +78,8 @@ export default function HomePage() {
 
   return (
     <>
+      <PromoBanner />
+
       {/* ── HERO ── */}
       <section
         className="relative min-h-[90vh] flex items-center overflow-hidden"
@@ -228,8 +230,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <PromoBanner />
 
       {/* ── BRANDS ── */}
       <section
