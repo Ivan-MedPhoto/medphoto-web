@@ -1,7 +1,8 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 27 de agosto de 2026 (integrado `PENDIENTE_INTEGRAR_WEB_2026-08-27.md`
-vía Drive: decisión de sección de alquiler de equipo, ver §5 punto 0)
+**Última actualización:** 27 de agosto de 2026 — cierre de sesión: `/alquiler/` en
+producción (línea de negocio de alquiler de equipo, primer producto Phase One IQ3 100)
+y Promo Profoto Verano apagada en todo el sitio. Ver §5 punto 0 y §7.
 **Mantenido por:** Claude · Actualizar al cierre de cada bloque de trabajo significativo
 
 > **Instrucción de arranque:** leer este documento antes de iniciar cualquier sesión de trabajo sobre el sitio, tanto en Claude.ai como en Claude Code.
@@ -25,8 +26,8 @@ vía Drive: decisión de sección de alquiler de equipo, ver §5 punto 0)
 | Comando de terminal | `web` → `~/medphoto-web/site` + Claude Code (**usar este**). `medphoto` → `~/Documents/MedPhoto`, NO carga las skills del sitio |
 | Dominio | medphoto.com.co |
 | Datos de producto | 96 productos hardcodeados en `src/data/products.ts` |
-| Páginas generadas en build | 120 |
-| URLs en sitemap | 114 (96 producto + 4 marca + 4 blog + 10 estáticas) |
+| Páginas generadas en build | 121 (+1: `/alquiler/`, agregada 27 ago) |
+| URLs en sitemap | 114 (96 producto + 4 marca + 4 blog + 10 estáticas — `/promo-profoto/` salió, `/alquiler/` entró, el total no cambió) |
 
 ### Deploy — regla crítica
 
@@ -170,13 +171,13 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 
 ### Alta prioridad
 
-0. **Sección de "Alquiler de equipo" — Phase One IQ3 100 — DECIDIDO 27 ago, sin implementar. BLOQUEA marketing.** Integrado desde `PENDIENTE_INTEGRAR_WEB_2026-08-27.md` (Drive). MedPhoto arranca línea de negocio de alquiler (no solo venta). Primer producto: respaldo digital Phase One IQ3 100 — no está en `products.ts` (el catálogo de venta solo tiene sistemas IQ4 150: `phase-one-xf-iq4-150`, `phase-one-xt-iq4-150`, `phase-one-xc-iq4-150`); el IQ3 100 es equipo propio de MedPhoto para alquilar, no para vender. Secuencia acordada: **web primero** — bloquea el e-blast de HubSpot y el post de Instagram de marketing, que necesitan un link de destino antes de poder salir.
-   - **Qué construir:** sección o página de alquiler para el IQ3 100 (dentro de la arquitectura de producto o aparte, a criterio de la sesión `web`).
-   - **Copy/ángulo ya validado por marketing:** hook "¿Tu próximo shoot necesita 100MP?"; cuerpo sobre alquilar por días sin comprometer los $50-60M+ COP de un sistema propio; specs verificadas (CMOS 101MP formato medio 54×40mm, 15 stops, ISO 50–12.800, exposiciones hasta 60 min); CTA por WhatsApp (usar `src/components/WhatsAppButton.tsx` si aplica tal cual — confirmar número con Iván si el existente no sirve); mención breve de que vienen más equipos de alquiler después (Profoto A2, etc.), sin prometer fecha.
-   - **Referencia visual:** post/story/header de e-blast ya diseñados con los tokens reales del sitio — artifact en `https://claude.ai/code/artifact/c8890f49-5eec-4d65-8e97-85d1b0a85565` (tono/ángulo, no copiar literal).
-   - **Qué NO hacer todavía:** no publicar tarifa/precio (sin definir); no tocar `products.ts` como si fuera venta; no coordinar A2/B30 todavía.
-   - **Al terminar:** avisar el link de la página (a Iván o en este documento) — marketing lo necesita como destino del e-blast/post.
-   - Pendiente de Iván antes de escribir copy final: confirmar audiencia/tono (regla binding §2 de `CLAUDE.md`) y el número de WhatsApp a usar.
+0. **Sección de "Alquiler de equipo" — Phase One IQ3 100 — RESUELTO y EN PRODUCCIÓN el 27 ago.** Integrado desde `PENDIENTE_INTEGRAR_WEB_2026-08-27.md` (Drive), construido en `feature/alquiler-equipo` a lo largo de toda la sesión, mergeado a `main` (fast-forward, commit `7e4c87d`) y verificado en vivo: `medphoto.com.co/alquiler/` responde 200, título `Alquiler de Equipo Fotográfico | MedPhoto Colombia`.
+   - **Qué se construyó:** `src/data/rentals.ts` (interfaz `RentalItem` — slug, brand, name, hook, description, specs, useCases, whatsappMessage, status, image, includes) + `src/app/alquiler/page.tsx`. Entrada única: `phase-one-iq3-100` — no está en `products.ts` (el catálogo de venta solo tiene sistemas IQ4 150), es equipo propio de MedPhoto para alquilar.
+   - **Contenido final de la página:** hook "¿Tu próximo shoot necesita 100MP?"; 4 specs técnicos (sensor 101MP 53.7×40.4mm — corregido desde 54×40mm con ficha oficial Phase One; 15 stops; ISO 50–12.800; exposiciones hasta 60 min); 6 casos de uso (moda, producto, arquitectura, campañas, reproducción de arte, fotografía de movimiento con nota de sincronización 1/1.600s); sección "Qué incluye el kit" (6 categorías, 19 ítems, inventario físico de Iván, cruzado dos veces) con nota al pie aclarando obturador de plano focal del lente Macro (sync 1/125s) vs leaf shutter de los Schneider (sync 1/1.600s); CTA "Consultar disponibilidad" por WhatsApp con mensaje pre-cargado editable (tipo de producción, fechas).
+   - **Imagen hero:** `public/alquiler/phase-one-iq3-100.jpg` — iteró varias veces (frontal blanco → 3/4 blanco → negro con reflejo → negro sin reflejo → gris `#1A1A1B` amplio → gris recorte cerrado, versión final). Fondo transparente en el componente (hereda `#1A1A1B` de la card, sin wrapper propio), contenedor con altura fija (340px móvil / 460px desktop) en vez de `aspect-square` sin límite, para que el hook sea visible sin scroll.
+   - **Sin tarifa/precio publicado** — sigue sin definir, tal como se decidió. CTA lleva a cotizar por WhatsApp, no a comprar.
+   - **Enlazada** en el footer (`Footer.tsx`, bloque de navegación, después de "Guía ROI Profoto") y en el sitemap (`/alquiler/`, prioridad 0.7).
+   - **Pendiente real restante:** avisar a marketing (`instagram-engine`) el link `https://medphoto.com.co/alquiler/` como destino del e-blast/post — eso ya no bloquea, la página está viva.
 
 1. **Google Search Console** — **VERIFICADO Y SITEMAP ACEPTADO el 27 jul** vía propiedad de Dominio + registro TXT en Dongee (Zone Editor, sin tocar el TXT de SPF existente). Sitemap `https://medphoto.com.co/sitemap.xml` en estado **"Correcto"**, 114 páginas descubiertas — coincide exacto con el conteo documentado en §1 (96 producto + 4 marca + 4 blog + 10 estáticas). (La ruta relativa `sitemap.xml` daba "Dirección no válida" en el campo de envío — funcionó con la URL absoluta; quirk de la propiedad tipo Dominio, no problema del sitio.) Hallazgo: ya existía una propiedad vieja con el sitemap legacy de Yoast (`sitemap_index.xml`, enviado 19 abr 2024, en estado "no se ha podido obtener" — normal, ese archivo no existe en el sitio nuevo; limpieza opcional, no urgente). Pendiente real restante: esperar unos días a que Google rastree y reporte datos de indexación/errores 404 para las 230 URLs legacy — sin acción adicional por ahora.
 2. **Mapa de redirecciones 301** — **EN PRODUCCIÓN desde el 27 jul** (commit `735151e`, `next.config.ts` + `src/data/legacy-redirects.ts`, 281 reglas). Auditoría manual completada por Ivan (94 aprobadas, 24 rechazadas de 118). Verificado en producción por Ivan: `/como-escoger-tu-paraguas/` → `/blog/como-elegir-paraguas-fotografia/` y `/producto/profoto-a2/` → `/tienda/profoto/profoto-a2/`, ambos correctos. **Refinamiento 5 ago** (commit `fa3976e`, mergeado a `main`): 21 redirects de flashes discontinuados (A1X, B10/B10-Plus sin "x", D2, Pro-10) movidos del fallback genérico `/tienda/profoto/` a su producto sucesor específico, cruzados contra el campo `successor` de `products.ts`. 3 slugs con página viva descontinuada (`b10x-duo-kit`, `b10x-plus-duo-kit`, `d2-kit-500-500-airttl`) auto-redirigen a esa página en vez de saltársela, igual que `b10x`/`b10x-plus`. De paso se corrigió un dato incorrecto en `products.ts`: el campo `successor` de `profoto-b10x` y `profoto-b10x-duo` apuntaba a B30 en vez de B20 (confirmado por Ivan: B10/B10X → B20, B10 Plus/B10X Plus → B30). Verificado con `curl` contra 11 URLs en producción tras el merge: 10 redirects 308 correctos + 1 404 deliberado en `/etiqueta-producto/`. Pendiente real restante: auditoría manual de las 118 filas ya está hecha — solo falta, si se quiere, el barrido completo y detallado de productos que Ivan mencionó para después (fuera de alcance de este trabajo). **Cierre 5 ago:** verificado en producción tras el merge de `fa3976e` — 10 redirects 308 correctos (a1x-canon→a10-canon, b10→b20, b10-plus→b30, b10x→b10x, d2-500→d30, d2-1000→pro-d3-1250w, pro-10→pro-11, b1x-kit-locacin→pro-b3-750, estuche-accesorios→/tienda/profoto/, categoria-producto/softbox→/tienda/profoto/) y `/etiqueta-producto/profoto/` en 404 deliberado. Nota técnica: Next.js emite **308** para `permanent: true`, no 301 — Google los trata igual.
@@ -215,13 +216,43 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 
 ---
 
-## 7. Campañas activas
+## 7. Campañas
 
-**Promo Profoto Verano 2026** (julio–agosto 2026)
-- Landing `/promo-profoto/` — con canonical, título propio y en el sitemap
-- `PromoBanner.tsx` en el home
-- Badge "Promo Julio–Agosto" en `profoto-b30` y `profoto-a2` (ahora **fuera** del `<h1>`)
-- B30 a $10.300.000 COP · Formulario HubSpot embebido
+### Alquiler de equipo — activa desde el 27 ago 2026
+
+Primera línea de alquiler de MedPhoto, ver §5 punto 0. `/alquiler/`, sin tarifa
+publicada, CTA a cotizar por WhatsApp.
+
+### Promo Profoto Verano 2026 — APAGADA el 27 ago (julio–agosto 2026)
+
+Decisión de Iván: apagar la campaña en todo el sitio, sin reemplazo definido todavía
+(el espacio queda libre). Verificado en producción tras merge a `main` (commit
+`db7735e`):
+
+- **Home:** `PromoBanner.tsx` quitado del render y **borrado** (solo se usaba ahí).
+  Card "Destacado" del hero: quitados precio tachado `$12.500.000`, "Ahorras
+  $2.200.000" y las dos líneas de bono — queda solo `$10.300.000`. CTA "Ver oferta"
+  (→ `/promo-profoto/`) cambiado a "Ver producto" (→ `/tienda/profoto/profoto-b30/`,
+  ruta real). Badge "Destacado" (indicador de featured, no de promo) intacto.
+- **Fichas de producto (B30/A2):** badge "Promo Julio–Agosto" y línea "+ Bono de
+  $500.000 en productos MedPhoto" apagados — arrays `PROMO_BADGE_SLUGS` y
+  `PROMO_BONO_SLUGS` vaciados en `tienda/[marca]/[slug]/page.tsx` (mecanismo
+  reversible, no se borró el JSX, listo para la próxima campaña).
+- **`/promo-profoto/`:** **preservada como plantilla**, contenido sin tocar —
+  solo se le agregó `robots: {index: false, follow: false}` y se sacó del
+  `sitemap.ts`. Sin links entrantes desde el resto del sitio (se quitó del array
+  `pages` del footer, que era el único link saliente real). Verificado en
+  producción: responde 200, `<meta name="robots" content="noindex, nofollow">`
+  presente, contenido idéntico al original.
+- **Precio real del B30 en `products.ts` sin cambios** en todo el proceso:
+  `10.300.000` — ajuste de TRM pendiente para más adelante, no tocado ahora.
+
+**Aprendizaje de proceso:** `feature/alquiler-equipo` y `feature/apagar-promo-verano`
+nacieron del mismo commit de `main` (ramas hermanas, no una fusionada en la otra).
+Al fusionar la segunda después de la primera, `Footer.tsx` y `sitemap.ts` tuvieron
+conflicto real de merge porque ambas ramas habían tocado la misma región del archivo
+(una agregando `/alquiler/`, la otra quitando `/promo-profoto/`) — resueltos a mano,
+verificados visualmente en preview antes de aprobar el segundo merge a `main`.
 
 ---
 
