@@ -38,7 +38,7 @@ export const rentals: RentalItem[] = [
       "Fotografía de movimiento con flash de alta velocidad — sincronización hasta 1/1.600s con los lentes Schneider (80mm y 110mm)",
     ],
     whatsappMessage:
-      "Hola, quiero cotizar el alquiler del sistema Phase One IQ3 100. Mi proyecto es para [tipo de producción], necesito el equipo del [fecha] al [fecha].",
+      "Hola, estoy interesado en alquilar el sistema Phase One IQ3 100. ¿Me pueden confirmar disponibilidad y cotizarlo para mi proyecto? Lo necesitaría del [fecha] al [fecha]. Gracias",
     status: "active",
     includes: [
       {

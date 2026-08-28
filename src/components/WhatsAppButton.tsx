@@ -7,7 +7,7 @@ import { WHATSAPP_URL } from "@/data/products";
 const WHATSAPP_MESSAGES: Record<string, string> = {
   "/guia-roi-profoto/": "Hola, vi la guía de ROI de Profoto y quiero saber qué equipo necesito para mi tipo de fotografía",
   "/promo-profoto/": "Hola MedPhoto, vi la promo de verano Profoto y quiero más información.",
-  "/alquiler/": "Hola, quiero cotizar el alquiler del respaldo Phase One IQ3 100",
+  "/alquiler/": "Hola, estoy interesado en alquilar el sistema Phase One IQ3 100. ¿Me pueden confirmar disponibilidad y cotizarlo para mi proyecto? Lo necesitaría del [fecha] al [fecha]. Gracias",
 };
 
 function InstagramIcon() {
