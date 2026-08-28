@@ -1,8 +1,9 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 28 de agosto de 2026 — dos ajustes finales al alquiler en
-producción: el banner volvió a su posición original (arriba del hero, no debajo) y el
-mensaje de WhatsApp se reescribió en los dos lugares donde vive. Ver §7.
+**Última actualización:** 28 de agosto de 2026 — integrado `PENDIENTE_INTEGRAR_WEB`
+v2/v3 de Chat0: nuevos pendientes (TRM, auditoría comercial de Nova, revisión de
+persistencia del banner), un pendiente obsoleto marcado, y tres lecciones de proceso.
+Ver §5 y §8.
 **Mantenido por:** Claude · Actualizar al cierre de cada bloque de trabajo significativo
 
 > **Instrucción de arranque:** leer este documento antes de iniciar cualquier sesión de trabajo sobre el sitio, tanto en Claude.ai como en Claude Code.
@@ -189,14 +190,18 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 5. **GA4 — RESUELTO el 27 jul** (commit `90be3bc`). Measurement ID `G-39DGBKV73R` (propiedad ya existía en la cuenta de Ivan, nunca se había instalado en el sitio). `gtag.js` agregado en `src/app/layout.tsx` con `next/script` (`strategy="afterInteractive"`), mismo patrón que Meta Pixel y HubSpot.
 6. **Redirigir productos descontinuados con página viva — DECIDIDO 5 ago, sin implementar.** Los 5 productos con `discontinued: true` y página activa (`profoto-b10x`, `profoto-b10x-plus`, `profoto-b10x-duo`, `profoto-b10x-plus-duo`, `profoto-d2-kit-500`) hoy auto-redirigen a su propia página de aviso. Decisión de Iván: redirigirlos directamente a su sucesor y excluirlos del sitemap, en vez de mantener fichas de descontinuado. Razón: el presupuesto de rastreo de Google en el dominio es bajo (7 de 96 fichas procesadas al 31 jul) y esas páginas consumen rastreo sin aportar contenido. NO eliminar de `products.ts` en el primer paso — solo redirigir y sacar del sitemap, que es reversible.
 7. **Artículo de blog "Equipos Profoto descontinuados y sus reemplazos" — DECIDIDO 5 ago, sin escribir.** Sustituye a las fichas de descontinuado como forma de capturar esas búsquedas. Debe cubrir la transición del catálogo (A1/A1X→A10, B1/B1X→B3, B10/B10X→B20, B10 Plus/B10X Plus→B30, D2 500→D30, D2 1000→D3 1250, Pro-10→Pro-11) y la compatibilidad de accesorios. Pendiente de Iván: specs verificadas de los modelos descontinuados y datos de compatibilidad. Encaja en el pilar de Educación.
+8. **Ajuste de precios del catálogo por baja del TRM — PENDIENTE, próxima semana (mencionado por Iván 27-28 ago).** No se tocó ningún precio en la sesión de alquiler/promo más allá de confirmar que el B30 (`10.300.000`) no cambia — el ajuste real de TRM es tarea aparte, todavía sin fecha ni alcance definido (¿todo el catálogo o productos específicos?). Pendiente de Iván antes de tocar `products.ts`.
+9. **Auditoría comercial completa de Nova sobre `/alquiler/` — PROPUESTA, sin implementar a propósito.** Solo se hizo la "Opción 2" (ajustes de bajo riesgo: hero de la página, casos de uso, copy "sistema completo" vs "respaldo", tono de cierre). Quedan bloqueadas: sección "Cómo funciona" (4 pasos) y sección "Condiciones" (depósito, seguro, mínimo de días, política de daños) — ambas requieren términos de negocio reales (¿entrega a domicilio o solo recogida? ¿Bogotá o nacional? ¿quién asume el seguro?) que Iván no ha confirmado, no son solo copy. Reestructuración completa en 7 secciones (hero con comparación compra-vs-alquiler, sección de inversión) evaluada y pospuesta por decisión de Iván ("no ahora, vamos incrementando") — queda como referencia, no descartada.
+10. **Revisión de persistencia del banner de alquiler — PROPUESTA, revisar en un par de semanas (~mediados sep 2026).** Hoy reaparece en cada carga de página sin excepción (decisión deliberada de dar "protagonismo por un tiempo"). Evaluar entonces cambiar a un modelo híbrido: ocultar por un período fijo (X horas) tras cerrarlo, en vez de reaparecer de inmediato. Falta que Iván confirme si quiere el cambio y qué duración prefiere — no tocar código hasta esa confirmación.
 
 ### Baja
 
-8. **Copy único por página de marca — RESUELTO el 27 jul** (commit `d2a6648`). Las 4 páginas (`/tienda/[marca]/`) tienen párrafo indexable, tono Profesional confirmado por Ivan para las 4 marcas.
-9. **Ampliar el blog de 4 a ~12-15 artículos — EN PROGRESO.** Fuente: posts técnicos que Ivan e Iván ya escribieron junto con Claude.ai para Instagram. Pendiente: Ivan debe recuperar/pasar ese material (no está en este repo ni en esta sesión) antes de poder redactar los artículos nuevos.
-10. Gap visual entre el banner de promo y el hero del home.
-11. **Contenido delgado en el home — detectado 27 jul vía auditoría externa (Seobility).** 451 palabras vs ~800 recomendadas. Requiere escribir copy adicional — pendiente definir audiencia/tono antes de tocarlo (regla binding del proyecto).
-12. **H1 del home no reforzado en el cuerpo del texto — detectado 27 jul vía Seobility.** El H1 ("La luz que los mejores usan") no comparte palabras clave con el copy del cuerpo. Se resuelve junto con el punto 11 (ambos son trabajo de copywriting, no de código).
+11. **Copy único por página de marca — RESUELTO el 27 jul** (commit `d2a6648`). Las 4 páginas (`/tienda/[marca]/`) tienen párrafo indexable, tono Profesional confirmado por Ivan para las 4 marcas.
+12. **Ampliar el blog de 4 a ~12-15 artículos — EN PROGRESO.** Fuente: posts técnicos que Ivan e Iván ya escribieron junto con Claude.ai para Instagram. Pendiente: Ivan debe recuperar/pasar ese material (no está en este repo ni en esta sesión) antes de poder redactar los artículos nuevos.
+13. ~~Gap visual entre el banner de promo y el hero del home.~~ **OBSOLETO 28 ago** — ese banner (`PromoBanner.tsx` original de la Promo Verano) ya no existe; el componente se recreó desde cero con contenido de alquiler, arriba del hero, sin el problema de espaciado original.
+14. **Contenido delgado en el home — detectado 27 jul vía auditoría externa (Seobility).** 451 palabras vs ~800 recomendadas. Requiere escribir copy adicional — pendiente definir audiencia/tono antes de tocarlo (regla binding del proyecto).
+15. **H1 del home no reforzado en el cuerpo del texto — detectado 27 jul vía Seobility.** El H1 ("La luz que los mejores usan") no comparte palabras clave con el copy del cuerpo. Se resuelve junto con el punto 14 (ambos son trabajo de copywriting, no de código).
+16. **Calidad de imagen en pantallas Retina — detectado 27-28 ago, no bloqueante (confirmado por Iván).** El archivo fuente de la imagen hero de `/alquiler/` es 692×555px, 118-121KB. A la altura máxima del contenedor (460px desktop) se ve ligeramente suave en pantallas 2x. Se puede resolver más adelante con una versión de mayor resolución si aparece — sin urgencia.
 
 **Ya corregido de esa misma auditoría Seobility (commit `40589ab`):** título del home acortado (602px→54 caracteres, ya no queda cortado a mitad de frase), canonical agregado al home (única página que no lo tenía), espaciado del H1 corregido (se extraía como "quelos mejoresusan" sin espacios), encabezado duplicado corregido (hero repetido como H2+H3, y "Distribuidores Oficiales" repetido en dos secciones — la segunda se renombró a "Nuestras Marcas").
 
@@ -315,3 +320,38 @@ El protocolo de pegado manual (§1 arriba, "pega el contenido en bloques de 70 l
 queda reemplazado por lectura directa desde Google Drive — mismo puente ya probado con
 el proyecto de marketing (`instagram-engine`). Ver `PROTOCOLO_SESION_WEB.md` en el repo
 para el detalle actualizado del arranque y cierre de sesión.
+
+### 27-28 de agosto de 2026 — sesión de alquiler/Promo Verano: tres lecciones de proceso
+
+Integrado desde `PENDIENTE_INTEGRAR_WEB_2026-08-27_v2.md` y `_v3.md` (Drive, generados
+por Chat0). Tres patrones detectados durante la sesión larga de construir `/alquiler/` y
+apagar la Promo Verano:
+
+- **Un patch perdido varias veces en el paso manual Chat0 → Code.** La corrección de
+  "el respaldo digital IQ3 100" → "el sistema completo Phase One 645DF+ con respaldo
+  IQ3 100" (en la descripción del producto y el mensaje de WhatsApp) se propuso más de
+  una vez desde Chat0 sin llegar a aplicarse — el texto se perdía en el copy/paste
+  intermedio. Terminó corregido y verificado en producción, pero es un punto ciego real
+  del puente actual: no hay forma de que Chat0 confirme que un patch propuesto
+  efectivamente llegó al código, más allá de pedirle a Code que lo verifique en la
+  siguiente sesión.
+- **Efecto secundario no anticipado al limpiar un array compartido.** Al sacar
+  `/promo-profoto/` del array `pages` del footer, se quitó por accidente el link
+  "Alquiler de Equipo" que vivía en el mismo array (agregado por una rama hermana sin
+  fusionar todavía en ese momento). Se detectó y restauró en el mismo ciclo de trabajo,
+  pero confirma el patrón ya visto con `Footer.tsx`/`sitemap.ts`: cuando dos líneas de
+  trabajo tocan el mismo archivo compartido de forma independiente, un "limpiar lo que
+  ya no sirve" puede llevarse por delante algo que sí sirve. Vale la pena revisar el
+  array completo, no solo la línea que se está quitando, cada vez que se edita uno de
+  estos archivos "de configuración compartida".
+- **Verificar con medición real, no con inspección visual.** En un punto de la sesión,
+  Chat0 afirmó que dos imágenes de preview eran "idénticas, pixel por pixel" sin
+  medirlas — resultaron ser archivos distintos (341×341 cuadrada vs. 230×185
+  panorámica). El error se corrigió al verificar con JavaScript real en el navegador
+  (leer dimensiones/bytes) en vez de solo comparar capturas de pantalla a ojo — mismo
+  principio que ya aplica Code en esta sesión (zoom + lectura de metadata antes de dar
+  por buena una imagen).
+
+Ambos `PENDIENTE_INTEGRAR_WEB` (v2 y v3, la v3 reemplaza a la v2) y la nota
+`NOTA_banner_alquiler_revision_futura_2026-08-27.md` (contenido absorbido en el punto
+10 de §5, Media) archivados en `Integrados/` tras esta integración.
