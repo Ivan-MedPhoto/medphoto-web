@@ -1,8 +1,8 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 28 de agosto de 2026 — la home ahora promociona el alquiler
-en el espacio que dejó libre la Promo Verano: card "Destacado" del hero y banner
-debajo, ambos en producción. Ver §5 punto 0 y §7.
+**Última actualización:** 28 de agosto de 2026 — dos ajustes finales al alquiler en
+producción: el banner volvió a su posición original (arriba del hero, no debajo) y el
+mensaje de WhatsApp se reescribió en los dos lugares donde vive. Ver §7.
 **Mantenido por:** Claude · Actualizar al cierre de cada bloque de trabajo significativo
 
 > **Instrucción de arranque:** leer este documento antes de iniciar cualquier sesión de trabajo sobre el sitio, tanto en Claude.ai como en Claude Code.
@@ -244,6 +244,24 @@ visibilidad real, no solo vivir en su propia página). Dos piezas, ambas en prod
   así que reaparece en cada carga/recarga de la home aunque el usuario lo haya
   cerrado antes. Verificado en producción: el texto del banner ya sale en el HTML
   servido por el servidor (antes solo aparecía tras hidratación en cliente).
+
+**28 ago — dos ajustes finales, ambos en producción:**
+
+- **Banner: de vuelta arriba del hero** (commit `96e7a81`). El `<PromoBanner />` había
+  quedado debajo del hero por instrucción explícita anterior; se movió de vuelta a la
+  posición original (primer elemento de la página, antes de todo). Solo cambia la
+  posición en `page.tsx` — copy, estilos y comportamiento intactos. Verificado en
+  producción: `"Ahora también alquilamos"` aparece en el HTML antes que
+  `"Distribuidor Oficial — Colombia"` (badge del hero).
+- **Mensaje de WhatsApp reescrito** (commit `b7785c0`). Nuevo texto en los dos lugares
+  donde vivía: `whatsappMessage` de `rentals.ts` (CTA "Consultar disponibilidad" en
+  `/alquiler/`) y el mapa `WHATSAPP_MESSAGES` de `WhatsAppButton.tsx` (botón flotante
+  en esa misma página) — estaban desincronizados desde antes (el flotante seguía
+  diciendo "respaldo" en vez de "sistema completo"), quedaron iguales. Texto final:
+  *"Hola, estoy interesado en alquilar el sistema Phase One IQ3 100. ¿Me pueden
+  confirmar disponibilidad y cotizarlo para mi proyecto? Lo necesitaría del [fecha]
+  al [fecha]. Gracias"*. Verificado en producción decodificando el `href` real de
+  ambos botones — coincide letra por letra.
 
 ### Promo Profoto Verano 2026 — APAGADA el 27 ago (julio–agosto 2026)
 
