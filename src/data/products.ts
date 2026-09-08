@@ -1755,7 +1755,7 @@ export const products: Product[] = [
     originalPrice: 1102000,
     price: 1014000,
     currency: "COP",
-    availability: "available",
+    availability: "backorder",
     shortDescription: "Sistema de seguridad para cables de tethering.",
     description:
       "El TetherGuard LeverLock protege tus conexiones de tethering con un sistema de traba mecánica. Nunca más una desconexión accidental.",
@@ -1767,7 +1767,7 @@ export const products: Product[] = [
     ],
     image: "/images/products/tetherguard-leverlock-cable-kit-usb-c-to-usb-c-31-94metros-straight-to-right-high-visibility-orange.png",
     sku: "LLPC31RT2-ORG",
-    stock: "InStock",
+    stock: "OutOfStock",
   },
   // ───── PROFOTO — TRANSMISORES CONNECT BÁSICO ─────
   {
