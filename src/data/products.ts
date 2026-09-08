@@ -2294,7 +2294,7 @@ export const products: Product[] = [
   {
     id: "jerkstopper-extension-lock-3pack",
     slug: "jerkstopper-extension-lock-3pack",
-    name: "JerkStopper Extension Lock (3 Pack)",
+    name: "JerkStopper Extension Lock (Paquete de 3 unidades)",
     brand: "tethertools",
     brandLabel: "TetherTools",
     category: "Cables Tethering",
