@@ -2604,7 +2604,7 @@ export const products: Product[] = [
     brandLabel: "TetherTools",
     category: "Accesorios de Estudio",
     originalPrice: 1427000,
-    price: 1312000,
+    price: 1100000,
     currency: "COP",
     availability: "backorder",
     shortDescription: "Sistema completo de configuración en T para tethering profesional.",
