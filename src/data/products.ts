@@ -1674,7 +1674,7 @@ export const products: Product[] = [
   {
     id: "tetherboost-pro-9-4m",
     slug: "tetherboost-pro-9-4m",
-    name: "TetherBoost Pro USB-C 9.4m",
+    name: "TetherBoost Pro (9.4m) USB-C to 3.0 Micro-B Cable System (Straight to Straight)",
     brand: "tethertools",
     brandLabel: "TetherTools",
     category: "Cables Tethering",
