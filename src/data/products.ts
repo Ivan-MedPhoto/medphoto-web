@@ -2481,7 +2481,7 @@ export const products: Product[] = [
     originalPrice: 1359000,
     price: 1250000,
     currency: "COP",
-    availability: "available",
+    availability: "backorder",
     shortDescription: "Sistema de ruedas de baja altura para trípodes y soportes de estudio.",
     description:
       "El Rock Solid Low Boy Roller lleva el sistema de ruedas a soportes de baja altura. Perfecto para c-stands, soportes de fondo y posiciones bajas en estudio.",
