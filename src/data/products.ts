@@ -1655,7 +1655,7 @@ export const products: Product[] = [
     brandLabel: "TetherTools",
     category: "Cables Tethering",
     originalPrice: 887000,
-    price: 600000,
+    price: 650000,
     currency: "COP",
     availability: "available",
     shortDescription: "Cable de tethering largo USB-C a USB-C para estudios grandes.",
