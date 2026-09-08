@@ -1,9 +1,9 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 28 de agosto de 2026 — integrado `PENDIENTE_INTEGRAR_WEB`
-v2/v3 de Chat0: nuevos pendientes (TRM, auditoría comercial de Nova, revisión de
-persistencia del banner), un pendiente obsoleto marcado, y tres lecciones de proceso.
-Ver §5 y §8.
+**Última actualización:** 8 de septiembre de 2026 — sesión de catálogo TetherTools:
+2 cables nuevos + 4 productos huérfanos agregados, 6 redirects legacy rotos
+corregidos, y ~19 ajustes de precio/disponibilidad/nombre confirmados por Iván
+contra su tabla de pricing. Ver §9.
 **Mantenido por:** Claude · Actualizar al cierre de cada bloque de trabajo significativo
 
 > **Instrucción de arranque:** leer este documento antes de iniciar cualquier sesión de trabajo sobre el sitio, tanto en Claude.ai como en Claude Code.
@@ -355,3 +355,108 @@ apagar la Promo Verano:
 Ambos `PENDIENTE_INTEGRAR_WEB` (v2 y v3, la v3 reemplaza a la v2) y la nota
 `NOTA_banner_alquiler_revision_futura_2026-08-27.md` (contenido absorbido en el punto
 10 de §5, Media) archivados en `Integrados/` tras esta integración.
+
+---
+
+## 9. Catálogo TetherTools — auditoría y corrección de precios/links (8 sep 2026)
+
+Iván pidió publicar 2 cables TetherPro que ya tenía en stock. Durante la revisión
+de la URL del primero (`/producto/adaptador-rock-solid-baby-ballhead/`) apareció un
+redirect apuntando a un producto equivocado, lo que llevó a auditar toda la tabla de
+pricing/links de Iván (23 SKU) contra `products.ts` y `legacy-redirects.ts`. Sesión
+completa en `main`, sin rama aparte — cada cambio se compiló (`tsc --noEmit` +
+`next build`), se verificó el HTML generado localmente, y se verificó de nuevo en
+producción con `curl` tras cada push antes de reportarlo a Iván.
+
+### Productos nuevos (6 en total)
+
+- **Commit `937defb`** — 3 cables TetherPro USB (2.0 Mini-B 5-Pin, 3.0 Micro-B,
+  2.0 Mini-B 8-Pin), 4.6m, Naranja Alta Visibilidad. SKU/precio/specs tomados de
+  tethertools.com, imágenes provistas por Iván (Descargas).
+- **Commit `d009404`** — 4 más, encontrados durante la auditoría de redirects (ver
+  abajo): TetherPro USB-C a 2.0 Mini-B 5-Pin (`CUC2415-ORG`), JerkStopper Extension
+  Lock 3-Pack (`JS026ORG3`), Rock Solid Baby Ballhead Adapter (`RS623-B`), Rock Solid
+  4-Head Tripod Cross Bar (`RSTAA4`). Imágenes: ya existían en
+  `public/images/products/` desde el pull de assets original (commit
+  `477bd21`, "producción lista"), solo sin usar — no hizo falta descargar nada
+  nuevo.
+
+### Redirects legacy rotos — 6 encontrados y corregidos (commit `d009404`)
+
+Cada uno devolvía **308** (no 404) pero aterrizaba en un producto o marca que no
+correspondía — el tipo de bug más difícil de detectar porque el link "funciona":
+
+| Redirect legacy | Antes (incorrecto) | Ahora |
+|---|---|---|
+| `/producto/adaptador-rock-solid-baby-ballhead/` | → Rock Solid Low Boy Roller | → producto propio nuevo |
+| `/producto/rock-solid-4-head-tripod-cross-bar/` | → Rock Solid Tripod Roller | → producto propio nuevo |
+| `/producto/tetherpro-usb-c-to-2-0-mini-b-5-pin/` | → TetherPro USB3 Micro-B Right Angle | → producto propio nuevo |
+| `/producto/tetherpro-usb-c-to-3-0-micro-b-right-angle.../` | → TetherPro USB-C a USB-C (producto distinto) | → `tetherpro-usbc-microb-4-6m` (el correcto, ya existía) |
+| `/producto/tetherpro-usb-c-to-usb-c-31-9-4m-straight.../` | → cable de 4.6m equivocado | → `tetherpro-usbc-usbc-9-4m` (el de 9.4m correcto) |
+| `/producto/jerkstopper-extension-lock-...-3-pack/` | → `/tienda/profoto/` (**marca equivocada**) | → producto propio nuevo, movido de Capa 6a (fallback de marca) a Capa 1 (match específico) |
+
+Verificado con `curl -w "%{redirect_url}"` contra los 6 en producción tras el
+deploy — los 6 aterrizan donde deben.
+
+### Precios y disponibilidad — cronología de ajustes confirmados por Iván
+
+La tabla de pricing de Iván pasó por varias rondas de confirmación en la misma
+sesión; el estado **final** en producción (no los valores intermedios) es el que
+importa para cualquier sesión futura:
+
+| SKU | Producto | Precio final actual | Disponibilidad |
+|---|---|---|---|
+| CU5451-ORG | TetherPro USB 2.0 a Mini-B 5-Pin 4.6m | $200.000 | En Stock |
+| CU5454-ORG | TetherPro USB 3.0 a Micro-B 4.6m | $230.000 | En Stock |
+| CU61RT15-ORG | TetherPro USB 3.0 a Micro-B Right Angle 4.6m | $270.000 | En Stock |
+| CU8015-ORG | TetherPro USB 2.0 a Mini-B 8-Pin 4.6m | $200.000 | En Stock |
+| CUC15RT2RT-ORG | TetherPro USB-C a USB-C Right Angle 4.6m | $290.000 | Sin stock (backorder) |
+| CUC2415-ORG | TetherPro USB-C a 2.0 Mini-B 5-Pin 4.6m | $200.000 | En Stock |
+| CUC31R-ORG | TetherBoost Pro (9.4m) USB-C to 3.0 Micro-B Cable System (Straight to Straight) | $600.000 | **En Stock (badge) pero `stock: OutOfStock` en el dato** — desync sin corregir, ver nota técnica |
+| CUC31RT2-ORG | TetherPro USB-C a USB-C 9.4m | **$650.000** (ajustado 8 sep, después del round inicial de $600.000) | En Stock |
+| CUC3215-ORG | TetherPro USB 3.0 a USB-C 4.6m | $230.000 | En Stock |
+| CUC33R15-ORG | TetherPro USB-C a Micro-B Right Angle 4.6m | $270.000 | En Stock |
+| JS026ORG3 | JerkStopper Extension Lock (Paquete de 3 unidades) | $155.000 | En Stock |
+| RS623-B | Rock Solid Baby Ballhead Adapter | $230.000 | En Stock |
+| RSDL012 | Rock Solid Tripod Roller | $430.000 | En Stock |
+| RSLBR81 | Rock Solid Low Boy Roller | $1.250.000 | Sin stock (backorder) |
+| RSTAA2 | Rock Solid 2-Head Cross Bar Side Arm | $450.000 | En Stock |
+| RSTAA4 | Rock Solid 4-Head Tripod Cross Bar | $700.000 | En Stock |
+| TB-QR-004G | TetherBlock Arca Graphite | $550.000 | Sin stock (backorder) |
+| TBPRO3-ORG | TetherBoost Pro USB-C Core Controller Extension Cable | $390.000 | En Stock (badge) — sin campo `stock` definido en el dato |
+| TG-LLP | TetherGuard LeverLock Plate | $550.000 | Sin stock (backorder) |
+| TG098 | TetherGuard Tethering Support Kit | $151.000 | En Stock |
+| TTA1SBLK | Tether Table Aero Standard | **$1.250.000** (ajustado 8 sep, desde $1.251.000) | En Stock |
+| LLPC31RT2-ORG | TetherGuard LeverLock & Cable Kit | $1.014.000 | **Sin stock (backorder)** — marcado 8 sep, antes decía "En Stock" |
+| TTSET | Tether T-Setup | **$1.100.000** (ajustado 8 sep, desde $1.312.000) | **En Stock** — marcado 8 sep, antes decía "Disponible bajo pedido" |
+
+Nota técnica encontrada de paso: el campo `availability` (badge visible: "En
+Stock" / "Disponible bajo pedido" / etc.) y el campo `stock` (solo alimenta el
+JSON-LD de SEO, no se renderiza en pantalla) pueden quedar desincronizados si se
+edita uno sin el otro. Pasó con Low Boy Roller (corregido esta sesión, ver tabla
+arriba) y **sigue sin corregir en dos productos, detectados al escribir esta
+nota pero no confirmados con Iván todavía:**
+- `tetherboost-pro-9-4m` (CUC31R-ORG): `stock: "OutOfStock"` pero
+  `availability: "available"` — el sitio muestra badge "En Stock", el schema le
+  dice a Google que está agotado. Preexistente, no se tocó en esta sesión más
+  que el precio y el nombre.
+- `tetherboost-pro-core-controller` (TBPRO3-ORG): no tiene campo `stock` en
+  absoluto (el resto del catálogo sí lo tiene). Badge dice "En Stock".
+
+Al tocar disponibilidad de cualquier producto, revisar los dos campos juntos —
+y sería buena idea que Iván confirme el estado real de estos dos antes de que
+alguien asuma que "En Stock" en pantalla es el dato completo.
+
+Commits de esta ronda de precios/nombres/disponibilidad, en orden: `cb60898`
+(8 ajustes de accesorios), `1e554b1` (USB-C a USB-C 9.4m a $650.000), `598efbc`
+(nombre TetherBoost Pro 9.4m), `338b428` (nombre JerkStopper en español), `040689e`
+(Low Boy Roller sin stock), `b4cf948` (Tether Table Aero a $1.250.000), `ba58253`
+(Tether T-Setup a $1.100.000), `d6449e0` (Tether T-Setup en stock), `9d9a35c`
+(TetherGuard LeverLock sin stock). Todos verificados en producción con `curl` tras
+cada deploy antes de reportar a Iván.
+
+**Aprendizaje de proceso:** el bug que arrancó la auditoría (Baby Ballhead → Low Boy
+Roller) no daba 404 — daba 308 a una página que carga perfecto, solo que es la
+equivocada. Un chequeo de solo status-code (200/404) sobre un mapa de redirects no
+detecta este tipo de error; hace falta comparar el *destino* contra el SKU/nombre
+esperado, no solo confirmar que el destino carga.
