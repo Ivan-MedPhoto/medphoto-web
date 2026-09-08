@@ -2606,7 +2606,7 @@ export const products: Product[] = [
     originalPrice: 1427000,
     price: 1100000,
     currency: "COP",
-    availability: "backorder",
+    availability: "available",
     shortDescription: "Sistema completo de configuración en T para tethering profesional.",
     description:
       "El Tether T-Setup incluye todo lo necesario para una estación de tethering profesional en configuración en T. Brazo, soporte y mesa integrados en un sistema.",
@@ -2618,6 +2618,7 @@ export const products: Product[] = [
     ],
     image: "/images/products/tether-t-set-up-configuracion-en-t.jpg",
     sku: "TTSET",
+    stock: "InStock",
   },
 
   // ───── PROFOTO — LUCES LED CINEMA ─────
