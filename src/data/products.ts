@@ -1727,7 +1727,7 @@ export const products: Product[] = [
     brandLabel: "TetherTools",
     category: "Accesorios de Estudio",
     originalPrice: 1359000,
-    price: 1251000,
+    price: 1250000,
     currency: "COP",
     availability: "available",
     shortDescription: "Mesa de trabajo para laptop en trípode. La favorita de los asistentes.",
