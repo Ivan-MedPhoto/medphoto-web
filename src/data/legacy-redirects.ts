@@ -13,7 +13,7 @@ export interface LegacyRedirect {
 // movidas desde Capa 6a el 5 ago 2026, sucesor especifico en vez de
 // fallback generico de marca -- ver bloque "Bloque A" mas abajo).
 export const productRedirects: LegacyRedirect[] = [
-  { source: "/producto/adaptador-rock-solid-baby-ballhead/", destination: "/tienda/tethertools/rock-solid-low-boy-roller/" },
+  { source: "/producto/adaptador-rock-solid-baby-ballhead/", destination: "/tienda/tethertools/rock-solid-baby-ballhead-adapter/" },
   { source: "/producto/air-remote-ttl-f/", destination: "/tienda/profoto/profoto-air-remote-ttl-f/" },
   { source: "/producto/air-remote-ttl-s/", destination: "/tienda/profoto/profoto-air-remote-ttl-s/" },
   { source: "/producto/bateria-life-para-pro-b3-b2/", destination: "/tienda/profoto/profoto-pro-b3-750/" },
@@ -28,6 +28,7 @@ export const productRedirects: LegacyRedirect[] = [
   { source: "/producto/grid-50-para-softbox-ocf-1x3-30x90-cm/", destination: "/tienda/profoto/profoto-softbox-ocf-60x90/" },
   { source: "/producto/grid-50-para-softbox-ocf-2-octa-60cm/", destination: "/tienda/profoto/profoto-softbox-ocf-octa-60/" },
   { source: "/producto/grid-50-para-softbox-ocf-2x3-60x90-cm/", destination: "/tienda/profoto/profoto-softbox-ocf-60x90/" },
+  { source: "/producto/jerkstopper-extension-lock-high-visibility-orange-3-pack/", destination: "/tienda/tethertools/jerkstopper-extension-lock-3pack/" },
   { source: "/producto/kit-grid-5-10-20-para-reflector-zoom/", destination: "/tienda/profoto/profoto-reflector-zoom/" },
   { source: "/producto/ocf-beauty-dish-silver-2-plegable/", destination: "/tienda/profoto/profoto-beauty-dish-ocf-silver/" },
   { source: "/producto/ocf-beauty-dish-white-2-plegable/", destination: "/tienda/profoto/profoto-beauty-dish-ocf-white/" },
@@ -106,7 +107,7 @@ export const productRedirects: LegacyRedirect[] = [
   { source: "/producto/rfi-grid-50-para-softbox-5-octa/", destination: "/tienda/profoto/profoto-softbox-rfi-octa-90/" },
   { source: "/producto/rfi-grid-50-softbox-3-octa/", destination: "/tienda/profoto/profoto-softbox-rfi-octa-90/" },
   { source: "/producto/rock-solid-2-head-cross-bar-side-arm/", destination: "/tienda/tethertools/rock-solid-2-head-side-arm/" },
-  { source: "/producto/rock-solid-4-head-tripod-cross-bar/", destination: "/tienda/tethertools/rock-solid-tripod-roller/" },
+  { source: "/producto/rock-solid-4-head-tripod-cross-bar/", destination: "/tienda/tethertools/rock-solid-4-head-side-arm/" },
   { source: "/producto/rock-solid-low-boy-roller/", destination: "/tienda/tethertools/rock-solid-low-boy-roller/" },
   { source: "/producto/rock-solid-tripod-roller/", destination: "/tienda/tethertools/rock-solid-tripod-roller/" },
   { source: "/producto/sistema-de-camara-xc-iq4-150-con-lente-23mm/", destination: "/tienda/phase-one/phase-one-xc-iq4-150/" },
@@ -144,9 +145,9 @@ export const productRedirects: LegacyRedirect[] = [
   { source: "/producto/tetherguard-tethering-support-kit/", destination: "/tienda/tethertools/tetherguard-tethering-support-kit/" },
   { source: "/producto/tetherpro-usb-3-0-to-micro-b-right-angle-15-4-6m-high-visibility-orange/", destination: "/tienda/tethertools/tetherpro-usb30-microb-4-6m/" },
   { source: "/producto/tetherpro-usb-3-0-to-usb-c-4-6mts-high-visibility-orange/", destination: "/tienda/tethertools/tetherpro-usb3-usbc-4-6m/" },
-  { source: "/producto/tetherpro-usb-c-to-2-0-mini-b-5-pin/", destination: "/tienda/tethertools/tetherpro-usb30-microb-4-6m/" },
-  { source: "/producto/tetherpro-usb-c-to-3-0-micro-b-right-angle-15-4-6m-high-visibility-orange/", destination: "/tienda/tethertools/tetherpro-usbc-usbc-right-angle/" },
-  { source: "/producto/tetherpro-usb-c-to-usb-c-31-9-4m-straight-to-right-angle-cable/", destination: "/tienda/tethertools/tetherpro-usbc-usbc-right-angle/" },
+  { source: "/producto/tetherpro-usb-c-to-2-0-mini-b-5-pin/", destination: "/tienda/tethertools/tetherpro-usbc-minib5-4-6m/" },
+  { source: "/producto/tetherpro-usb-c-to-3-0-micro-b-right-angle-15-4-6m-high-visibility-orange/", destination: "/tienda/tethertools/tetherpro-usbc-microb-4-6m/" },
+  { source: "/producto/tetherpro-usb-c-to-usb-c-31-9-4m-straight-to-right-angle-cable/", destination: "/tienda/tethertools/tetherpro-usbc-usbc-9-4m/" },
   { source: "/producto/tetherpro-usb-c-to-usb-c-right-angle-orange/", destination: "/tienda/tethertools/tetherpro-usbc-usbc-right-angle/" },
 
   // Bloque A (5 ago 2026): flashes discontinuados con sucesor especifico,
@@ -285,7 +286,6 @@ export const fallbackByBrandRedirects: LegacyRedirect[] = [
   { source: "/producto/grid-kit-10-20/", destination: "/tienda/profoto/" },
   { source: "/producto/handle-prohead/", destination: "/tienda/profoto/" },
   { source: "/producto/jerkstopper-camera-support/", destination: "/tienda/profoto/" },
-  { source: "/producto/jerkstopper-extension-lock-high-visibility-orange-3-pack/", destination: "/tienda/profoto/" },
   { source: "/producto/kit-gel-profoto-a1/", destination: "/tienda/profoto/" },
   { source: "/producto/mochila-m/", destination: "/tienda/profoto/" },
   { source: "/producto/ocf-adapter-para-profoto-a-series-a10-a1x-a1/", destination: "/tienda/profoto/" },
