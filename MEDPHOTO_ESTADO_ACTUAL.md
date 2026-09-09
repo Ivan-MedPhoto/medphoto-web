@@ -193,7 +193,7 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 8. **Ajuste de precios del catálogo por baja del TRM — PENDIENTE, próxima semana (mencionado por Iván 27-28 ago).** No se tocó ningún precio en la sesión de alquiler/promo más allá de confirmar que el B30 (`10.300.000`) no cambia — el ajuste real de TRM es tarea aparte, todavía sin fecha ni alcance definido (¿todo el catálogo o productos específicos?). Pendiente de Iván antes de tocar `products.ts`.
 9. **Auditoría comercial completa de Nova sobre `/alquiler/` — PROPUESTA, sin implementar a propósito.** Solo se hizo la "Opción 2" (ajustes de bajo riesgo: hero de la página, casos de uso, copy "sistema completo" vs "respaldo", tono de cierre). Quedan bloqueadas: sección "Cómo funciona" (4 pasos) y sección "Condiciones" (depósito, seguro, mínimo de días, política de daños) — ambas requieren términos de negocio reales (¿entrega a domicilio o solo recogida? ¿Bogotá o nacional? ¿quién asume el seguro?) que Iván no ha confirmado, no son solo copy. Reestructuración completa en 7 secciones (hero con comparación compra-vs-alquiler, sección de inversión) evaluada y pospuesta por decisión de Iván ("no ahora, vamos incrementando") — queda como referencia, no descartada.
 10a. **Diagnóstico de indexación (268 páginas en 404) — RESUELTO el 9 sep** (commit `9376999`). Iván exportó el CSV real de Search Console; 259/267 URLs (97%) ya funcionan bien en producción (redirect o 404 deliberado) — el reporte de Google solo estaba desactualizado. Los 2 gaps reales (`/inicio-medphoto-fotografia-profesional/`, `/flash-profoto-d3/`) ya tienen redirect. Ver §10 para el detalle completo y la clasificación fila por fila.
-10b. **Vincular GA4 con Search Console — BLOQUEADO, acción de ~1 min en la consola de Google.** Requiere cuenta `medphotosas@gmail.com`, no accesible desde `web`. Ver §10.
+10b. **Vincular GA4 con Search Console — RESUELTO el 9 sep.** Iván lo hizo manualmente ("VINCULACIÓN CREADA" confirmado en pantalla). Ver §10.
 10c. **Instrumentar el botón de WhatsApp por origen — RESUELTO el 9 sep** (commit `eda047d`). Los 14 CTA de WhatsApp del sitio ahora disparan evento GA4 `whatsapp_click` y llevan `[Origen]` en el mensaje pre-cargado. Ver §10 para el detalle completo.
 10d. **`/contacto/` +507% de impresiones — NO VERIFICADO, sin causa técnica identificada en el repo.** Ver §10. No se toca nada hasta ver la cifra absoluta real en Search Console.
 
@@ -563,14 +563,37 @@ pocas impresiones antes → algunas más después) que el porcentaje no signifiq
 pero no puedo confirmar los números absolutos sin Search Console en vivo. Sin evidencia
 de causa técnica en el sitio; no se toca nada hasta ver la cifra real.
 
-### DATO — GA4 y Search Console siguen sin vincular
+### RESUELTO — GA4 vinculado con Search Console (9 sep)
 
-La recomendación "Vincula tu propiedad de Search Console" sigue apareciendo en el home
-de GA4 (cuenta `medphotosas@gmail.com`, propiedad "Medphoto Colombia"). Configuración de
-~1 minuto según la propia UI de Google. **NO EJECUTADO** — es una acción dentro de la
-consola de Google (Admin → Vinculaciones de productos), no en el repo, y requiere la
-cuenta `medphotosas@gmail.com` que no está logueada en este Chrome. Debe hacerlo Iván
-directamente o vía Claude.ai con esa cuenta.
+La recomendación "Vincula tu propiedad de Search Console" llevaba desde el 27 jul en el
+home de GA4 (cuenta `medphotosas@gmail.com`, propiedad "Medphoto Colombia"). `web` no
+pudo ejecutarlo directamente — la cuenta `medphotosas@gmail.com` no está logueada en el
+Chrome de esta sesión y no correspondía iniciar sesión por otra cuenta (contraseña, fuera
+de lo permitido). Iván lo hizo manualmente siguiendo las instrucciones (Vincular cuenta →
+propiedad `medphoto.com.co` (Dominio) → flujo web "Medphoto Colombia" → Enviar).
+Confirmado en pantalla: **"VINCULACIÓN CREADA"**.
+
+### DATO adicional — backlinks a `/etiqueta-producto/*` investigados (9 sep)
+
+A pedido de Iván (surgido de una duda de la sesión `marketing`/`instagram-engine` sobre
+si los 268 de la vista de indexación seguían "reales"), se investigó si las 58 URLs
+`/etiqueta-producto/*` (404 deliberado, ver arriba) tienen backlinks externos reales que
+justificarían reabrir la decisión de julio de no redirigirlas. **Sin evidencia de
+backlinks externos:**
+- Wayback CDX (público): 148 URLs históricas bajo ese patrón — coincide exacto con el
+  inventario ya documentado en §4, confirma que son páginas de taxonomía de WooCommerce
+  del sitio viejo.
+- Búsqueda web de `"medphoto.com.co/etiqueta-producto"` e
+  `inurl:"...etiqueta-producto" -site:medphoto.com.co`: cero sitios externos enlazan a
+  estas páginas. Único resultado no propio: `medphoto.cl`, una tienda chilena sin
+  relación — coincide solo porque `/etiqueta-producto/` es el slug español por defecto de
+  WooCommerce.
+
+**NO VERIFICADO al 100%** — esto es búsqueda web pública + Wayback, no una base de datos
+de backlinks completa (tipo Ahrefs/Semrush). El dato definitivo estaría en Search Console
+→ Enlaces, con la misma cuenta `medphotosas@gmail.com`. Con la evidencia disponible
+(páginas de una sola palabra genérica, autogeneradas, cero citas externas encontradas) no
+hay motivo para reabrir la decisión de julio: se mantienen en 404, sin acción.
 
 ### RESUELTO — Botón de WhatsApp sin trazabilidad de origen (9 sep, commit `eda047d`)
 
