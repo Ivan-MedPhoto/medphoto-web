@@ -192,6 +192,11 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 7. **Artículo de blog "Equipos Profoto descontinuados y sus reemplazos" — DECIDIDO 5 ago, sin escribir.** Sustituye a las fichas de descontinuado como forma de capturar esas búsquedas. Debe cubrir la transición del catálogo (A1/A1X→A10, B1/B1X→B3, B10/B10X→B20, B10 Plus/B10X Plus→B30, D2 500→D30, D2 1000→D3 1250, Pro-10→Pro-11) y la compatibilidad de accesorios. Pendiente de Iván: specs verificadas de los modelos descontinuados y datos de compatibilidad. Encaja en el pilar de Educación.
 8. **Ajuste de precios del catálogo por baja del TRM — PENDIENTE, próxima semana (mencionado por Iván 27-28 ago).** No se tocó ningún precio en la sesión de alquiler/promo más allá de confirmar que el B30 (`10.300.000`) no cambia — el ajuste real de TRM es tarea aparte, todavía sin fecha ni alcance definido (¿todo el catálogo o productos específicos?). Pendiente de Iván antes de tocar `products.ts`.
 9. **Auditoría comercial completa de Nova sobre `/alquiler/` — PROPUESTA, sin implementar a propósito.** Solo se hizo la "Opción 2" (ajustes de bajo riesgo: hero de la página, casos de uso, copy "sistema completo" vs "respaldo", tono de cierre). Quedan bloqueadas: sección "Cómo funciona" (4 pasos) y sección "Condiciones" (depósito, seguro, mínimo de días, política de daños) — ambas requieren términos de negocio reales (¿entrega a domicilio o solo recogida? ¿Bogotá o nacional? ¿quién asume el seguro?) que Iván no ha confirmado, no son solo copy. Reestructuración completa en 7 secciones (hero con comparación compra-vs-alquiler, sección de inversión) evaluada y pospuesta por decisión de Iván ("no ahora, vamos incrementando") — queda como referencia, no descartada.
+10a. **Diagnóstico de indexación (268 páginas en 404) — BLOQUEADO, requiere Search Console en vivo.** Ver §10. `web` no tiene acceso a la propiedad (`medphotosas@gmail.com` no está logueada en este Chrome); repo-side, la hipótesis parcial es que buena parte son `/etiqueta-producto/*` (404 deliberado, sin acción) pero ~120 quedan sin explicar. Pendiente que Iván (o `marketing`/Claude.ai) exporte el listado real de Search Console → Indexación → Páginas para cruzarlo contra `legacy-redirects.ts`.
+10b. **Vincular GA4 con Search Console — BLOQUEADO, acción de ~1 min en la consola de Google.** Requiere cuenta `medphotosas@gmail.com`, no accesible desde `web`. Ver §10.
+10c. **Instrumentar el botón de WhatsApp por origen — PROPUESTA, sin implementar.** Ver §10 para las dos opciones (evento GA4 vs mensaje pre-cargado distinto por página). Pendiente que Iván elija el enfoque antes de tocar `ProductCard.tsx`, `CartContent.tsx`, `alquiler/page.tsx`, etc.
+10d. **`/contacto/` +507% de impresiones — NO VERIFICADO, sin causa técnica identificada en el repo.** Ver §10. No se toca nada hasta ver la cifra absoluta real en Search Console.
+
 10. **Revisión de persistencia del banner de alquiler — PROPUESTA, revisar en un par de semanas (~mediados sep 2026).** Hoy reaparece en cada carga de página sin excepción (decisión deliberada de dar "protagonismo por un tiempo"). Evaluar entonces cambiar a un modelo híbrido: ocultar por un período fijo (X horas) tras cerrarlo, en vez de reaparecer de inmediato. Falta que Iván confirme si quiere el cambio y qué duración prefiere — no tocar código hasta esa confirmación.
 
 ### Baja
@@ -460,3 +465,114 @@ Roller) no daba 404 — daba 308 a una página que carga perfecto, solo que es l
 equivocada. Un chequeo de solo status-code (200/404) sobre un mapa de redirects no
 detecta este tipo de error; hace falta comparar el *destino* contra el SKU/nombre
 esperado, no solo confirmar que el destino carga.
+
+---
+
+## 10. Diagnóstico "sistema de ventas" — indexación y atribución (9 sep 2026)
+
+Integrado desde `PENDIENTE_INTEGRAR_WEB_2026-09-09.md` (Drive), escrito por la sesión
+`marketing`/`instagram-engine` a partir de capturas de Search Console y GA4 que mandó
+Iván. Diagnóstico arrancado por Chat0 el 9 sept 2026 — el análisis de datos (GA4/Search
+Console) vive en `marketing`; la corrección técnica del sitio es trabajo de `web`. Ver
+`MEDPHOTO_ESTADO_ACTUAL_MARKETING.md` §9 (Drive) para la narrativa completa.
+
+### DATO — Indexación de `medphoto.com.co` (Search Console, capturas de Iván, 9 sep 2026)
+
+De 589 páginas rastreadas: **90 indexadas, 499 sin indexar**.
+
+| Motivo | Fuente | Páginas |
+|---|---|---|
+| No se ha encontrado (404) | Sitio web | **268** |
+| Rastreada: actualmente sin indexar | Sistemas de Google | 130 |
+| Excluida por etiqueta "noindex" | Sitio web | 66 |
+| Página con redirección | Sitio web | 13 |
+| Descubierta: actualmente sin indexar | Sistemas de Google | 15 |
+| Página alternativa con canónica adecuada | Sitio web | 4 |
+| Duplicada, sin canónica indicada | Sitio web | 2 |
+| Bloqueada (403) | Sitio web | 1 |
+
+Los 66 "noindex" probablemente incluyen intencionales (`/promo-profoto/`, marcado
+`noindex` a propósito el 28 ago, ver §5 punto 9 histórico / estado `marketing` §5
+ítem 5) — no alarmante sin ver el detalle completo.
+
+**NO VERIFICADO — identidad exacta de las 268 URLs en 404.** Intenté extraer el listado
+desde Search Console en esta sesión (`web`) vía navegador; la cuenta de Chrome activa es
+`ivanpb77@gmail.com`, y la propiedad `sc-domain:medphoto.com.co` pertenece a
+`medphotosas@gmail.com` — sin acceso ("Oops, you don't have access to this property").
+No se intentó iniciar sesión con otra cuenta (requeriría contraseña, fuera de lo
+permitido). Esto es exactamente la asimetría descrita en §11 de `CLAUDE.md`: el listado
+completo hay que sacarlo desde Claude.ai (o con Iván ya logueado como `medphotosas` en
+este Chrome) — `web` no puede verificarlo de forma independiente.
+
+**Hipótesis desde el repo (parcial, sin confirmar contra el listado real):**
+- `/etiqueta-producto/*` (148 rutas de WordPress) devuelve 404 **a propósito** — Capa 5
+  de `next.config.ts`, decisión ya tomada en §4 (son *product tags*, thin content;
+  redirigirlas mandaría señales de equivalencia falsa). Si estas están dentro de las 268,
+  no requieren acción — son ruido esperado, no un bug.
+- De los 230 productos legacy, 156 tienen redirect específico en
+  `src/data/legacy-redirects.ts` (Capa 1); el resto cae en el fallback por marca
+  inferida o en el catch-all `/tienda/` (Capa 6) — **no en 404** — así que el grueso de
+  los 74 productos sin match específico no debería explicar la cifra de 268 (ya
+  redirigen a algún destino, aunque sea genérico).
+- El resto (~120 de 268, sin contar `/etiqueta-producto/`) no tiene explicación en el
+  repo — puede ser URLs de assets/imágenes de WordPress (`/wp-content/...`), rutas de
+  WooCommerce (carrito, checkout, cuenta), paginación fuera de rango, o basura de
+  spam/referrer que Google indexó sin que exista en ningún sitemap real.
+- Los grep hechos aquí no prueban ausencia de enlaces internos rotos — un enlace roto
+  podría vivir en contenido que no es código (imagen externa, link de un blog post con
+  URL a mano). Confirmado por GA4 (ventana 2–8 sep): **7 vistas en una semana en "Página
+  no encontrada - Medphoto"** — hay tráfico real cayendo ahí, no solo rastreo de bots. No
+  se pudo confirmar en esta sesión si esas 7 vistas vienen de enlaces internos del sitio
+  o de backlinks/marcadores externos a URLs legacy, porque GA4 (cuenta `medphotosas`)
+  tampoco es accesible desde este Chrome.
+
+**Siguiente paso real:** Iván (o la sesión `marketing`/Claude.ai) exporta el listado de
+268 URLs desde Search Console → Indexación → Páginas → "No se ha encontrado (404)", y
+`web` lo cruza contra `src/data/legacy-redirects.ts` + el listado de 230 productos
+legacy (§4) para separar "enlace interno roto real" de "URL legacy que Google todavía
+recuerda, sin acción necesaria".
+
+### DATO — Rendimiento en Search Console (ventana 26 jul–6 sep, 3 meses)
+
+36 clics totales, 1.480 impresiones, CTR medio 2,4%, posición media 6,3. Top consultas:
+"medphoto" (marca propia) 4 clics/242 impresiones — CTR bajo incluso en búsqueda de
+marca; "profoto" 3/78; "phase one xf iq4 150mp" 2/20; "camara phase one" 2/11. Ningún
+término genérico de categoría entre las consultas principales.
+
+`/contacto/` tuvo **+507%** de impresiones recientes (recomendación de Google en Search
+Console). **NO VERIFICADO — causa.** Revisé el repo: `/contacto/` está enlazado desde
+Header y Footer (nav global) desde el lanzamiento del sitio — no hay commit reciente que
+agregue un enlace nuevo hacia esa página (`git log -- "*contacto*"` solo muestra los dos
+commits del lote SEO de julio). Con un total de apenas 1.480 impresiones en 3 meses para
+todo el sitio, un +507% en una página individual puede ser una base tan chica (unas
+pocas impresiones antes → algunas más después) que el porcentaje no signifique nada —
+pero no puedo confirmar los números absolutos sin Search Console en vivo. Sin evidencia
+de causa técnica en el sitio; no se toca nada hasta ver la cifra real.
+
+### DATO — GA4 y Search Console siguen sin vincular
+
+La recomendación "Vincula tu propiedad de Search Console" sigue apareciendo en el home
+de GA4 (cuenta `medphotosas@gmail.com`, propiedad "Medphoto Colombia"). Configuración de
+~1 minuto según la propia UI de Google. **NO EJECUTADO** — es una acción dentro de la
+consola de Google (Admin → Vinculaciones de productos), no en el repo, y requiere la
+cuenta `medphotosas@gmail.com` que no está logueada en este Chrome. Debe hacerlo Iván
+directamente o vía Claude.ai con esa cuenta.
+
+### PENDIENTE — Botón de WhatsApp sin trazabilidad de origen
+
+Todo el contacto entrante (web orgánico, Instagram, e-blast) converge en el mismo botón
+de WhatsApp (`+57 324 368 0862`, ver `src/data/products.ts` `WHATSAPP`) sin diferenciar
+canal — ningún lead es atribuible hoy a su origen real. Ya registrado en
+`MEDPHOTO_ESTADO_ACTUAL.md` de `instagram-engine` §4 ítem 12; la implementación es
+trabajo de `web`. Los CTA de WhatsApp del sitio ya usan mensaje pre-cargado
+(`whatsappProduct()` en `src/data/products.ts`, más casos a mano en `alquiler/page.tsx`,
+`promo-profoto/page.tsx`, `CartContent.tsx`) pero ninguno identifica la página/sección de
+origen. Dos formas de resolverlo, no excluyentes: (a) evento GA4 (`gtag`, ya instalado)
+al hacer click, con parámetro de origen — atribución real sin depender de que Iván lea el
+texto del chat; (b) prefijo distinto en el mensaje pre-cargado por página/sección —
+visible a simple vista en WhatsApp. **Sin implementar** — cambia el comportamiento
+visible del flujo de contacto en varias páginas, así que se consulta el enfoque con Iván
+antes de tocar el código (ver §5 pendientes).
+
+Ambos `PENDIENTE_INTEGRAR_WEB` de esta fecha archivados en `Integrados/` tras esta
+integración.
