@@ -192,7 +192,7 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 7. **Artículo de blog "Equipos Profoto descontinuados y sus reemplazos" — DECIDIDO 5 ago, sin escribir.** Sustituye a las fichas de descontinuado como forma de capturar esas búsquedas. Debe cubrir la transición del catálogo (A1/A1X→A10, B1/B1X→B3, B10/B10X→B20, B10 Plus/B10X Plus→B30, D2 500→D30, D2 1000→D3 1250, Pro-10→Pro-11) y la compatibilidad de accesorios. Pendiente de Iván: specs verificadas de los modelos descontinuados y datos de compatibilidad. Encaja en el pilar de Educación.
 8. **Ajuste de precios del catálogo por baja del TRM — PENDIENTE, próxima semana (mencionado por Iván 27-28 ago).** No se tocó ningún precio en la sesión de alquiler/promo más allá de confirmar que el B30 (`10.300.000`) no cambia — el ajuste real de TRM es tarea aparte, todavía sin fecha ni alcance definido (¿todo el catálogo o productos específicos?). Pendiente de Iván antes de tocar `products.ts`.
 9. **Auditoría comercial completa de Nova sobre `/alquiler/` — PROPUESTA, sin implementar a propósito.** Solo se hizo la "Opción 2" (ajustes de bajo riesgo: hero de la página, casos de uso, copy "sistema completo" vs "respaldo", tono de cierre). Quedan bloqueadas: sección "Cómo funciona" (4 pasos) y sección "Condiciones" (depósito, seguro, mínimo de días, política de daños) — ambas requieren términos de negocio reales (¿entrega a domicilio o solo recogida? ¿Bogotá o nacional? ¿quién asume el seguro?) que Iván no ha confirmado, no son solo copy. Reestructuración completa en 7 secciones (hero con comparación compra-vs-alquiler, sección de inversión) evaluada y pospuesta por decisión de Iván ("no ahora, vamos incrementando") — queda como referencia, no descartada.
-10a. **Diagnóstico de indexación (268 páginas en 404) — BLOQUEADO, requiere Search Console en vivo.** Ver §10. `web` no tiene acceso a la propiedad (`medphotosas@gmail.com` no está logueada en este Chrome); repo-side, la hipótesis parcial es que buena parte son `/etiqueta-producto/*` (404 deliberado, sin acción) pero ~120 quedan sin explicar. Pendiente que Iván (o `marketing`/Claude.ai) exporte el listado real de Search Console → Indexación → Páginas para cruzarlo contra `legacy-redirects.ts`.
+10a. **Diagnóstico de indexación (268 páginas en 404) — RESUELTO el 9 sep** (commit `9376999`). Iván exportó el CSV real de Search Console; 259/267 URLs (97%) ya funcionan bien en producción (redirect o 404 deliberado) — el reporte de Google solo estaba desactualizado. Los 2 gaps reales (`/inicio-medphoto-fotografia-profesional/`, `/flash-profoto-d3/`) ya tienen redirect. Ver §10 para el detalle completo y la clasificación fila por fila.
 10b. **Vincular GA4 con Search Console — BLOQUEADO, acción de ~1 min en la consola de Google.** Requiere cuenta `medphotosas@gmail.com`, no accesible desde `web`. Ver §10.
 10c. **Instrumentar el botón de WhatsApp por origen — PROPUESTA, sin implementar.** Ver §10 para las dos opciones (evento GA4 vs mensaje pre-cargado distinto por página). Pendiente que Iván elija el enfoque antes de tocar `ProductCard.tsx`, `CartContent.tsx`, `alquiler/page.tsx`, etc.
 10d. **`/contacto/` +507% de impresiones — NO VERIFICADO, sin causa técnica identificada en el repo.** Ver §10. No se toca nada hasta ver la cifra absoluta real en Search Console.
@@ -495,42 +495,56 @@ Los 66 "noindex" probablemente incluyen intencionales (`/promo-profoto/`, marcad
 `noindex` a propósito el 28 ago, ver §5 punto 9 histórico / estado `marketing` §5
 ítem 5) — no alarmante sin ver el detalle completo.
 
-**NO VERIFICADO — identidad exacta de las 268 URLs en 404.** Intenté extraer el listado
-desde Search Console en esta sesión (`web`) vía navegador; la cuenta de Chrome activa es
-`ivanpb77@gmail.com`, y la propiedad `sc-domain:medphoto.com.co` pertenece a
-`medphotosas@gmail.com` — sin acceso ("Oops, you don't have access to this property").
-No se intentó iniciar sesión con otra cuenta (requeriría contraseña, fuera de lo
-permitido). Esto es exactamente la asimetría descrita en §11 de `CLAUDE.md`: el listado
-completo hay que sacarlo desde Claude.ai (o con Iván ya logueado como `medphotosas` en
-este Chrome) — `web` no puede verificarlo de forma independiente.
+**RESUELTO 9 sep.** El acceso directo a Search Console desde esta sesión (`web`) estaba
+bloqueado — la cuenta de Chrome activa es `ivanpb77@gmail.com`, la propiedad pertenece a
+`medphotosas@gmail.com` ("Oops, you don't have access to this property"), y no se
+intentó iniciar sesión con otra cuenta (requeriría contraseña, fuera de lo permitido).
+Iván exportó el listado manualmente (Search Console → Indexación → Páginas → fila "No se
+ha encontrado (404)" → Exportar → CSV) y lo pasó como archivo
+(`medphoto.com.co-Coverage-Drilldown-2026-09-09/Tabla.csv`, 267 filas de datos).
 
-**Hipótesis desde el repo (parcial, sin confirmar contra el listado real):**
-- `/etiqueta-producto/*` (148 rutas de WordPress) devuelve 404 **a propósito** — Capa 5
-  de `next.config.ts`, decisión ya tomada en §4 (son *product tags*, thin content;
-  redirigirlas mandaría señales de equivalencia falsa). Si estas están dentro de las 268,
-  no requieren acción — son ruido esperado, no un bug.
-- De los 230 productos legacy, 156 tienen redirect específico en
-  `src/data/legacy-redirects.ts` (Capa 1); el resto cae en el fallback por marca
-  inferida o en el catch-all `/tienda/` (Capa 6) — **no en 404** — así que el grueso de
-  los 74 productos sin match específico no debería explicar la cifra de 268 (ya
-  redirigen a algún destino, aunque sea genérico).
-- El resto (~120 de 268, sin contar `/etiqueta-producto/`) no tiene explicación en el
-  repo — puede ser URLs de assets/imágenes de WordPress (`/wp-content/...`), rutas de
-  WooCommerce (carrito, checkout, cuenta), paginación fuera de rango, o basura de
-  spam/referrer que Google indexó sin que exista en ningún sitemap real.
-- Los grep hechos aquí no prueban ausencia de enlaces internos rotos — un enlace roto
-  podría vivir en contenido que no es código (imagen externa, link de un blog post con
-  URL a mano). Confirmado por GA4 (ventana 2–8 sep): **7 vistas en una semana en "Página
-  no encontrada - Medphoto"** — hay tráfico real cayendo ahí, no solo rastreo de bots. No
-  se pudo confirmar en esta sesión si esas 7 vistas vienen de enlaces internos del sitio
-  o de backlinks/marcadores externos a URLs legacy, porque GA4 (cuenta `medphotosas`)
-  tampoco es accesible desde este Chrome.
+**Clasificación de las 267 URLs (por patrón de path) + verificación en vivo con `curl`
+contra producción (40+ muestras al azar, todas consistentes dentro de su categoría):**
 
-**Siguiente paso real:** Iván (o la sesión `marketing`/Claude.ai) exporta el listado de
-268 URLs desde Search Console → Indexación → Páginas → "No se ha encontrado (404)", y
-`web` lo cruza contra `src/data/legacy-redirects.ts` + el listado de 230 productos
-legacy (§4) para separar "enlace interno roto real" de "URL legacy que Google todavía
-recuerda, sin acción necesaria".
+| Patrón | Filas | Estado real en producción (curl, 9 sep) |
+|---|---|---|
+| `/producto/*` | 179 | **308**, redirige bien (específico o fallback de marca) |
+| `/categoria-producto/*` | 22 | **308**, redirige bien |
+| `/etiqueta-producto/*` | 58 | **404 deliberado** — decisión ya tomada en §4, sin acción |
+| `/nosotros-medphoto-distribuidores-2/`, `/catalogo-productos-fotografia-iluminacion/`, `/como-escoger-tu-paraguas/`, `/terms/`, `/phase-one/` | 5 | **308**, ya cubiertas por Capa 2 (rutas sueltas) |
+| `/inicio-medphoto-fotografia-profesional/` | 1 | Era 404 real → **corregido** (ver abajo) |
+| `/flash-profoto-d3/` | 1 | Era 404 real → **corregido** (ver abajo) |
+| `/mi-cuenta/` | 1 | 404 — sin sistema de cuentas en el sitio actual, no hay destino real |
+| `/?taxonomy=product_shipping_class&term=envio-1/feed/` | 1 | 404 — feed de taxonomía de WooCommerce, basura, sin contenido real |
+
+**Hallazgo principal: el reporte de Search Console está desactualizado, no refleja la
+producción actual.** 259 de las 267 URLs (97%) ya funcionan bien hoy (redirect 308 o 404
+deliberado por diseño) — el mapa de redirects está vigente desde el 27 jul y no cambió
+para ninguna de estas rutas desde entonces (`git log` confirma cero commits a
+`next.config.ts`/`legacy-redirects.ts` entre el 5 ago y el 8 sep, salvo los cables
+TetherTools del 8 sep que no tocan estas URLs). El "Último rastreo" del reporte muestra
+fechas de 3–4 sep, pero el estado ya era correcto en esas fechas también — consistente
+con lo ya documentado en §5 punto 1 sobre presupuesto de rastreo bajo (7 de 96 fichas
+procesadas al 31 jul): Google recrawlea despacio y el reporte de Coverage tarda en
+reflejar cambios, incluso de hace más de un mes.
+
+**Corregido (commit `9376999`):** los únicos 2 gaps reales encontrados, agregados a
+`directRedirects` en `src/data/legacy-redirects.ts`:
+- `/inicio-medphoto-fotografia-profesional/` → `/` (alias legacy del home)
+- `/flash-profoto-d3/` → `/tienda/profoto/` (página suelta del sitio viejo, no
+  `/producto/`; sin SKU específico identificable — single/duo, 750W/1250W — así que se
+  usó el fallback de marca, mismo criterio que la Capa 6 para productos sin match)
+
+`/mi-cuenta/` y el feed de shipping-class quedan en 404 a propósito — no hay página
+equivalente en el sitio actual ni tiene sentido crear una solo para capturar el rastreo.
+
+**GA4 — 7 vistas en "Página no encontrada" (ventana 2–8 sep):** no se pudo confirmar el
+origen exacto (interno vs. backlink externo) porque GA4 tampoco es accesible desde este
+Chrome (misma cuenta `medphotosas@gmail.com`). Dado que solo 2 URLs además de
+`/mi-cuenta/` y el feed daban 404 real en ese período, es razonable que esas vistas
+vengan de ahí (marcadores o backlinks viejos a `/inicio-medphoto-fotografia-profesional/`
+o `/flash-profoto-d3/`) — **NO VERIFICADO**, hipótesis consistente con los datos
+disponibles, no confirmación directa.
 
 ### DATO — Rendimiento en Search Console (ventana 26 jul–6 sep, 3 meses)
 
