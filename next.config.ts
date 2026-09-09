@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       })),
 
-      // Capa 2: rutas sueltas 1:1 (6)
+      // Capa 2: rutas sueltas 1:1 (8)
       ...directRedirects.map((r) => ({
         source: r.source,
         destination: r.destination,

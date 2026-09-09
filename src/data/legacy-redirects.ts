@@ -181,7 +181,7 @@ export const productRedirects: LegacyRedirect[] = [
   { source: "/producto/profoto-d2-kit-500-500-airttl/", destination: "/tienda/profoto/profoto-d2-kit-500/" },
 ];
 
-// Capa 2: rutas sueltas con match 1:1 verificado (6 filas). La ruta de
+// Capa 2: rutas sueltas con match 1:1 verificado (8 filas). La ruta de
 // catalogo tambien vive aqui.
 export const directRedirects: LegacyRedirect[] = [
   { source: "/catalogo-productos-fotografia-iluminacion/", destination: "/tienda/" },
@@ -190,6 +190,15 @@ export const directRedirects: LegacyRedirect[] = [
   { source: "/terms/", destination: "/terminos-condiciones/" },
   { source: "/privacy-policy/", destination: "/politica-datos/" },
   { source: "/phase-one/", destination: "/tienda/phase-one/" },
+  // Agregadas 9 sep 2026 (diagnostico indexacion, ver MEDPHOTO_ESTADO_ACTUAL.md §10):
+  // unicas 2 de las 267 URLs del reporte de 404 de Search Console que de verdad
+  // seguian dando 404 en produccion (todo lo demas eran /producto, /categoria-producto
+  // y /etiqueta-producto ya cubiertos, con el reporte de Google atrasado).
+  { source: "/inicio-medphoto-fotografia-profesional/", destination: "/" },
+  // "flash-profoto-d3" era pagina suelta, no /producto/ -- sin match especifico
+  // de SKU (single/duo, 750W/1250W) en el inventario legacy. Fallback a la
+  // categoria de marca, mismo criterio que el catch-all de productos (Capa 6).
+  { source: "/flash-profoto-d3/", destination: "/tienda/profoto/" },
 ];
 
 // Capa 3+4: categorias legacy -> landing de marca actual (46 filas).
