@@ -194,7 +194,7 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 9. **Auditoría comercial completa de Nova sobre `/alquiler/` — PROPUESTA, sin implementar a propósito.** Solo se hizo la "Opción 2" (ajustes de bajo riesgo: hero de la página, casos de uso, copy "sistema completo" vs "respaldo", tono de cierre). Quedan bloqueadas: sección "Cómo funciona" (4 pasos) y sección "Condiciones" (depósito, seguro, mínimo de días, política de daños) — ambas requieren términos de negocio reales (¿entrega a domicilio o solo recogida? ¿Bogotá o nacional? ¿quién asume el seguro?) que Iván no ha confirmado, no son solo copy. Reestructuración completa en 7 secciones (hero con comparación compra-vs-alquiler, sección de inversión) evaluada y pospuesta por decisión de Iván ("no ahora, vamos incrementando") — queda como referencia, no descartada.
 10a. **Diagnóstico de indexación (268 páginas en 404) — RESUELTO el 9 sep** (commit `9376999`). Iván exportó el CSV real de Search Console; 259/267 URLs (97%) ya funcionan bien en producción (redirect o 404 deliberado) — el reporte de Google solo estaba desactualizado. Los 2 gaps reales (`/inicio-medphoto-fotografia-profesional/`, `/flash-profoto-d3/`) ya tienen redirect. Ver §10 para el detalle completo y la clasificación fila por fila.
 10b. **Vincular GA4 con Search Console — BLOQUEADO, acción de ~1 min en la consola de Google.** Requiere cuenta `medphotosas@gmail.com`, no accesible desde `web`. Ver §10.
-10c. **Instrumentar el botón de WhatsApp por origen — PROPUESTA, sin implementar.** Ver §10 para las dos opciones (evento GA4 vs mensaje pre-cargado distinto por página). Pendiente que Iván elija el enfoque antes de tocar `ProductCard.tsx`, `CartContent.tsx`, `alquiler/page.tsx`, etc.
+10c. **Instrumentar el botón de WhatsApp por origen — RESUELTO el 9 sep** (commit `eda047d`). Los 14 CTA de WhatsApp del sitio ahora disparan evento GA4 `whatsapp_click` y llevan `[Origen]` en el mensaje pre-cargado. Ver §10 para el detalle completo.
 10d. **`/contacto/` +507% de impresiones — NO VERIFICADO, sin causa técnica identificada en el repo.** Ver §10. No se toca nada hasta ver la cifra absoluta real en Search Console.
 
 10. **Revisión de persistencia del banner de alquiler — PROPUESTA, revisar en un par de semanas (~mediados sep 2026).** Hoy reaparece en cada carga de página sin excepción (decisión deliberada de dar "protagonismo por un tiempo"). Evaluar entonces cambiar a un modelo híbrido: ocultar por un período fijo (X horas) tras cerrarlo, en vez de reaparecer de inmediato. Falta que Iván confirme si quiere el cambio y qué duración prefiere — no tocar código hasta esa confirmación.
@@ -572,21 +572,40 @@ consola de Google (Admin → Vinculaciones de productos), no en el repo, y requi
 cuenta `medphotosas@gmail.com` que no está logueada en este Chrome. Debe hacerlo Iván
 directamente o vía Claude.ai con esa cuenta.
 
-### PENDIENTE — Botón de WhatsApp sin trazabilidad de origen
+### RESUELTO — Botón de WhatsApp sin trazabilidad de origen (9 sep, commit `eda047d`)
 
-Todo el contacto entrante (web orgánico, Instagram, e-blast) converge en el mismo botón
-de WhatsApp (`+57 324 368 0862`, ver `src/data/products.ts` `WHATSAPP`) sin diferenciar
-canal — ningún lead es atribuible hoy a su origen real. Ya registrado en
-`MEDPHOTO_ESTADO_ACTUAL.md` de `instagram-engine` §4 ítem 12; la implementación es
-trabajo de `web`. Los CTA de WhatsApp del sitio ya usan mensaje pre-cargado
-(`whatsappProduct()` en `src/data/products.ts`, más casos a mano en `alquiler/page.tsx`,
-`promo-profoto/page.tsx`, `CartContent.tsx`) pero ninguno identifica la página/sección de
-origen. Dos formas de resolverlo, no excluyentes: (a) evento GA4 (`gtag`, ya instalado)
-al hacer click, con parámetro de origen — atribución real sin depender de que Iván lea el
-texto del chat; (b) prefijo distinto en el mensaje pre-cargado por página/sección —
-visible a simple vista en WhatsApp. **Sin implementar** — cambia el comportamiento
-visible del flujo de contacto en varias páginas, así que se consulta el enfoque con Iván
-antes de tocar el código (ver §5 pendientes).
+Todo el contacto entrante convergía en el mismo botón de WhatsApp
+(`+57 324 368 0862`) sin diferenciar canal/página. Ya registrado en
+`MEDPHOTO_ESTADO_ACTUAL.md` de `instagram-engine` §4 ítem 12. Iván confirmó
+implementar ambos mecanismos (evento GA4 + mensaje tagueado), corroborado también por
+la sesión `marketing`/`instagram-engine` vía mensaje directo entre sesiones.
+
+**Búsqueda inicial incompleta:** el primer barrido (`grep "wa.me\|whatsapp"`, sin
+`-i`) solo encontró 6 de los 14 CTA de WhatsApp del sitio — se perdió todo lo que
+usaba `WhatsAppButton`/`WHATSAPP_URL` con mayúsculas. Una segunda búsqueda
+case-insensitive encontró los 8 restantes (botón flotante sitewide, Header
+desktop+mobile, Footer, home x2, nosotros, contacto x2) antes de dar el trabajo por
+terminado.
+
+**Implementado:**
+- `src/lib/analytics.ts` — `trackWhatsAppClick(origin, product?)`: evento GA4
+  `whatsapp_click` vía el `gtag` ya instalado (`G-39DGBKV73R`).
+- `src/components/WhatsAppLink.tsx` — client component que envuelve `<a>` y dispara
+  el evento al click; se puede montar dentro de server components (páginas con
+  `generateMetadata`) sin convertirlas enteras a `"use client"`.
+- `src/data/products.ts` — `whatsappUrl(message, origin)` agrega `[Origen]` al final
+  del mensaje pre-cargado (visible directamente en el chat); `whatsappProduct(name,
+  origin)` ahora exige origen explícito.
+- 12 valores de `WhatsAppOrigin`: `ficha-producto`, `catalogo`, `carrito`,
+  `alquiler`, `promo-profoto`, `blog`, `home`, `nosotros`, `contacto`, `header`,
+  `footer`, `flotante` — cubriendo los 14 CTA (`home` y `contacto` y `header` tienen
+  2 cada uno). El botón flotante sitewide (`WhatsAppButton.tsx`) ya tenía mensajes
+  distintos por `pathname` (`WHATSAPP_MESSAGES`) desde el 28 ago — se le sumó el tag
+  `[Botón flotante]` y el evento GA4, sin tocar esos 3 mensajes especiales.
+
+Verificado: `tsc --noEmit` limpio, `next build` (128 páginas) limpio, HTML generado
+inspeccionado para confirmar el tag `[Origen]` en el `href` final de cada CTA, y en
+producción tras el deploy (`curl` contra home y `/contacto/`).
 
 Ambos `PENDIENTE_INTEGRAR_WEB` de esta fecha archivados en `Integrados/` tras esta
 integración.
