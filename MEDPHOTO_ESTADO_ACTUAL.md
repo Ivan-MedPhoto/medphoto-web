@@ -553,15 +553,22 @@ disponibles, no confirmación directa.
 marca; "profoto" 3/78; "phase one xf iq4 150mp" 2/20; "camara phase one" 2/11. Ningún
 término genérico de categoría entre las consultas principales.
 
-`/contacto/` tuvo **+507%** de impresiones recientes (recomendación de Google en Search
-Console). **NO VERIFICADO — causa.** Revisé el repo: `/contacto/` está enlazado desde
-Header y Footer (nav global) desde el lanzamiento del sitio — no hay commit reciente que
-agregue un enlace nuevo hacia esa página (`git log -- "*contacto*"` solo muestra los dos
-commits del lote SEO de julio). Con un total de apenas 1.480 impresiones en 3 meses para
-todo el sitio, un +507% en una página individual puede ser una base tan chica (unas
-pocas impresiones antes → algunas más después) que el porcentaje no signifique nada —
-pero no puedo confirmar los números absolutos sin Search Console en vivo. Sin evidencia
-de causa técnica en el sitio; no se toca nada hasta ver la cifra real.
+**RESUELTO 9 sep.** `/contacto/` tuvo **+507%** de impresiones recientes (recomendación
+de Google en Search Console). Revisé el repo: `/contacto/` está enlazado desde Header y
+Footer (nav global) desde el lanzamiento del sitio — no hay commit reciente que agregue
+un enlace nuevo hacia esa página (`git log -- "*contacto*"` solo muestra los dos commits
+del lote SEO de julio) — sin causa técnica visible.
+
+Iván confirmó la causa real en vivo (Rendimiento → Comparar → "últimos 3 meses con el
+período anterior"): **el período anterior completo devuelve 0 en todas las métricas,
+para todo el sitio** — no solo `/contacto/` (ej. consulta "medphoto": 4 clics / 242
+impresiones en el período actual vs. 0 / 0 en el anterior). La propiedad de Search
+Console se verificó el 27 jul — el "período anterior" cae antes de esa fecha, cuando
+Google todavía no tenía datos de rendimiento del dominio. Cualquier página muestra un
+crecimiento artificialmente enorme (o infinito) al compararse contra una base de cero;
+no es un problema de `/contacto/` en particular ni de ninguna página — es un artefacto
+de que la propiedad todavía es demasiado nueva para que esa comparación automática
+signifique algo. Sin acción — se vuelve confiable solo con más historia acumulada.
 
 ### RESUELTO — GA4 vinculado con Search Console (9 sep)
 
