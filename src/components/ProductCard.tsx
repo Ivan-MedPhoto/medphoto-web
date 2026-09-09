@@ -6,6 +6,7 @@ import Image from "next/image";
 import { MessageCircle, ShoppingCart, Check } from "lucide-react";
 import { Product, formatPrice, whatsappProduct } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 const availabilityConfig = {
   available: { label: "En Stock", color: "#22c55e" },
@@ -131,8 +132,10 @@ export default function ProductCard({ product }: ProductCardProps) {
                 {added ? <Check size={13} /> : <ShoppingCart size={13} />}
                 {added ? "Agregado" : "Comprar"}
               </button>
-              <a
-                href={whatsappProduct(product.name)}
+              <WhatsAppLink
+                href={whatsappProduct(product.name, "catalogo")}
+                origin="catalogo"
+                product={product.name}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Preguntar por WhatsApp sobre ${product.name}`}
@@ -140,7 +143,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 style={{ borderColor: "#2a2a2b", color: "#B7B8B9" }}
               >
                 <MessageCircle size={14} />
-              </a>
+              </WhatsAppLink>
             </div>
           </div>
         )}

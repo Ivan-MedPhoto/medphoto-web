@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import WhatsAppLink from "@/components/WhatsAppLink";
+import { whatsappUrl } from "@/data/products";
 
 export const metadata: Metadata = {
   title: "Profoto B3: ¿Single o Duo Kit? Cómo elegir según tu forma de trabajar",
@@ -258,14 +260,16 @@ export default function BlogProfotoB3SingleVsDuo() {
             </Link>
           </div>
           <div style={{ marginTop: "16px" }}>
-            <a
-              href={`https://wa.me/573243680862?text=${encodeURIComponent("Hola, quiero saber cuál Profoto B3 me conviene según mi flujo de trabajo")}`}
+            <WhatsAppLink
+              href={whatsappUrl("Hola, quiero saber cuál Profoto B3 me conviene según mi flujo de trabajo", "blog")}
+              origin="blog"
+              product="Profoto B3"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: "#4CB4E7", fontSize: "0.875rem", fontFamily: "var(--font-label)" }}
             >
               Consultar por WhatsApp →
-            </a>
+            </WhatsAppLink>
           </div>
         </div>
 

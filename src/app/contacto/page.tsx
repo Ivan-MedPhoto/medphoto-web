@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { MessageCircle, Mail, Clock, MapPin } from "lucide-react";
-import { WHATSAPP_URL } from "@/data/products";
+import { whatsappUrl } from "@/data/products";
 import HubSpotForm from "@/components/HubSpotForm";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -17,9 +18,10 @@ const contactMethods = [
     Icon: MessageCircle,
     label: "WhatsApp",
     value: "+57 324 368 0862",
-    href: `${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quiero información sobre equipos fotográficos")}`,
+    href: whatsappUrl("Hola, quiero información sobre equipos fotográficos", "contacto"),
     cta: "Escribir ahora",
     highlight: true,
+    isWhatsApp: true,
   },
   {
     Icon: Mail,
@@ -28,6 +30,7 @@ const contactMethods = [
     href: "mailto:contacto@medphoto.com.co",
     cta: "Enviar correo",
     highlight: false,
+    isWhatsApp: false,
   },
   {
     Icon: Clock,
@@ -36,6 +39,7 @@ const contactMethods = [
     href: null,
     cta: null,
     highlight: false,
+    isWhatsApp: false,
   },
   {
     Icon: MapPin,
@@ -44,6 +48,7 @@ const contactMethods = [
     href: null,
     cta: null,
     highlight: false,
+    isWhatsApp: false,
   },
 ];
 
@@ -100,7 +105,7 @@ export default function ContactoPage() {
 
           {/* Contact cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
-            {contactMethods.map(({ Icon, label, value, href, cta, highlight }) => (
+            {contactMethods.map(({ Icon, label, value, href, cta, highlight, isWhatsApp }) => (
               <div
                 key={label}
                 className="rounded-xl p-6 border"
@@ -127,7 +132,22 @@ export default function ContactoPage() {
                 >
                   {value}
                 </p>
-                {href && cta && (
+                {href && cta && isWhatsApp && (
+                  <WhatsAppLink
+                    href={href}
+                    origin="contacto"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-medium transition-colors hover:opacity-80"
+                    style={{
+                      color: highlight ? "#4CB4E7" : "#B7B8B9",
+                      fontFamily: "var(--font-label)",
+                    }}
+                  >
+                    {cta} →
+                  </WhatsAppLink>
+                )}
+                {href && cta && !isWhatsApp && (
                   <a
                     href={href}
                     target={href.startsWith("http") ? "_blank" : undefined}
@@ -190,8 +210,9 @@ export default function ContactoPage() {
             <p className="text-sm mb-6 max-w-md mx-auto" style={{ color: "#B7B8B9" }}>
               WhatsApp. Atendemos en horario comercial y respondemos el mismo día.
             </p>
-            <a
-              href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quiero información sobre equipos fotográficos")}`}
+            <WhatsAppLink
+              href={whatsappUrl("Hola, quiero información sobre equipos fotográficos", "contacto")}
+              origin="contacto"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-medium transition-all hover:opacity-90 hover:scale-105"
@@ -199,7 +220,7 @@ export default function ContactoPage() {
             >
               <MessageCircle size={18} />
               Abrir WhatsApp
-            </a>
+            </WhatsAppLink>
           </div>
 
           {/* FAQ */}

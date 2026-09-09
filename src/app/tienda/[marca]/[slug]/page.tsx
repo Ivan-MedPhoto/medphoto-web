@@ -9,10 +9,10 @@ import {
   formatPrice,
   whatsappProduct,
   brandLabels,
-  WHATSAPP_URL,
   type Brand,
 } from "@/data/products";
 import AddToCartButton from "@/components/AddToCartButton";
+import WhatsAppLink from "@/components/WhatsAppLink";
 import { productTitle, productAvailability } from "@/lib/seo";
 
 type Props = {
@@ -375,8 +375,10 @@ export default async function ProductPage({ params }: Props) {
             {!product.discontinued && (
               <div className="flex flex-col sm:flex-row gap-4 mb-10">
                 <AddToCartButton product={product} />
-                <a
-                  href={whatsappProduct(product.name)}
+                <WhatsAppLink
+                  href={whatsappProduct(product.name, "ficha-producto")}
+                  origin="ficha-producto"
+                  product={product.name}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-medium border transition-all hover:border-[#4CB4E7] hover:text-[#4CB4E7]"
@@ -384,7 +386,7 @@ export default async function ProductPage({ params }: Props) {
                 >
                   <MessageCircle size={18} />
                   Consultar por WhatsApp
-                </a>
+                </WhatsAppLink>
               </div>
             )}
 

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { MessageCircle, Award, Users, Zap } from "lucide-react";
-import { WHATSAPP_URL } from "@/data/products";
+import { whatsappUrl } from "@/data/products";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 export const metadata: Metadata = {
   title: "Nosotros",
@@ -182,8 +183,9 @@ export default function NosotrosPage() {
             Si tienes un proyecto, una duda técnica, o simplemente quieres saber
             qué equipo se adapta mejor a tu trabajo, escríbenos.
           </p>
-          <a
-            href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quiero saber más sobre MedPhoto y sus equipos")}`}
+          <WhatsAppLink
+            href={whatsappUrl("Hola, quiero saber más sobre MedPhoto y sus equipos", "nosotros")}
+            origin="nosotros"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-medium transition-all hover:opacity-90"
@@ -191,7 +193,7 @@ export default function NosotrosPage() {
           >
             <MessageCircle size={18} />
             Escribir por WhatsApp
-          </a>
+          </WhatsAppLink>
         </div>
       </section>
     </>

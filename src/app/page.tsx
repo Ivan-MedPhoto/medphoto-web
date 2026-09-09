@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { MessageCircle, Award, HeadphonesIcon, Package } from "lucide-react";
-import { getFeaturedProducts, formatPrice, WHATSAPP_URL } from "@/data/products";
+import { getFeaturedProducts, formatPrice, whatsappUrl } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
 import PromoBanner from "@/components/PromoBanner";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 export const metadata: Metadata = {
   title: "MedPhoto Colombia — Equipos Fotográficos Profesionales",
@@ -159,8 +160,9 @@ export default function HomePage() {
                 >
                   Ver catálogo
                 </Link>
-                <a
-                  href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quiero asesoría sobre equipos fotográficos")}`}
+                <WhatsAppLink
+                  href={whatsappUrl("Hola, quiero asesoría sobre equipos fotográficos", "home")}
+                  origin="home"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium border transition-all hover:border-[#4CB4E7] hover:text-[#4CB4E7]"
@@ -168,7 +170,7 @@ export default function HomePage() {
                 >
                   <MessageCircle size={15} />
                   Pedir asesoría
-                </a>
+                </WhatsAppLink>
               </div>
             </div>
 
@@ -410,8 +412,9 @@ export default function HomePage() {
               Escríbenos. Conocemos cada producto a fondo y te ayudamos a elegir
               el equipo que realmente necesitas, sin sobrecosto ni presión.
             </p>
-            <a
-              href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, necesito asesoría para elegir un equipo fotográfico")}`}
+            <WhatsAppLink
+              href={whatsappUrl("Hola, necesito asesoría para elegir un equipo fotográfico", "home")}
+              origin="home"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-medium transition-all hover:opacity-90 hover:scale-105"
@@ -419,7 +422,7 @@ export default function HomePage() {
             >
               <MessageCircle size={18} />
               Escribir por WhatsApp
-            </a>
+            </WhatsAppLink>
           </div>
         </div>
       </section>

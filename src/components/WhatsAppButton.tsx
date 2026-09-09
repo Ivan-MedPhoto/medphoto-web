@@ -2,7 +2,8 @@
 
 import { MessageCircle } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { WHATSAPP_URL } from "@/data/products";
+import { whatsappUrl } from "@/data/products";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 const WHATSAPP_MESSAGES: Record<string, string> = {
   "/guia-roi-profoto/": "Hola, vi la guía de ROI de Profoto y quiero saber qué equipo necesito para mi tipo de fotografía",
@@ -76,8 +77,9 @@ export default function WhatsAppButton() {
           <Icon />
         </a>
       ))}
-      <a
-        href={`${WHATSAPP_URL}?text=${encodeURIComponent(message)}`}
+      <WhatsAppLink
+        href={whatsappUrl(message, "flotante")}
+        origin="flotante"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contactar por WhatsApp"
@@ -86,7 +88,7 @@ export default function WhatsAppButton() {
       >
         <MessageCircle size={22} strokeWidth={2} />
         <span className="hidden sm:inline font-label tracking-wide">WhatsApp</span>
-      </a>
+      </WhatsAppLink>
     </div>
   );
 }

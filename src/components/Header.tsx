@@ -5,8 +5,9 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X, MessageCircle, ShoppingCart } from "lucide-react";
 import Logo from "./Logo";
-import { WHATSAPP_URL } from "@/data/products";
+import { whatsappUrl } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 const nav = [
   { label: "Tienda", href: "/tienda/" },
@@ -68,8 +69,9 @@ export default function Header() {
               )}
             </Link>
 
-            <a
-              href={WHATSAPP_URL}
+            <WhatsAppLink
+              href={whatsappUrl("Hola, quiero información sobre equipos fotográficos", "header")}
+              origin="header"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium transition-all hover:opacity-90"
@@ -77,7 +79,7 @@ export default function Header() {
             >
               <MessageCircle size={14} />
               Escríbenos
-            </a>
+            </WhatsAppLink>
           </div>
 
           {/* Mobile right actions */}
@@ -131,8 +133,9 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
-            <a
-              href={WHATSAPP_URL}
+            <WhatsAppLink
+              href={whatsappUrl("Hola, quiero información sobre equipos fotográficos", "header")}
+              origin="header"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-3 flex items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-medium"
@@ -140,7 +143,7 @@ export default function Header() {
             >
               <MessageCircle size={16} />
               Escríbenos por WhatsApp
-            </a>
+            </WhatsAppLink>
           </nav>
         </div>
       )}

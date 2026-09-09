@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "./Logo";
-import { WHATSAPP_URL } from "@/data/products";
+import { whatsappUrl } from "@/data/products";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 const LANDING_PAGES = ["/promo-profoto/"];
 
@@ -148,15 +149,16 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li>
-                <a
-                  href={`${WHATSAPP_URL}?text=${encodeURIComponent("Hola, quiero información")}`}
+                <WhatsAppLink
+                  href={whatsappUrl("Hola, quiero información", "footer")}
+                  origin="footer"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm transition-colors hover:text-[#4CB4E7]"
                   style={{ color: "#B7B8B9" }}
                 >
                   +57 324 368 0862
-                </a>
+                </WhatsAppLink>
               </li>
               <li>
                 <a

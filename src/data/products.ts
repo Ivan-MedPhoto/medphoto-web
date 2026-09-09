@@ -45,9 +45,46 @@ export function formatPrice(price: number, currency: Currency): string {
 export const WHATSAPP = "573243680862";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP}`;
 
-export function whatsappProduct(name: string): string {
-  const text = encodeURIComponent(`Hola, quiero información sobre el ${name}`);
-  return `${WHATSAPP_URL}?text=${text}`;
+// Trazabilidad de origen del botón de WhatsApp (ver MEDPHOTO_ESTADO_ACTUAL.md §10):
+// hasta el 9 sep 2026 todo el contacto entrante caía en el mismo número sin
+// diferenciar canal. `origin` se usa para (a) el evento GA4 en WhatsAppLink y
+// (b) el prefijo visible al final del mensaje pre-cargado.
+export type WhatsAppOrigin =
+  | "ficha-producto"
+  | "catalogo"
+  | "carrito"
+  | "alquiler"
+  | "promo-profoto"
+  | "blog"
+  | "home"
+  | "nosotros"
+  | "contacto"
+  | "header"
+  | "footer"
+  | "flotante";
+
+const WHATSAPP_ORIGIN_LABEL: Record<WhatsAppOrigin, string> = {
+  "ficha-producto": "Ficha producto",
+  catalogo: "Catálogo",
+  carrito: "Carrito",
+  alquiler: "Alquiler",
+  "promo-profoto": "Promo Profoto",
+  blog: "Blog",
+  home: "Home",
+  nosotros: "Nosotros",
+  contacto: "Contacto",
+  header: "Header",
+  footer: "Footer",
+  flotante: "Botón flotante",
+};
+
+export function whatsappUrl(message: string, origin: WhatsAppOrigin): string {
+  const tagged = `${message} [${WHATSAPP_ORIGIN_LABEL[origin]}]`;
+  return `${WHATSAPP_URL}?text=${encodeURIComponent(tagged)}`;
+}
+
+export function whatsappProduct(name: string, origin: WhatsAppOrigin): string {
+  return whatsappUrl(`Hola, quiero información sobre el ${name}`, origin);
 }
 
 export const products: Product[] = [

@@ -5,9 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Minus, Plus, Trash2, ShoppingCart, MessageCircle } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { formatPrice } from "@/data/products";
-
-const WHATSAPP_CART = "https://wa.me/573243680862";
+import { formatPrice, whatsappUrl } from "@/data/products";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 export default function CartContent() {
   const { items, removeFromCart, updateQuantity, clearCart, totalPrice } = useCart();
@@ -51,19 +50,18 @@ export default function CartContent() {
     );
   }
 
-  const cartText = encodeURIComponent(
+  const cartMessage =
     "Hola, quiero coordinar el pago de:\n" +
-      items
-        .map(
-          (i) =>
-            `• ${i.product.name} x${i.quantity} — ${formatPrice(
-              i.product.price * i.quantity,
-              i.product.currency
-            )}`
-        )
-        .join("\n") +
-      `\n\nTotal: ${formatPrice(totalPrice, "COP")}`
-  );
+    items
+      .map(
+        (i) =>
+          `• ${i.product.name} x${i.quantity} — ${formatPrice(
+            i.product.price * i.quantity,
+            i.product.currency
+          )}`
+      )
+      .join("\n") +
+    `\n\nTotal: ${formatPrice(totalPrice, "COP")}`;
 
   return (
     <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12">
@@ -205,8 +203,9 @@ export default function CartContent() {
           </p>
         </div>
 
-        <a
-          href={`${WHATSAPP_CART}?text=${cartText}`}
+        <WhatsAppLink
+          href={whatsappUrl(cartMessage, "carrito")}
+          origin="carrito"
           target="_blank"
           rel="noopener noreferrer"
           className="w-full flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-medium transition-all hover:opacity-90 hover:scale-[1.02]"
@@ -219,7 +218,7 @@ export default function CartContent() {
         >
           <MessageCircle size={18} />
           Coordinar pago por WhatsApp
-        </a>
+        </WhatsAppLink>
       </div>
     </div>
   );

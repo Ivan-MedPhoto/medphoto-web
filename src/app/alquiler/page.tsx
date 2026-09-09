@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { WHATSAPP_URL } from "@/data/products";
+import { whatsappUrl } from "@/data/products";
 import { rentals } from "@/data/rentals";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 export const metadata: Metadata = {
   title: "Alquiler de Equipo Fotográfico",
@@ -161,8 +162,10 @@ export default function AlquilerPage() {
                 hasta 1/1.600s.
               </p>
 
-              <a
-                href={`${WHATSAPP_URL}?text=${encodeURIComponent(item.whatsappMessage)}`}
+              <WhatsAppLink
+                href={whatsappUrl(item.whatsappMessage, "alquiler")}
+                origin="alquiler"
+                product={item.name}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-medium transition-all hover:opacity-90"
@@ -170,7 +173,7 @@ export default function AlquilerPage() {
               >
                 <MessageCircle size={18} />
                 Consultar disponibilidad
-              </a>
+              </WhatsAppLink>
             </div>
           ))}
         </div>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import HubSpotForm from "@/components/HubSpotForm";
+import WhatsAppLink from "@/components/WhatsAppLink";
+import { whatsappUrl } from "@/data/products";
 
 export const metadata: Metadata = {
   title: "Promo Profoto Julio–Agosto 2026",
@@ -146,15 +148,17 @@ export default function PromoProfotoPage() {
                 </p>
               </div>
 
-              <a
-                href="https://wa.me/573243680862?text=Hola%20MedPhoto%2C%20me%20interesa%20el%20Profoto%20B30%20con%20el%20bono%20de%20%24500.000.%20%C2%BFEst%C3%A1%20disponible%3F"
+              <WhatsAppLink
+                href={whatsappUrl("Hola MedPhoto, me interesa el Profoto B30 con el bono de $500.000. ¿Está disponible?", "promo-profoto")}
+                origin="promo-profoto"
+                product="Profoto B30"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full px-8 py-4 text-sm font-medium transition-all hover:opacity-90"
                 style={{ backgroundColor: "#4CB4E7", color: "#0F0F10", fontFamily: "var(--font-label)", letterSpacing: "0.05em" }}
               >
                 Quiero el B30 → WhatsApp
-              </a>
+              </WhatsAppLink>
             </div>
           </div>
         </div>
@@ -203,15 +207,17 @@ export default function PromoProfotoPage() {
                 + Bono $500.000 en productos MedPhoto
               </p>
 
-              <a
-                href="https://wa.me/573243680862?text=Hola%20MedPhoto%2C%20me%20interesa%20el%20Profoto%20A2%20con%20el%20bono%20de%20%24500.000."
+              <WhatsAppLink
+                href={whatsappUrl("Hola MedPhoto, me interesa el Profoto A2 con el bono de $500.000.", "promo-profoto")}
+                origin="promo-profoto"
+                product="Profoto A2"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-medium transition-all hover:opacity-90"
                 style={{ backgroundColor: "#4CB4E7", color: "#0F0F10", fontFamily: "var(--font-label)", letterSpacing: "0.05em" }}
               >
                 Quiero el A2 Solo → WhatsApp
-              </a>
+              </WhatsAppLink>
             </div>
 
             {/* A2 Connect Kit */}
@@ -248,15 +254,17 @@ export default function PromoProfotoPage() {
                 + Bono $500.000 en productos MedPhoto
               </p>
 
-              <a
-                href="https://wa.me/573243680862?text=Hola%20MedPhoto%2C%20me%20interesa%20el%20Profoto%20A2%20Connect%20Kit%20con%20el%20bono%20de%20%24500.000."
+              <WhatsAppLink
+                href={whatsappUrl("Hola MedPhoto, me interesa el Profoto A2 Connect Kit con el bono de $500.000.", "promo-profoto")}
+                origin="promo-profoto"
+                product="Profoto A2 Connect Kit"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-medium transition-all hover:opacity-90"
                 style={{ backgroundColor: "#4CB4E7", color: "#0F0F10", fontFamily: "var(--font-label)", letterSpacing: "0.05em" }}
               >
                 Quiero el A2 Connect Kit → WhatsApp
-              </a>
+              </WhatsAppLink>
             </div>
           </div>
         </div>
