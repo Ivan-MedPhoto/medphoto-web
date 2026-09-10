@@ -1,9 +1,9 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 8 de septiembre de 2026 — sesión de catálogo TetherTools:
-2 cables nuevos + 4 productos huérfanos agregados, 6 redirects legacy rotos
-corregidos, y ~19 ajustes de precio/disponibilidad/nombre confirmados por Iván
-contra su tabla de pricing. Ver §9.
+**Última actualización:** 10 de septiembre de 2026 — diagnóstico completo del
+`PENDIENTE_INTEGRAR_WEB_2026-09-09` (indexación, GA4↔GSC, WhatsApp por origen,
+backlinks) y limpieza de Deployment Storage de Vercel (60 → 1 deployment, tarea
+recurrente cada 3-4 semanas). Ver §10 y §11.
 **Mantenido por:** Claude · Actualizar al cierre de cada bloque de trabajo significativo
 
 > **Instrucción de arranque:** leer este documento antes de iniciar cualquier sesión de trabajo sobre el sitio, tanto en Claude.ai como en Claude Code.
@@ -195,7 +195,7 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 10a. **Diagnóstico de indexación (268 páginas en 404) — RESUELTO el 9 sep** (commit `9376999`). Iván exportó el CSV real de Search Console; 259/267 URLs (97%) ya funcionan bien en producción (redirect o 404 deliberado) — el reporte de Google solo estaba desactualizado. Los 2 gaps reales (`/inicio-medphoto-fotografia-profesional/`, `/flash-profoto-d3/`) ya tienen redirect. Ver §10 para el detalle completo y la clasificación fila por fila.
 10b. **Vincular GA4 con Search Console — RESUELTO el 9 sep.** Iván lo hizo manualmente ("VINCULACIÓN CREADA" confirmado en pantalla). Ver §10.
 10c. **Instrumentar el botón de WhatsApp por origen — RESUELTO el 9 sep** (commit `eda047d`). Los 14 CTA de WhatsApp del sitio ahora disparan evento GA4 `whatsapp_click` y llevan `[Origen]` en el mensaje pre-cargado. Ver §10 para el detalle completo.
-10d. **`/contacto/` +507% de impresiones — NO VERIFICADO, sin causa técnica identificada en el repo.** Ver §10. No se toca nada hasta ver la cifra absoluta real en Search Console.
+10d. **`/contacto/` +507% de impresiones — RESUELTO el 9 sep.** Artefacto de que la propiedad de Search Console (verificada 27 jul) no tiene historia previa — el período de comparación anterior da 0 en todas las métricas del sitio, no solo `/contacto/`. Sin acción. Ver §10.
 
 10. **Revisión de persistencia del banner de alquiler — PROPUESTA, revisar en un par de semanas (~mediados sep 2026).** Hoy reaparece en cada carga de página sin excepción (decisión deliberada de dar "protagonismo por un tiempo"). Evaluar entonces cambiar a un modelo híbrido: ocultar por un período fijo (X horas) tras cerrarlo, en vez de reaparecer de inmediato. Falta que Iván confirme si quiere el cambio y qué duración prefiere — no tocar código hasta esa confirmación.
 
@@ -209,6 +209,10 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 16. **Calidad de imagen en pantallas Retina — detectado 27-28 ago, no bloqueante (confirmado por Iván).** El archivo fuente de la imagen hero de `/alquiler/` es 692×555px, 118-121KB. A la altura máxima del contenedor (460px desktop) se ve ligeramente suave en pantallas 2x. Se puede resolver más adelante con una versión de mayor resolución si aparece — sin urgencia.
 
 **Ya corregido de esa misma auditoría Seobility (commit `40589ab`):** título del home acortado (602px→54 caracteres, ya no queda cortado a mitad de frase), canonical agregado al home (única página que no lo tenía), espaciado del H1 corregido (se extraía como "quelos mejoresusan" sin espacios), encabezado duplicado corregido (hero repetido como H2+H3, y "Distribuidores Oficiales" repetido en dos secciones — la segunda se renombró a "Nuestras Marcas").
+
+### Recurrente
+
+17. **Limpieza de Deployment Storage en Vercel — cada 3-4 semanas.** Ver §11. Sin poda automática, los deployments se acumulan indefinidamente con cada push a `main`. Correr `npx vercel@latest remove medphoto-web --safe --yes --scope ivans-projects-1d09dbdb` desde una terminal logueada (`npx vercel login` si hace falta) — `--safe` nunca toca la producción activa. Última limpieza: 10 sep 2026 (60 → 1 deployment).
 
 ---
 
@@ -639,3 +643,66 @@ producción tras el deploy (`curl` contra home y `/contacto/`).
 
 Ambos `PENDIENTE_INTEGRAR_WEB` de esta fecha archivados en `Integrados/` tras esta
 integración.
+
+---
+
+## 11. Vercel — limpieza de Deployment Storage (9-10 sep 2026)
+
+Iván reenvió un correo de Vercel: el team `ivans-projects-1d09dbdb` llegó al 75% del
+free tier de Deployment Storage (10GB).
+
+### Causa raíz
+
+`public/social/test/` (4 videos + 2 imágenes, ~220MB) y
+`public/social/post09/capture-one-vertical.mp4` (1.3MB) eran material de staging del
+motor de Instagram (dry-run de candidato Pickit, pruebas de Reels) — verificado con
+`grep` que no tenían ninguna referencia en `src/`, no se servían en ningún lado del
+sitio. Next.js/Vercel empaqueta **toda** `public/` en cada deployment; como cada push a
+`main` dispara un deployment de producción nuevo (sin poda automática), esos ~220MB se
+re-empaquetaron sin uso en cada uno de los 22 commits posteriores al 4 sep — solo esa
+semana sumó ~4.8GB de storage sobre archivos que el sitio ni siquiera sirve.
+
+### Qué se hizo
+
+1. **Eliminados del repo** los 7 archivos de prueba (commit `342751b`) — `public/`
+   bajó de 265MB a 44MB. No cambia comportamiento visible (cero referencias en el
+   código); quedan recuperables del historial de git si `instagram-engine` los
+   necesita de nuevo.
+2. **Login de Vercel CLI** desde esta sesión (`npx vercel login`, device-code flow,
+   cuenta `irp@medphoto.com.co`) — necesario para poder inspeccionar y limpiar
+   deployments directamente. Nota técnica: el `orgId` guardado en
+   `.vercel/project.json` (`team_7nSqwxJfBIKl5qr4sJItKh2X`) da 403 al resolverlo
+   automáticamente; hay que pasar `--scope ivans-projects-1d09dbdb` (el *slug* del
+   team) explícito en cada comando de la CLI para este proyecto.
+3. **Limpieza de deployments** (con Iván corriendo los comandos en su propia
+   terminal — el clasificador de auto mode de Claude Code bloquea el borrado masivo
+   de deployments incluso con el patrón `Bash(vercel *)` ya permitido; no se intentó
+   sortear el bloqueo editando la config de permisos):
+   ```
+   npx vercel@latest remove medphoto-web --safe --yes --scope ivans-projects-1d09dbdb
+   ```
+   `--safe` protege cualquier deployment con alias activo (nunca toca el que sirve
+   `medphoto.com.co`). Resultado: **60 → 8 deployments** (52 borrados). Los 7
+   restantes eran previews viejos (13-36 días) con su propio alias de preview, por
+   lo que `--safe` los saltó; se borraron aparte apuntándolos por URL exacta:
+   ```
+   npx vercel@latest remove <url-1> <url-2> ... --yes --scope ivans-projects-1d09dbdb
+   ```
+   Resultado final: **1 solo deployment** (el de producción actual). Verificado
+   `medphoto.com.co` con `curl` (200) antes y después de cada tanda de borrado.
+
+### Pendiente recurrente — limpieza de deployments cada 3-4 semanas
+
+Sin poda automática configurada, los deployments de Vercel se acumulan indefinidamente
+con cada push a `main` (nunca se limpian solos). Cadencia sugerida: **cada 3-4 semanas**,
+correr desde una terminal ya logueada (`npx vercel login` si hace falta):
+```
+cd ~/medphoto-web/site
+npx vercel@latest remove medphoto-web --safe --yes --scope ivans-projects-1d09dbdb
+```
+Con `--safe` es seguro repetir — nunca toca el deployment de producción activo. Revisar
+antes con `npx vercel@latest ls medphoto-web --scope ivans-projects-1d09dbdb` si hay
+muchos deployments (indica que pasó tiempo desde la última limpieza). De paso, revisar
+si `public/` volvió a crecer de forma anormal (`du -sh public`) — la causa de esta vez
+fue justamente un asset de prueba de otro proyecto (`instagram-engine`) commiteado por
+error en `public/`; ese tipo de archivo nunca debería vivir en el repo del sitio.
