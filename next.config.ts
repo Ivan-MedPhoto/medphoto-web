@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
     // coincidencia gana. Reglas especificas primero, catch-alls al final.
     // Ver src/data/legacy-redirects.ts para el detalle de cada capa y
     // ~/.gstack/projects/Ivan-MedPhoto-medphoto-web/main-legacy-redirects-plan.md
+    // (nota: la carpeta del repo se movió a ~/Claude-MedPhoto/medphoto-web/ el 10 sep 2026;
+    // esta ruta de ~/.gstack/projects/ es independiente y no cambió)
     // para el analisis completo (/autoplan, 27 jul 2026).
     return [
       // Capa 1: producto -> producto especifico (135)

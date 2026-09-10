@@ -46,7 +46,7 @@ Todo contenido debe encajar en al menos uno de estos pilares. Si no encaja, no s
   vía `instagram-engine` (repo propio, motor Python sobre Instagram Graph API, atajo de
   terminal `marketing`). **Make.com está descartado definitivamente** de este pipeline —
   el escenario que orquestaba la publicación no funcionaba y no forma parte de la
-  arquitectura actual. Ver `~/medphoto-automations/instagram-engine/MEDPHOTO_ESTADO_ACTUAL.md`
+  arquitectura actual. Ver `~/Claude-MedPhoto/instagram-engine/MEDPHOTO_ESTADO_ACTUAL.md`
   para el estado y la estrategia de Instagram/marketing (no se documenta aquí para no
   duplicarlo).
 - **TikTok:** Manual siempre. Audio trending requiere control humano.
@@ -66,7 +66,7 @@ Todo contenido debe encajar en al menos uno de estos pilares. Si no encaja, no s
 | playwright | Activo | QA visual automatizado en browser real — /qa lo activa. |
 | G Stack | NO es plugin | Skills vendorizadas en `.claude/skills/gstack/` del repo — 44 skills (43 subskills + raíz), verificado |
 
-**CRÍTICO — raíz de sesión:** las skills de gstack (`/autoplan`, `/qa`, `/review` completo) solo cargan si Claude Code se inicia DESDE `~/medphoto-web/site`. La raíz queda fijada al iniciar la sesión; anteponer `cd` a los comandos NO la corrige. Arrancar siempre escribiendo `web` en la terminal (la función `medphoto` abre `~/Documents/MedPhoto` y las skills del sitio no cargan).
+**CRÍTICO — raíz de sesión:** las skills de gstack (`/autoplan`, `/qa`, `/review` completo) solo cargan si Claude Code se inicia DESDE `~/Claude-MedPhoto/medphoto-web/site`. La raíz queda fijada al iniciar la sesión; anteponer `cd` a los comandos NO la corrige. Arrancar siempre escribiendo `web` en la terminal (la función `medphoto` abre `~/Documents/MedPhoto` y las skills del sitio no cargan).
 
 ### Reglas de Uso de Herramientas (MedPhoto)
 - `/autoplan` antes de cualquier feature nueva (requiere raíz correcta)
@@ -139,7 +139,7 @@ No escalar para:
 
 ## 10. CHECKLIST DE INICIO DE SESIÓN
 
-0. **Arrancar la sesión con `web`** (no `medphoto`). `web` abre Claude Code desde `~/medphoto-web/site`, donde viven las skills de gstack.
+0. **Arrancar la sesión con `web`** (no `medphoto`). `web` abre Claude Code desde `~/Claude-MedPhoto/medphoto-web/site`, donde viven las skills de gstack.
 1. `/mem-search "[tarea actual]"` para cargar contexto previo.
 2. Leer `MEDPHOTO_ESTADO_ACTUAL.md`.
 3. **(Agregado 24 ago 2026)** Cargar las herramientas de Drive (`ToolSearch` con
@@ -173,7 +173,7 @@ Claude Code ve el repositorio, no la historia de producción. Lo que requiera co
 ### Errores de entorno conocidos
 - `grep` resuelve a **ugrep**: no acepta `\|` como alternancia. Usar `-E` con `|`.
 - `git log --grep` usa regex básica. Para alternancia añadir `-E`.
-- El cwd de Bash se resetea entre comandos: anteponer `cd ~/medphoto-web/site &&`.
+- El cwd de Bash se resetea entre comandos: anteponer `cd ~/Claude-MedPhoto/medphoto-web/site &&`.
 - Esto NO corrige la raíz de sesión para skills (ver §5).
 
 ### Capas de seguridad
