@@ -1,6 +1,9 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 10 de septiembre de 2026 — diagnóstico completo del
+**Última actualización:** 11 de septiembre de 2026 — acceso de Lector a GA4 para
+`ivanpb77@gmail.com` (cubre `ventas-93` e `instagram-engine-00`) y verificación en vivo
+de `whatsapp_click` (falsa alarma de `ventas-93` descartada). Ver §10.
+Anterior: 10 de septiembre de 2026 — diagnóstico completo del
 `PENDIENTE_INTEGRAR_WEB_2026-09-09` (indexación, GA4↔GSC, WhatsApp por origen,
 backlinks) y limpieza de Deployment Storage de Vercel (60 → 1 deployment, tarea
 recurrente cada 3-4 semanas). Ver §10 y §11.
@@ -24,7 +27,8 @@ recurrente cada 3-4 semanas). Ver §10 y §11.
 | Rama de producción | `main` |
 | Hosting | Vercel — proyecto `medphoto-web` |
 | Ruta local | `~/medphoto-web/site/` |
-| Comando de terminal | `web` → `~/medphoto-web/site` + Claude Code (**usar este**). `medphoto` → `~/Documents/MedPhoto`, NO carga las skills del sitio |
+| Comando de terminal | `web` → `~/Claude-MedPhoto/medphoto-web/site` + Claude Code (**usar este**). `medphoto` → `~/Documents/MedPhoto`, NO carga las skills del sitio |
+| Nombre de sesión (mensajería entre chats) | `web` es solo el alias de terminal que arranca esta sesión — **no** es el nombre con el que otras sesiones de Claude le envían mensajes. El nombre real de mensajería es dinámico por sesión (ej. `site-e9`, verificado 11 sep) — confirmar con `ListAgents` antes de asumir el nombre. Ver §10 nota del 11 sep. |
 | Dominio | medphoto.com.co |
 | Datos de producto | 96 productos hardcodeados en `src/data/products.ts` |
 | Páginas generadas en build | 121 (+1: `/alquiler/`, agregada 27 ago) |
@@ -222,7 +226,7 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 |---|---|
 | HubSpot | Portal `9428261` · Tracking `46114173` · Form lead magnet `fe713f94-46ec-45cb-987e-1e681443a2fe` |
 | Meta Pixel | `1530931291102927` |
-| Google Analytics 4 | Measurement ID `G-39DGBKV73R` (instalado 27 jul) |
+| Google Analytics 4 | Measurement ID `G-39DGBKV73R` (instalado 27 jul). Cuenta propietaria `medphotosas@gmail.com` (Administrador). `ivanpb77@gmail.com` agregado como **Lector** el 11 sep — cubre también a las sesiones `ventas-93` e `instagram-engine-00`, que operan sobre el mismo Chrome/cuenta sin identidad propia. Ver §10. |
 | Google Search Console | Propiedad de Dominio, verificada 27 jul vía TXT en Dongee |
 | Dominios autorizados en HubSpot | medphoto.com.co · medphoto.com.mx |
 | WhatsApp | +57 324 368 0862 |
@@ -643,6 +647,55 @@ producción tras el deploy (`curl` contra home y `/contacto/`).
 
 Ambos `PENDIENTE_INTEGRAR_WEB` de esta fecha archivados en `Integrados/` tras esta
 integración.
+
+### RESUELTO — Acceso de lectura a GA4 para sesiones de ventas/marketing (11 sep 2026)
+
+La sesión `ventas-93` (armando el reporte de herramientas para la operación de ventas
+consultivo Profoto/Phase One) preguntó si podía pedir acceso directo de lectura a la
+propiedad GA4. Se resolvió en vivo con Iván:
+
+- **Mecanismo:** GA4 → Admin → "Gestión de accesos a la propiedad" → agregar correo de
+  Google con rol **Lector**. No requiere compartir contraseña ni sesión de Chrome.
+- **Agregado:** `ivanpb77@gmail.com`, verificado funcionando (reporte cargó con datos
+  reales: 761 usuarios activos, 28 días).
+- **Cubre a `ventas-93` e `instagram-engine-00` sin agregar nada más:** ambas sesiones
+  confirmaron que navegan sobre el mismo Chrome/cuenta de Iván, sin identidad de Google
+  propia. No existe un "correo de ventas" ni un "correo de marketing" separado hoy.
+- Sin API/export conectado (GA4 Data API, BigQuery, Sheets) — los eventos solo viven en
+  la consola. No hay landing/form propio de Phase One en HubSpot (sí de Profoto:
+  `/promo-profoto`, `/guia-roi-profoto`); el flujo de WhatsApp por origen no sincroniza
+  a HubSpot automáticamente.
+
+**Nota sobre nombres de sesión para mensajería entre chats:** durante esta
+coordinación se aclaró que `web` (alias de terminal, ver §1) **no** es el nombre que
+otras sesiones usan para enviar mensajes a esta sesión — ese nombre es dinámico
+(`ListAgents` lo confirma; en esta sesión fue `site-e9`). Cualquier instrucción futura
+de "avísale a `web`" debe resolverse primero con `ListAgents`, no asumiendo el alias de
+terminal.
+
+### RESUELTO — Falsa alarma de `whatsapp_click` en cero (11 sep 2026)
+
+`ventas-93` reportó, antes de escalarlo como bug a Iván, que revisó "14+ meses" de
+eventos en GA4 y `whatsapp_click` nunca se había disparado — contradiciendo el cierre
+de esta sección (9 sep). Verificado en vivo antes de aceptar el hallazgo:
+
+- **Prueba real en producción:** click en el CTA de `/contacto/` capturado por
+  network tab → request saliente con `en=whatsapp_click&ep.origin=contacto`, exacto al
+  diseño. El código funciona correctamente.
+- **Causa de la falsa alarma:** `ventas-93` puso el selector de fechas de GA4 en
+  "Jul 1, 2025" sin verificar cuándo se instaló la propiedad. La propiedad se instaló
+  el **27 jul 2026** (~6 semanas de historia real, no 14 meses) y el evento
+  `whatsapp_click` se deployó el **9 sep 2026** (commit `eda047d`) — 2 días antes del
+  reporte. Cero eventos en 2 días no es una anomalía.
+- `ventas-93` confirmó el error y retractó el hallazgo; no se escaló como bug.
+- **Hallazgo secundario, sin cerrar:** en el navegador de prueba usado para la
+  verificación, los tres eventos capturados (`page_view`, `whatsapp_click`, `click`
+  automático de outbound) volvieron con `statusCode 503` desde
+  `google-analytics.com/g/collect`. No parece representativo de tráfico real (la
+  propiedad ya muestra usuarios y page views reales), probablemente algún
+  bloqueador activo en ese entorno de prueba puntual — **NO VERIFICADO** a fondo,
+  no bloqueó nada del trabajo de esta sesión. Si se repite en una prueba futura,
+  investigar.
 
 ---
 
