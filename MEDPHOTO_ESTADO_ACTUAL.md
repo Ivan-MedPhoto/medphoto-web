@@ -790,3 +790,14 @@ muchos deployments (indica que pasó tiempo desde la última limpieza). De paso,
 si `public/` volvió a crecer de forma anormal (`du -sh public`) — la causa de esta vez
 fue justamente un asset de prueba de otro proyecto (`instagram-engine`) commiteado por
 error en `public/`; ese tipo de archivo nunca debería vivir en el repo del sitio.
+
+**NO TOCAR `public/social/test/` antes del 30 sept 2026 (aclarado 14 sept, coordinación
+con `director-a5`/`marketing`).** Pese a el nombre de la carpeta y su peso (150MB), NO
+es material de prueba descartable: son 3 Reels de `instagram-engine` **programados y
+sin publicar todavía** (`justin-james-muir-b30.mp4` → 23 sept, `kirill-umrikhin-beach.mp4`
+→ 16 sept, `meg-loeks-beautydish.mp4` → 30 sept), restaurados por el commit `6a0ad7f`
+tras el incidente del 10 sept. Sus `post.json` en `instagram-engine` apuntan a la URL
+`medphoto.com.co/social/test/...` — mover, renombrar o borrar la carpeta antes de que
+cada Reel se publique rompe ese post (repite exactamente el incidente del 10 sept). Solo
+después del 30 sept, y con los 3 confirmados archivados en `council-ia/Post para
+Instagram/..._Publicado/`, se puede evaluar limpiar o reubicar esta carpeta.
