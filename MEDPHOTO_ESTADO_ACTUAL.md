@@ -15,10 +15,10 @@ de `whatsapp_click` (falsa alarma de `ventas-93` descartada). Ver §10.
 
 > **Instrucción de arranque:** leer este documento antes de iniciar cualquier sesión de trabajo sobre el sitio, tanto en Claude.ai como en Claude Code.
 >
-> **Ubicación canónica:** raíz del repo, versionado en Git. Espejo para sesiones sin
-> acceso al repo (Claude Chat / claude.ai) en Google Drive, carpeta `MedPhoto / Estado
-> de Proyectos (Claude)` — reemplaza al viejo "proyecto de Claude.ai" desde el 24 ago
-> 2026. Ver `PROTOCOLO_SESION_WEB.md` §1.
+> **Ubicación canónica:** raíz del repo, versionado en Git. **Vive solo aquí** — desde
+> el 15 sept 2026 (aprobado por Iván) ya no hay espejo en Google Drive: `director` lee
+> este archivo directo del disco y mantiene el único reporte en la carpeta `MedPhoto /
+> Estado de Proyectos (Claude)`. Ver `PROTOCOLO_SESION_WEB.md` §1.
 
 ---
 

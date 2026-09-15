@@ -157,6 +157,11 @@ No escalar para:
    alguno, clasificar (DATO/CORRECCIÓN/DECISIÓN se integran directo; PROPUESTA se
    pregunta a Iván) e integrarlo antes de seguir — mismo protocolo que
    `instagram-engine` (ver `MEDPHOTO_ESTADO_ACTUAL.md` de ese repo, §7).
+   **(Cambio 15 sept 2026, aprobado por Iván)** Web ya NO sube ni actualiza espejo de
+   su estado en Drive (`MEDPHOTO_ESTADO_ACTUAL_WEB.md` quedó retirado; no volver a
+   crearlo). `MEDPHOTO_ESTADO_ACTUAL.md` es la memoria de web y vive solo en el repo;
+   `director` lo lee directo del disco y mantiene el único reporte en Drive. La
+   carpeta puente se sigue usando solo para recibir `PENDIENTE_INTEGRAR_WEB_*`.
 4. Confirmar rama: `git branch --show-current`.
 5. Activar `/guard` si la sesión toca archivos de configuración o pipelines activos.
 6. Si es trabajo de contenido: confirmar audiencia y pilar antes de escribir.

@@ -13,20 +13,23 @@
 
 **Actualizado 24 ago 2026 — reemplaza el protocolo de pegado manual anterior.**
 
-**Claude Chat ("Chat0"):** antes de opinar sobre cualquier cosa, busca y lee
-`MEDPHOTO_ESTADO_ACTUAL_WEB.md` en la carpeta de Drive `MedPhoto / Estado de Proyectos
-(Claude)` (`https://drive.google.com/drive/folders/1D8-M_V-x9WZlXip3pMs2t8MeqfS9wYKx`).
-El sufijo `_WEB` es solo del espejo en Drive — esa carpeta es compartida entre
-proyectos (web y marketing), así que cada espejo lleva el nombre del proyecto para
-no chocar; el archivo local (`MEDPHOTO_ESTADO_ACTUAL.md`, sin sufijo) no tiene esa
-ambigüedad porque vive solo en este repo. Mismo patrón para `PENDIENTE_INTEGRAR_WEB_*`
-vs `PENDIENTE_INTEGRAR_MARKETING_*`.
-No asumas el estado por chats anteriores — ese doc se actualiza seguido y el espejo
-puede ir un paso detrás del repo si Code no lo sincronizó todavía.
+**Cambio 15 sept 2026 (aprobado por Iván): se retira el espejo de web en Drive.**
+Code ya NO sube ni actualiza `MEDPHOTO_ESTADO_ACTUAL_WEB.md` en Drive (el último
+espejo se movió a "Documentos a borrar"; no se vuelve a crear). Criterio: el
+`MEDPHOTO_ESTADO_ACTUAL.md` del repo es la memoria de web; `director` lo lee directo
+del disco y mantiene el único reporte en Drive. Así no se duplica información ni se
+gastan tokens sincronizando.
+
+**Claude Chat ("Chat0"):** antes de opinar sobre cualquier cosa, lee el reporte de
+`director` en la carpeta de Drive `MedPhoto / Estado de Proyectos (Claude)`
+(`https://drive.google.com/drive/folders/1D8-M_V-x9WZlXip3pMs2t8MeqfS9wYKx`). No
+asumas el estado por chats anteriores. Para mandarle algo a web, Chat0 sigue dejando
+`PENDIENTE_INTEGRAR_WEB_*` en esa carpeta (el sufijo evita choques con
+`PENDIENTE_INTEGRAR_MARKETING_*`, porque la carpeta es compartida).
 
 **Claude Code ("Code"):** al iniciar cualquier sesión en este repo, lee
-`MEDPHOTO_ESTADO_ACTUAL.md` local primero (es la fuente de verdad, no el espejo), y
-revisa si el espejo en Drive quedó desactualizado desde el último cierre de sesión.
+`MEDPHOTO_ESTADO_ACTUAL.md` local (fuente de verdad) y revisa la carpeta puente por
+`PENDIENTE_INTEGRAR_WEB_*` sin procesar para integrarlos.
 
 **Por qué cambió:** el paso anterior — Iván pegando el doc a mano en bloques de 70
 líneas porque Claude.ai no podía leer el repo — fue el mismo punto de falla que causó
@@ -150,7 +153,7 @@ corporativo — el radio de daño incluye el canal de contacto del negocio).
 - Eso **no** corrige la raíz de sesión para skills. Claude Code debe arrancarse
   con `web` (no `medphoto`) o las skills de gstack no cargan.
 - Los pegados largos desde Code **se cortan**. Para el estado del proyecto esto ya no
-  aplica (Chat0 lee el espejo en Drive directo, ver §1). Sigue aplicando a cualquier
+  aplica (Chat0 lee el reporte de `director` en Drive, ver §1). Sigue aplicando a cualquier
   otro pegado largo ad-hoc en el chat: pedir bloques de 70 líneas con `sed -n 'X,Yp'`
   y conteo explícito de cuántas van y cuántas faltan.
 
