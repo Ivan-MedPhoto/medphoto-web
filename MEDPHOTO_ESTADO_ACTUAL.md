@@ -1,11 +1,13 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 14 de septiembre de 2026 — adoptadas dos reglas
-transversales del hub (13 sept: protocolo "Documentos a borrar" en Drive;
-confirmación del modelo activo al arrancar sesión, sin esperar a que Iván lo
-pida). Intento de republicar el espejo de Drive bloqueado por el clasificador
-de auto mode — ver §8 para el hallazgo completo. Modelo activo de esta sesión:
-Sonnet 5.
+**Última actualización:** 14 de septiembre de 2026 — cierre de sesión larga de
+coordinación con `director-a5` e `instagram-engine-f4`: tres reglas
+transversales del hub adoptadas (Documentos a borrar, confirmación de modelo,
+idioma español colombiano — esta última también en `~/.claude/CLAUDE.md`
+global); espejo de Drive republicado; política de assets de campaña de
+Instagram en `public/social/` (borrado periódico); `public/social/test/`
+confirmada intacta hasta el 30 sept (3 Reels sin publicar). Modelo activo de
+esta sesión: Sonnet 5. Ver §8 y §5 punto 17 para el detalle completo.
 Anterior: 11 de septiembre de 2026 — acceso de Lector a GA4 para
 `ivanpb77@gmail.com` (cubre `ventas-93` e `instagram-engine-00`) y verificación en vivo
 de `whatsapp_click` (falsa alarma de `ventas-93` descartada). Ver §10.
@@ -220,6 +222,8 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 
 17. **Limpieza de Deployment Storage en Vercel — cada 3-4 semanas.** Ver §11. Sin poda automática, los deployments se acumulan indefinidamente con cada push a `main`. Correr `npx vercel@latest remove medphoto-web --safe --yes --scope ivans-projects-1d09dbdb` desde una terminal logueada (`npx vercel login` si hace falta) — `--safe` nunca toca la producción activa. Última limpieza: 10 sep 2026 (60 → 1 deployment).
     - **Ampliado 14 sept 2026 — política de assets de campaña de Instagram en `public/social/`.** Decisión de Iván, a raíz de coordinación con `instagram-engine-f4` (concurso Capture One, extensión de plazo): mientras no exista storage externo (Vercel Blob u otro, sin decidir todavía), las imágenes de campañas de Instagram que necesitan URL pública para la API de publicación siguen viviendo en `public/social/<slug>/` del repo del sitio (mismo patrón que `post11-concurso-captureone/`) — **pero con borrado periódico obligatorio**, no indefinido como antes del incidente del 9-10 sept. En la misma sesión de limpieza de deployments (cada 3-4 semanas), revisar `public/social/` y borrar en un commit las carpetas de campañas cuya ventana de necesidad de URL pública ya pasó (la API de Instagram solo necesita la URL una vez, al momento de publicar, para que Instagram copie la imagen a sus propios servidores — no para mantener el post vivo después, salvo que la imagen también esté enlazada desde alguna página del sitio). Sin esto, cada asset de campaña vuelve a empaquetarse en cada deployment nuevo indefinidamente, el mismo problema que causó el incidente de storage.
+    - **Aplicado el mismo día:** `CAPTURE-ONE-23_BTS-2.jpg` (imagen del concurso Capture One, extensión de plazo al 25 sept) subida a `public/social/post-capture-one-extension/`. Iván la movió con Finder desde Descargas (el sandbox de Bash de esta sesión y el `!`-comando bloquean esa carpeta — "Operation not permitted", restricción de macOS, no de Claude Code); llegó con nombre no apto para URL (`CAPTURE-ONE-23_BTS – 2.jpg`, con espacio y guion largo) y se renombró antes del commit. Reglas resultantes: imágenes van directo del Finder a `public/social/<slug>/` (nunca desde Descargas), sin espacios/tildes/guiones largos en el nombre — ver `~/Claude-MedPhoto/hub/MEDPHOTO_ESTADO_ACTUAL.md:160-177`. Verificado en producción con `curl` (200) tras el deploy.
+    - **Regla de idioma reubicada 14 sept:** por decisión de Iván, la regla de español colombiano sin voseo (ver arriba, entrada del 14 sept) vive ahora en `~/.claude/CLAUDE.md` (global, todas las sesiones de Claude Code) además de en el `CLAUDE.md` de este repo — verificado con `grep` en ambos archivos.
 
 ---
 
