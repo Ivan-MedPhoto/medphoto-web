@@ -26,6 +26,13 @@ Sitio: medphoto.com.co
 
 Nunca mezclar tonos en el mismo piece de contenido. Definir audiencia antes de escribir cualquier copy.
 
+### Idioma (BINDING, decisión de Iván 11 sept 2026)
+
+Español colombiano, sin voseo argentino ("vos"/"tenés"/"acá") — tanto en mensajes
+con Iván como entre agentes (`SendMessage`) y en los documentos de estado. Aplica
+a los cinco agentes de MedPhoto (`web`, `marketing`, `ventas`, `factura`,
+`director`). Ver `~/Claude-MedPhoto/hub/MEDPHOTO_ESTADO_ACTUAL.md:153-159`.
+
 ---
 
 ## 3. PILARES DE CONTENIDO (BINDING)

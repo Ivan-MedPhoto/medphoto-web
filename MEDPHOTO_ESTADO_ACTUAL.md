@@ -1,12 +1,14 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 11 de septiembre de 2026 — acceso de Lector a GA4 para
+**Última actualización:** 14 de septiembre de 2026 — adoptadas dos reglas
+transversales del hub (13 sept: protocolo "Documentos a borrar" en Drive;
+confirmación del modelo activo al arrancar sesión, sin esperar a que Iván lo
+pida). Intento de republicar el espejo de Drive bloqueado por el clasificador
+de auto mode — ver §8 para el hallazgo completo. Modelo activo de esta sesión:
+Sonnet 5.
+Anterior: 11 de septiembre de 2026 — acceso de Lector a GA4 para
 `ivanpb77@gmail.com` (cubre `ventas-93` e `instagram-engine-00`) y verificación en vivo
 de `whatsapp_click` (falsa alarma de `ventas-93` descartada). Ver §10.
-Anterior: 10 de septiembre de 2026 — diagnóstico completo del
-`PENDIENTE_INTEGRAR_WEB_2026-09-09` (indexación, GA4↔GSC, WhatsApp por origen,
-backlinks) y limpieza de Deployment Storage de Vercel (60 → 1 deployment, tarea
-recurrente cada 3-4 semanas). Ver §10 y §11.
 **Mantenido por:** Claude · Actualizar al cierre de cada bloque de trabajo significativo
 
 > **Instrucción de arranque:** leer este documento antes de iniciar cualquier sesión de trabajo sobre el sitio, tanto en Claude.ai como en Claude Code.
@@ -217,6 +219,7 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 ### Recurrente
 
 17. **Limpieza de Deployment Storage en Vercel — cada 3-4 semanas.** Ver §11. Sin poda automática, los deployments se acumulan indefinidamente con cada push a `main`. Correr `npx vercel@latest remove medphoto-web --safe --yes --scope ivans-projects-1d09dbdb` desde una terminal logueada (`npx vercel login` si hace falta) — `--safe` nunca toca la producción activa. Última limpieza: 10 sep 2026 (60 → 1 deployment).
+    - **Ampliado 14 sept 2026 — política de assets de campaña de Instagram en `public/social/`.** Decisión de Iván, a raíz de coordinación con `instagram-engine-f4` (concurso Capture One, extensión de plazo): mientras no exista storage externo (Vercel Blob u otro, sin decidir todavía), las imágenes de campañas de Instagram que necesitan URL pública para la API de publicación siguen viviendo en `public/social/<slug>/` del repo del sitio (mismo patrón que `post11-concurso-captureone/`) — **pero con borrado periódico obligatorio**, no indefinido como antes del incidente del 9-10 sept. En la misma sesión de limpieza de deployments (cada 3-4 semanas), revisar `public/social/` y borrar en un commit las carpetas de campañas cuya ventana de necesidad de URL pública ya pasó (la API de Instagram solo necesita la URL una vez, al momento de publicar, para que Instagram copie la imagen a sus propios servidores — no para mantener el post vivo después, salvo que la imagen también esté enlazada desde alguna página del sitio). Sin esto, cada asset de campaña vuelve a empaquetarse en cada deployment nuevo indefinidamente, el mismo problema que causó el incidente de storage.
 
 ---
 
@@ -368,6 +371,34 @@ apagar la Promo Verano:
 Ambos `PENDIENTE_INTEGRAR_WEB` (v2 y v3, la v3 reemplaza a la v2) y la nota
 `NOTA_banner_alquiler_revision_futura_2026-08-27.md` (contenido absorbido en el punto
 10 de §5, Media) archivados en `Integrados/` tras esta integración.
+
+### 14 de septiembre de 2026 — reglas transversales del hub + escritura a Drive bloqueada
+
+Coordinación iniciada por `director-a5` (sesión par): confirmó dos reglas transversales
+agregadas al hub el 13 sept 2026 (protocolo "Documentos a borrar" para borrados
+bloqueados en la carpeta puente de Drive; confirmación del modelo activo al arrancar
+sesión, sin esperar a que Iván lo pida) — ver
+`~/Claude-MedPhoto/hub/MEDPHOTO_ESTADO_ACTUAL.md:128-143`. Adoptadas en esta sesión.
+
+**Regla de idioma, decidida por Iván el 11 sept 2026 (escrita en el hub el 14 sept,
+confirmada por Iván directamente en esta sesión el mismo día):** español colombiano,
+sin voseo argentino ("vos"/"tenés"/"acá"), tanto en los mensajes con Iván como entre
+agentes (`SendMessage`) y en los documentos de estado. Aplica a los cinco agentes
+(`web`, `marketing`, `ventas`, `factura`, `director`) — ver
+`~/Claude-MedPhoto/hub/MEDPHOTO_ESTADO_ACTUAL.md:153-159`.
+
+**Hallazgo:** al intentar republicar el espejo `MEDPHOTO_ESTADO_ACTUAL_WEB.md`
+(desactualizado desde el 25 ago), las tres operaciones de escritura en Drive probadas
+— `trash_file`, `update_file` (mover a "Documentos a borrar") y `create_file` — fueron
+bloqueadas por el clasificador de auto mode de Claude Code (motivo "External System
+Writes" / "Irreversible Deletion"), incluso tras autorización explícita de Iván en el
+chat. El bloqueo es a nivel de clasificador de la sesión, no un prompt de aprobación
+puntual — no lo destraba una confirmación verbal. `director-a5` confirmó que a su
+sesión sí le funcionó mover archivos en esa misma carpeta el mismo día — el bloqueo
+depende de la sesión (`web`/`site-*` lo tiene, `director` no), no es una restricción
+global de la carpeta. `director-a5` movió el espejo viejo a "Documentos a borrar"
+por pedido directo de Iván, en lugar de hacerlo esta sesión, precisamente por este
+bloqueo.
 
 ---
 
