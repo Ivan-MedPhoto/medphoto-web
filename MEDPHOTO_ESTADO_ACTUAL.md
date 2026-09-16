@@ -53,7 +53,7 @@ El comando `vercel --prod` del CLI **no** actualiza producción.
 
 ### Hosting secundario — Dongee
 
-Dongee (Plan GO!, IP 192.99.84.39, directorio `/home/adminirp`) **ya no sirve al sitio web**, pero sigue alojando el **correo corporativo** (`contacto@medphoto.com.co`).
+Dongee (Plan GO!, IP 192.99.84.39, directorio `/home/adminirp`) **ya no sirve al sitio web**, pero sigue alojando el **correo corporativo** (`contacto@medphoto.com.co`) y el **DNS autoritativo del dominio** (NS `ns1/ns2/ns3.dongee.com` — ahí viven los registros que apuntan a Vercel). Auditoría completa de qué se usa y qué no: **§12**.
 
 > **Regla:** no dar acceso SSH ni de base de datos a agentes sobre este servidor. El radio de daño incluye el correo del negocio. Todo lo necesario del WordPress legacy se obtuvo por vías públicas (ver §4).
 
@@ -805,3 +805,147 @@ tras el incidente del 10 sept. Sus `post.json` en `instagram-engine` apuntan a l
 cada Reel se publique rompe ese post (repite exactamente el incidente del 10 sept). Solo
 después del 30 sept, y con los 3 confirmados archivados en `council-ia/Post para
 Instagram/..._Publicado/`, se puede evaluar limpiar o reubicar esta carpeta.
+
+---
+
+## 12. Dongee — auditoría de qué usamos y qué no (15 sept 2026)
+
+Motivo: a raíz del aviso de Vercel por Deployment Storage (§11) surgió la pregunta de si
+convenía mover el sitio a Dongee para no pagar Vercel Pro. Se auditó la cuenta completa
+desde el panel (`manager.dongee.com`) y desde cPanel, con autorización explícita de Iván.
+
+### 12.1 Servicios contratados
+
+| Servicio | Precio | Renueva | Estado |
+|---|---|---|---|
+| Hosting Dongee — **DONGEE GO!** (medphoto.com.co) | 420.000 COP/año | 17/02/2027 | Activo |
+| Dongee CDN — 50 GB mensuales | 180.000 COP/año | 22/11/2026 | **Cancelado** (ver §12.5) |
+
+Cliente desde el **17/02/2022**; el primer pago fue de 300.000 COP, o sea que el precio ya
+subió una vez. **DONGEE GO! es un plan heredado**: no existe en el catálogo actual
+(hoy venden Startup 480.000 COP/año con 100 GB, Quantum 876.000 COP/año con 250 GB, y
+Business a la medida). Si se cancela, ese precio no se recupera.
+
+### 12.2 Recursos reales (cPanel, servidor `wapeka.dongee.com`, IP 192.99.84.39, `/home/adminirp`)
+
+| Recurso | Uso | Límite |
+|---|---|---|
+| Disco | 9,36 GB | 25 GB (37%) |
+| Archivos (inodos) | 106.342 | 250.000 (42%) |
+| Memoria RAM | 138 MB | 2 GB |
+| Banda ancha | 2,63 GB | Ilimitada |
+| Cuentas de correo | 9 | 30 |
+| Bases de datos MySQL | 4 | 20 |
+| Dominios adicionales | 1 | 10 |
+| CPU / IOPS / Procesos | 0% | 100 / 1.024 / 180 |
+
+Desglose del disco (13.041 MB en el detalle; la línea de cuota reporta 9.511 MB por
+compresión y hardlinks del correo):
+
+- **`mail/` — 10.464 MB** ← el 80% del consumo de la cuenta
+- `public_html/` — 1.583 MB (WordPress legacy de .co)
+- `medphoto.com.mx/` — 719 MB
+- `tmp/` 147 MB · `etc/` 34 MB · Bases de datos 77 MB · `logs/` 6,6 MB
+
+### 12.3 Qué SÍ usamos
+
+1. **Correo corporativo** — es el uso real del servicio. 10,2 GB, 9 cuentas activas.
+   MX → `mail.medphoto.com.co` → 192.99.84.39. El SPF autoriza
+   `+ip4:192.99.84.39 +include:_spf.dongee.com`.
+2. **DNS autoritativo del dominio** — NS: `ns1/ns2/ns3.dongee.com`. Ahí viven los
+   registros que apuntan a Vercel (A `76.76.21.21`, CNAME `cname.vercel-dns.com`) y el
+   TXT de verificación de Google Search Console. **Cancelar Dongee sin migrar antes la
+   zona DNS tumbaría el sitio y el correo al mismo tiempo.**
+3. **`medphoto.com.mx`** — WordPress vivo y público (HTTP 200, PHP 7.4.33), 719 MB de
+   archivos + BD `adminirp_184_mx` (22,35 MB). **Se conserva a propósito**: es la opción
+   de impulsar **MedPhoto México**, hoy funcional de forma muy básica (decisión de Iván,
+   15 sept 2026). NO es candidato a limpieza por más que parezca un sitio abandonado.
+
+### 12.4 Qué NO usamos
+
+4. **El hosting web como tal.** El sitio se sirve 100% desde Vercel. No se usan Node.js,
+   Git, SSH, cron, Softaculous ni 19 de las 20 bases de datos disponibles.
+5. **El WordPress legacy de medphoto.com.co** en `public_html/` — 1.583 MB, más las BD
+   `adminirp_wp184` (52,71 MB), `adminirp_wp383` (1 MB) y `adminirp_wp419` (896 KB).
+   Corre con **PHP 7.4.33**, sin soporte desde noviembre de 2022. No es alcanzable por el
+   dominio principal (el DNS manda a Vercel); `mail.medphoto.com.co` responde 301 hacia
+   `https://medphoto.com.co`, servido por ese mismo PHP. Ver §12.6.
+6. **El CDN** — 11,45 kB de tráfico consumidos en casi 3 años, y cero referencias a
+   `b-cdn.net` en el repo. Nunca se integró.
+
+### 12.5 Node.js sí está disponible — corrige el análisis previo
+
+cPanel → Software → **"Setup Node.js App"** está activo (sin aplicaciones creadas).
+Versiones que ofrece el servidor: `10.24.1`, `14.21.3`, `16.20.2` (marcada como
+recomendada), `18.20.8` y **`22.23.2`**. Next.js 16.2.4 exige **Node >= 20.9.0**
+(`node_modules/next/package.json`), así que **la única versión compatible es 22.23.2**.
+También están disponibles Git Version Control, Terminal, acceso SSH, cron y JetBackup 5.
+
+**Conclusión: no conviene mover el sitio a Dongee.** Es técnicamente viable —más de lo
+que se suponía— pero el ahorro frente a hoy es **cero**, porque Vercel Hobby no cuesta
+nada; el ahorro solo existiría contra el escenario de pagar Pro. A cambio se asumiría:
+una sola versión de Node compatible (si Dongee retira la 22, el sitio cae), Next.js sobre
+Passenger/LSAPI sin que nadie lo haya probado (**NO VERIFICADO**), pérdida del deploy por
+`git push`, pérdida de la optimización de `next/image` tal como funciona hoy, y todo
+alojado en el mismo servidor que el correo del negocio.
+
+### 12.6 CDN cancelado (15 sept 2026)
+
+Solicitud enviada desde el panel con modalidad **"Fin del periodo de contratación"** (no
+inmediata), para que el servicio corra hasta donde ya está pagado. Confirmado por correo
+de Dongee: *"El servicio será terminado cuando termine el período de facturación actual.
+22/11/2026."* No se pidió reembolso. **Ahorro: 180.000 COP/año** a partir de esa fecha.
+Costo de Dongee tras la cancelación: **420.000 COP/año**.
+
+### 12.7 WordPress legacy en `public_html/` — borrado PENDIENTE, NO ejecutado
+
+**Estado al 15 sept 2026: no se borró absolutamente nada.** Decisión de Iván: parar y
+validar primero con el chat de soporte de Dongee, para tener certeza del 100% antes de
+tocar el servidor del correo. Retomar desde aquí.
+
+Contenido verificado de `/home/adminirp/public_html` (1.583 MB):
+
+- **Carpetas:** `.well-known/` (50 bytes, 1 may 2022), `wp/`, `wp-admin/`, `wp-content/`
+  (modificada *hoy*), `wp-includes/`
+- **Archivos:** `.htaccess` (3,02 KB), `.lsphp_flag`, `error_log` (**73,91 MB, modificado
+  hoy 22:58**), `index.php`, `license.txt`, `lsphp.conf`, `readme.html`,
+  `sphp_index.php`, `wp-activate.php`, `wp-blog-header.php`, `wp-comments-post.php`,
+  `wp-config-sample.php`, `wp-config.php`, `wp-cron.php`, `wp-links-opml.php`,
+  `wp-load.php`, `wp-login.php` (**50,23 KB**), `wp-mail.php`, `wp-settings.php`,
+  `wp-signup.php`, `wp-trackback.php`, `xmlrpc.php`
+- **Bases de datos asociadas:** `adminirp_wp184` (52,71 MB), `adminirp_wp383` (1 MB),
+  `adminirp_wp419` (896 KB)
+
+#### Indicios de posible compromiso — resolver ANTES de borrar
+
+1. `error_log` de **73,91 MB modificado el mismo día** → algo está golpeando esa
+   instalación activamente, pese a que el DNS del dominio apunta a Vercel.
+2. `wp-login.php` de **50,23 KB**; el archivo original de WordPress pesa ~5 KB.
+3. `sphp_index.php` y la carpeta `wp/` **no son parte de una instalación estándar**.
+4. PHP **7.4.33**, sin soporte desde noviembre de 2022.
+
+Si efectivamente está comprometido, borrar los archivos **no basta**: habría que revisar
+también el sitio `.mx` (mismo servidor), rotar contraseñas de correo y cPanel, y pedirle
+a Dongee un escaneo (la cuenta tiene Imunify360 y Monarx Security disponibles).
+
+#### Condiciones de seguridad YA verificadas (válidas para cuando se ejecute)
+
+- `medphoto.com.mx` tiene **document root propio** `/medphoto.com.mx` (cPanel → Dominios),
+  no cuelga de `public_html` → no se afecta.
+- El correo vive en `mail/` y se accede por **puertos propios** (webmail 2096, cPanel
+  2083, ambos responden 200) → no depende de `public_html`.
+- **No hay tareas cron** ("No hay trabajos de cron") → borrar no deja procesos huérfanos.
+- **JetBackup 5: 7 puntos de restauración** del Home Directory (1,91 GB c/u), del 15, 14,
+  13, 12 y 6 sept y 30 y 23 ago 2026, incrementales hacia `s3-backup` → hay reversa real,
+  y el del 15 sept ya capturó el estado actual (sirve como evidencia si hubo compromiso).
+- **Conservar `.well-known/`**: AutoSSL la usa para validar y renovar certificados,
+  incluido el de `webmail.medphoto.com.co`. Borrar el contenido, no el directorio
+  `public_html` en sí.
+
+#### Nota de procedimiento (trampa encontrada)
+
+El Administrador de archivos de cPanel **abre un campo de renombrado** al hacer clic
+sobre el nombre de una fila que ya está seleccionada. Para seleccionar sin ese riesgo:
+clic en la primera fila deseada + **shift+clic** en la última (selección por rango), en
+vez de "Seleccionar todo" y deseleccionar con cmd+clic. En esta sesión se abrió ese campo
+dos veces y se canceló con Escape: **no se renombró ni se borró ningún archivo**.
