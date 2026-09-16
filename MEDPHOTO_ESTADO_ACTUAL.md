@@ -1,16 +1,26 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 14 de septiembre de 2026 — cierre de sesión larga de
-coordinación con `director-a5` e `instagram-engine-f4`: tres reglas
-transversales del hub adoptadas (Documentos a borrar, confirmación de modelo,
-idioma español colombiano — esta última también en `~/.claude/CLAUDE.md`
-global); espejo de Drive republicado; política de assets de campaña de
-Instagram en `public/social/` (borrado periódico); `public/social/test/`
-confirmada intacta hasta el 30 sept (3 Reels sin publicar). Modelo activo de
-esta sesión: Sonnet 5. Ver §8 y §5 punto 17 para el detalle completo.
-Anterior: 11 de septiembre de 2026 — acceso de Lector a GA4 para
-`ivanpb77@gmail.com` (cubre `ventas-93` e `instagram-engine-00`) y verificación en vivo
-de `whatsapp_click` (falsa alarma de `ventas-93` descartada). Ver §10.
+**Última actualización:** 15 de septiembre de 2026 — sesión de infraestructura y costos.
+**(1) Vercel:** se diagnosticó el aviso de 100% de Deployment Storage. Los 10,41 GB los
+generan ~52 deployments borrados el 10 sept que **siguen contando durante su ventana de
+recuperación de 30 días**; bajan solos entre el 7 y el 9 de octubre y no hay forma
+autogestionada de purgarlos antes (solo hay "Restore", no borrado permanente). El sitio
+nunca dejó de funcionar y los deployments siguieron saliendo por encima del límite.
+Ver §11. **(2) Protocolo:** web deja de subir espejo a Drive — este archivo vive solo en
+el repo y `director` lo lee directo del disco (actualizado `CLAUDE.md` §10 y
+`PROTOCOLO_SESION_WEB.md` §1 y §6). **(3) Dongee:** auditoría completa de la cuenta
+(§12) — el plan se usa de hecho como servidor de correo (10,2 GB de 13 GB) y DNS
+autoritativo; CDN cancelado a fin de periodo (**ahorro 180.000 COP/año** desde el
+22/11/2026, confirmado por correo de Dongee); borrado del WordPress legacy **pendiente**
+de validar con soporte por indicios de posible compromiso (§12.7, §5 punto 18).
+Conclusión: **no conviene mover el sitio a Dongee**. Dos commits locales **sin push**
+(`ea18912`, `f58d0ec`) para no generar deployments nuevos mientras el storage esté al
+tope. Modelo activo de esta sesión: Opus 5.
+Anterior: 14 de septiembre de 2026 — tres reglas transversales del hub adoptadas
+(Documentos a borrar, confirmación de modelo, idioma español colombiano, esta última
+también en `~/.claude/CLAUDE.md` global); política de assets de campaña de Instagram en
+`public/social/` (borrado periódico); `public/social/test/` confirmada intacta hasta el
+30 sept (3 Reels sin publicar). Ver §8 y §5 punto 17.
 **Mantenido por:** Claude · Actualizar al cierre de cada bloque de trabajo significativo
 
 > **Instrucción de arranque:** leer este documento antes de iniciar cualquier sesión de trabajo sobre el sitio, tanto en Claude.ai como en Claude Code.
@@ -218,12 +228,17 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 
 **Ya corregido de esa misma auditoría Seobility (commit `40589ab`):** título del home acortado (602px→54 caracteres, ya no queda cortado a mitad de frase), canonical agregado al home (única página que no lo tenía), espaciado del H1 corregido (se extraía como "quelos mejoresusan" sin espacios), encabezado duplicado corregido (hero repetido como H2+H3, y "Distribuidores Oficiales" repetido en dos secciones — la segunda se renombró a "Nuestras Marcas").
 
+### Abierto — servidor de Dongee
+
+18. **Borrar el WordPress legacy de `public_html/` — PENDIENTE de validar con soporte de Dongee (15 sept 2026).** 1.583 MB de archivos más 3 bases de datos (`adminirp_wp184`, `adminirp_wp383`, `adminirp_wp419`), corriendo con PHP 7.4.33 sin soporte, en el mismo servidor que el correo corporativo. Iván autorizó borrarlo si no afectaba nada; **se detuvo antes de ejecutar** al aparecer indicios de posible compromiso (`error_log` de 73,91 MB modificado el mismo día, `wp-login.php` de 50,23 KB contra ~5 KB del original, `sphp_index.php` y carpeta `wp/` fuera de una instalación estándar). Decisión de Iván: hablar primero con el chat de soporte de Dongee para tener certeza del 100%. **No se borró ni se renombró nada.** El detalle completo —contenido exacto del directorio, condiciones de seguridad ya verificadas (el sitio `.mx` tiene raíz propia, el correo no depende de `public_html`, no hay cron, hay 7 puntos de restauración en JetBackup) y la trampa de renombrado del File Manager— está en **§12.7**. Preguntas concretas para soporte: (a) ¿pueden escanear la cuenta con Imunify360 antes de borrar?; (b) ¿confirman que borrar el contenido de `public_html` conservando `.well-known/` no afecta el certificado de `webmail.medphoto.com.co`?; (c) ¿tiene explicación benigna que el `error_log` siga creciendo hoy?
+
 ### Recurrente
 
 17. **Limpieza de Deployment Storage en Vercel — cada 3-4 semanas.** Ver §11. Sin poda automática, los deployments se acumulan indefinidamente con cada push a `main`. Correr `npx vercel@latest remove medphoto-web --safe --yes --scope ivans-projects-1d09dbdb` desde una terminal logueada (`npx vercel login` si hace falta) — `--safe` nunca toca la producción activa. Última limpieza: 10 sep 2026 (60 → 1 deployment).
     - **Ampliado 14 sept 2026 — política de assets de campaña de Instagram en `public/social/`.** Decisión de Iván, a raíz de coordinación con `instagram-engine-f4` (concurso Capture One, extensión de plazo): mientras no exista storage externo (Vercel Blob u otro, sin decidir todavía), las imágenes de campañas de Instagram que necesitan URL pública para la API de publicación siguen viviendo en `public/social/<slug>/` del repo del sitio (mismo patrón que `post11-concurso-captureone/`) — **pero con borrado periódico obligatorio**, no indefinido como antes del incidente del 9-10 sept. En la misma sesión de limpieza de deployments (cada 3-4 semanas), revisar `public/social/` y borrar en un commit las carpetas de campañas cuya ventana de necesidad de URL pública ya pasó (la API de Instagram solo necesita la URL una vez, al momento de publicar, para que Instagram copie la imagen a sus propios servidores — no para mantener el post vivo después, salvo que la imagen también esté enlazada desde alguna página del sitio). Sin esto, cada asset de campaña vuelve a empaquetarse en cada deployment nuevo indefinidamente, el mismo problema que causó el incidente de storage.
     - **Aplicado el mismo día:** `CAPTURE-ONE-23_BTS-2.jpg` (imagen del concurso Capture One, extensión de plazo al 25 sept) subida a `public/social/post-capture-one-extension/`. Iván la movió con Finder desde Descargas (el sandbox de Bash de esta sesión y el `!`-comando bloquean esa carpeta — "Operation not permitted", restricción de macOS, no de Claude Code); llegó con nombre no apto para URL (`CAPTURE-ONE-23_BTS – 2.jpg`, con espacio y guion largo) y se renombró antes del commit. Reglas resultantes: imágenes van directo del Finder a `public/social/<slug>/` (nunca desde Descargas), sin espacios/tildes/guiones largos en el nombre — ver `~/Claude-MedPhoto/hub/MEDPHOTO_ESTADO_ACTUAL.md:160-177`. Verificado en producción con `curl` (200) tras el deploy.
     - **Regla de idioma reubicada 14 sept:** por decisión de Iván, la regla de español colombiano sin voseo (ver arriba, entrada del 14 sept) vive ahora en `~/.claude/CLAUDE.md` (global, todas las sesiones de Claude Code) además de en el `CLAUDE.md` de este repo — verificado con `grep` en ambos archivos.
+    - **CORRECCIÓN IMPORTANTE, 15 sept 2026 — borrar deployments NO libera el espacio de inmediato.** Verificado en el panel de Vercel: un deployment borrado entra en una **ventana de recuperación de 30 días** (visible en *Settings → Security → Recently Deleted Deployments*, con su cuenta regresiva) y **sigue ocupando Deployment Storage** hasta que se cumple el plazo; el menú de esos deployments solo ofrece "View Source" y "Restore", **no existe purga permanente autogestionada**. Por eso la limpieza del 10 sept (60 → 1 deployment) no hizo bajar la cifra y el 15 sept se llegó al 100% del free tier. Consecuencia práctica: la limpieza sigue valiendo la pena, pero **su efecto se ve 30 días después**, no el mismo día. Planear con esa demora y no repetir la limpieza esperando un alivio inmediato.
 
 ---
 
