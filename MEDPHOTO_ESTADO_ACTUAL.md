@@ -1,6 +1,19 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 15 de septiembre de 2026 — sesión de infraestructura y costos.
+**Última actualización:** 16 de septiembre de 2026 — cierre del día sin trabajo nuevo en
+el sitio. No hubo commits, cambios de código, deploys ni contacto con soporte de Dongee
+hoy; web solo atendió el pedido de cierre de `director`. Estado al cierre: `main` va
+**3 commits adelante** de `origin/main` sin push (`ea18912`, `f58d0ec` y el cierre
+`76da4fe` — el texto del 15 sept decía "dos" porque se escribió antes del commit de
+cierre), árbol limpio (`git status`). Se mantiene retenido el push mientras Vercel siga
+al tope de storage. Deployment Storage de Vercel **no se volvió a revisar hoy** (NO
+VERIFICADO desde el 15 sept; la baja esperada sigue siendo 7-9 oct). WordPress legacy
+de Dongee: **sigue sin validar con soporte** — nada borrado (§12.7, §5 punto 18).
+Reel `kirill-umrikhin-beach` publicado hoy 3:21 p.m. (confirmado por `director`, Post_14).
+Fechas próximas: 23 y 30 sept, Reels restantes de `public/social/test/` (no tocar la carpeta); 25 sept,
+cierre del concurso Capture One (asset en `public/social/post-capture-one-extension/`);
+7-9 oct, baja de storage en Vercel; 22/11, fin del CDN de Dongee.
+Anterior: 15 de septiembre de 2026 — sesión de infraestructura y costos.
 **(1) Vercel:** se diagnosticó el aviso de 100% de Deployment Storage. Los 10,41 GB los
 generan ~52 deployments borrados el 10 sept que **siguen contando durante su ventana de
 recuperación de 30 días**; bajan solos entre el 7 y el 9 de octubre y no hay forma
@@ -13,8 +26,8 @@ el repo y `director` lo lee directo del disco (actualizado `CLAUDE.md` §10 y
 autoritativo; CDN cancelado a fin de periodo (**ahorro 180.000 COP/año** desde el
 22/11/2026, confirmado por correo de Dongee); borrado del WordPress legacy **pendiente**
 de validar con soporte por indicios de posible compromiso (§12.7, §5 punto 18).
-Conclusión: **no conviene mover el sitio a Dongee**. Dos commits locales **sin push**
-(`ea18912`, `f58d0ec`) para no generar deployments nuevos mientras el storage esté al
+Conclusión: **no conviene mover el sitio a Dongee**. Commits locales **sin push**
+(`ea18912`, `f58d0ec`, más el cierre `76da4fe`) para no generar deployments nuevos mientras el storage esté al
 tope. Modelo activo de esta sesión: Opus 5.
 Anterior: 14 de septiembre de 2026 — tres reglas transversales del hub adoptadas
 (Documentos a borrar, confirmación de modelo, idioma español colombiano, esta última
@@ -814,7 +827,7 @@ error en `public/`; ese tipo de archivo nunca debería vivir en el repo del siti
 con `director-a5`/`marketing`).** Pese a el nombre de la carpeta y su peso (150MB), NO
 es material de prueba descartable: son 3 Reels de `instagram-engine` **programados y
 sin publicar todavía** (`justin-james-muir-b30.mp4` → 23 sept, `kirill-umrikhin-beach.mp4`
-→ 16 sept, `meg-loeks-beautydish.mp4` → 30 sept), restaurados por el commit `6a0ad7f`
+→ 16 sept (**publicado** 16 sept 3:21 p.m., https://www.instagram.com/reel/DdXIZDICWCp/, archivado por marketing como Post_14 — confirmado por `director`), `meg-loeks-beautydish.mp4` → 30 sept), restaurados por el commit `6a0ad7f`
 tras el incidente del 10 sept. Sus `post.json` en `instagram-engine` apuntan a la URL
 `medphoto.com.co/social/test/...` — mover, renombrar o borrar la carpeta antes de que
 cada Reel se publique rompe ese post (repite exactamente el incidente del 10 sept). Solo
