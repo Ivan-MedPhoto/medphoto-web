@@ -10,6 +10,10 @@ al tope de storage. Deployment Storage de Vercel **no se volvió a revisar hoy**
 VERIFICADO desde el 15 sept; la baja esperada sigue siendo 7-9 oct). WordPress legacy
 de Dongee: **sigue sin validar con soporte** — nada borrado (§12.7, §5 punto 18).
 Reel `kirill-umrikhin-beach` publicado hoy 3:21 p.m. (confirmado por `director`, Post_14).
+El 17 sept se evaluó en papel **Chrome DevTools MCP** a pedido de `director`: recomendación
+de web = **no instalar por ahora** (se solapa con Playwright/`/benchmark`/Lighthouse y no
+resuelve ningún pendiente); decisión de Iván, pendiente. Ver §5 punto 19. Sin cambios de
+código ni deploys en ninguno de los dos días.
 Fechas próximas: 23 y 30 sept, Reels restantes de `public/social/test/` (no tocar la carpeta); 25 sept,
 cierre del concurso Capture One (asset en `public/social/post-capture-one-extension/`);
 7-9 oct, baja de storage en Vercel; 22/11, fin del CDN de Dongee.
@@ -244,6 +248,8 @@ Recuperado el 26 jul 2026 desde el **índice público del Internet Archive (CDX 
 ### Abierto — servidor de Dongee
 
 18. **Borrar el WordPress legacy de `public_html/` — PENDIENTE de validar con soporte de Dongee (15 sept 2026).** 1.583 MB de archivos más 3 bases de datos (`adminirp_wp184`, `adminirp_wp383`, `adminirp_wp419`), corriendo con PHP 7.4.33 sin soporte, en el mismo servidor que el correo corporativo. Iván autorizó borrarlo si no afectaba nada; **se detuvo antes de ejecutar** al aparecer indicios de posible compromiso (`error_log` de 73,91 MB modificado el mismo día, `wp-login.php` de 50,23 KB contra ~5 KB del original, `sphp_index.php` y carpeta `wp/` fuera de una instalación estándar). Decisión de Iván: hablar primero con el chat de soporte de Dongee para tener certeza del 100%. **No se borró ni se renombró nada.** El detalle completo —contenido exacto del directorio, condiciones de seguridad ya verificadas (el sitio `.mx` tiene raíz propia, el correo no depende de `public_html`, no hay cron, hay 7 puntos de restauración en JetBackup) y la trampa de renombrado del File Manager— está en **§12.7**. Preguntas concretas para soporte: (a) ¿pueden escanear la cuenta con Imunify360 antes de borrar?; (b) ¿confirman que borrar el contenido de `public_html` conservando `.well-known/` no afecta el certificado de `webmail.medphoto.com.co`?; (c) ¿tiene explicación benigna que el `error_log` siga creciendo hoy?
+
+19. **Chrome DevTools MCP — EVALUADO 17 sept 2026, recomendación: no instalar por ahora. Decisión de Iván, pendiente.** Consulta traída por `director`. Lo que ofrece (trazas de rendimiento con análisis, Lighthouse, red y consola con stack traces mapeados a fuente, Puppeteer) no resuelve ningún pendiente actual: en §5 no hay ningún punto de Core Web Vitals ni de velocidad (verificado con `grep -i -E "lighthouse|web vitals|LCP|CLS|INP|pagespeed|velocidad"` — el único hit de "rendimiento" es §10, que es de clics/impresiones en Search Console, no de carga). Lo pendiente de SEO técnico es copy (puntos 14 y 15), no medición. Además se solapa con lo ya instalado: Playwright, la skill `/benchmark` de gstack (Core Web Vitals, tiempos de carga, peso de recursos, comparación antes/después), `/seo-audit`, y Lighthouse corrible con `npx` sin plugin. Riesgos señalados: telemetría activa por defecto (`--no-usage-statistics` la apaga) y `--autoConnect`, que se engancha al Chrome real de Iván con sus sesiones (más el issue #1149: como plugin abre un Chrome nuevo en vez de conectarse). Si Iván quiere auditoría de velocidad, **medir no requiere push ni deployment** (se hace contra producción, así que el tope de Vercel no lo bloquea): primero una pasada con `/benchmark` o Lighthouse vía `npx`, y solo si aparece un problema real (p. ej. LCP alto en fichas de producto) reevaluar DevTools MCP en navegador aislado, sin `autoConnect` y sin telemetría.
 
 ### Recurrente
 
