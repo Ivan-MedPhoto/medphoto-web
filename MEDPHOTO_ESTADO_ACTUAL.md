@@ -1,22 +1,37 @@
 # MEDPHOTO — ESTADO ACTUAL DEL SITIO WEB
 
-**Última actualización:** 16 de septiembre de 2026 — cierre del día sin trabajo nuevo en
+**Última actualización:** 21 de septiembre de 2026 — corrección de encabezado desactualizado
+(quedó fechado "16 de septiembre" con "3 commits adelante" pese a que el commit `a996ae9`
+del 18 sept ya lo había modificado sin actualizar esta línea) más nueva tarea pendiente.
+**Verificado ahora con `git status` / `git log`:** `main` va **5 commits adelante** de
+`origin/main`, árbol limpio: `ea18912`, `f58d0ec`, `76da4fe`, `4658f0c`, `a996ae9` (los
+mismos 5 reportados a `director` el 17 sept). Push sigue retenido por el tope de storage
+de Vercel; recuperación esperada 7-9 oct (NO VERIFICADO desde el 15 sept — no se ha vuelto
+a revisar el panel). **Tarea nueva pendiente de `director`/`marketing` (lun 21):** carrusel
+`post15-kirill-final` — 3 imágenes (`kirill-final-01-salto.jpg`, `kirill-final-02-muelle.jpg`
+con transparencia a fondo negro/recorte NUNCA blanco, `kirill-final-03-playa.jpg`) a
+`public/social/post15-kirill-final/`, JPEG ≤8MB, 320-1440px ancho, sRGB, 4:5 a 1.91:1,
+las 3 con la misma proporción (1440x1080 o 4:5). Bloqueada en: (1) Iván debe bajar los 3
+originales de Pickit y pasarlos a esta sesión; (2) el push que los publica requiere
+autorización explícita de Iván por el tope de storage de Vercel arriba mencionado — no
+verificado si ya bajó del tope. Tooling de conversión disponible en el equipo: `ffmpeg`
+(sí), `sips` (sí); `sharp`/ImageMagick NO instalados. Ver §5 para el resto de pendientes.
+Fechas próximas: 23 y 30 sept, Reels restantes de `public/social/test/` (no tocar la carpeta); 25 sept,
+cierre del concurso Capture One (asset en `public/social/post-capture-one-extension/`);
+7-9 oct, baja de storage en Vercel; 22/11, fin del CDN de Dongee.
+Anterior: 16 de septiembre de 2026 — cierre del día sin trabajo nuevo en
 el sitio. No hubo commits, cambios de código, deploys ni contacto con soporte de Dongee
-hoy; web solo atendió el pedido de cierre de `director`. Estado al cierre: `main` va
+hoy; web solo atendió el pedido de cierre de `director`. Estado al cierre: `main` iba
 **3 commits adelante** de `origin/main` sin push (`ea18912`, `f58d0ec` y el cierre
 `76da4fe` — el texto del 15 sept decía "dos" porque se escribió antes del commit de
-cierre), árbol limpio (`git status`). Se mantiene retenido el push mientras Vercel siga
-al tope de storage. Deployment Storage de Vercel **no se volvió a revisar hoy** (NO
-VERIFICADO desde el 15 sept; la baja esperada sigue siendo 7-9 oct). WordPress legacy
+cierre), árbol limpio (`git status`). Se mantuvo retenido el push mientras Vercel siguiera
+al tope de storage. WordPress legacy
 de Dongee: **sigue sin validar con soporte** — nada borrado (§12.7, §5 punto 18).
 Reel `kirill-umrikhin-beach` publicado hoy 3:21 p.m. (confirmado por `director`, Post_14).
 El 17 sept se evaluó en papel **Chrome DevTools MCP** a pedido de `director`: recomendación
 de web = **no instalar por ahora** (se solapa con Playwright/`/benchmark`/Lighthouse y no
 resuelve ningún pendiente); decisión de Iván, pendiente. Ver §5 punto 19. Sin cambios de
 código ni deploys en ninguno de los dos días.
-Fechas próximas: 23 y 30 sept, Reels restantes de `public/social/test/` (no tocar la carpeta); 25 sept,
-cierre del concurso Capture One (asset en `public/social/post-capture-one-extension/`);
-7-9 oct, baja de storage en Vercel; 22/11, fin del CDN de Dongee.
 Anterior: 15 de septiembre de 2026 — sesión de infraestructura y costos.
 **(1) Vercel:** se diagnosticó el aviso de 100% de Deployment Storage. Los 10,41 GB los
 generan ~52 deployments borrados el 10 sept que **siguen contando durante su ventana de
